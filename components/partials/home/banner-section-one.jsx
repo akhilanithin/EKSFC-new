@@ -43,16 +43,18 @@ function BannerSectionOne(props) {
 
                             <div className="card-description overlay-zoom">
                                 <figure className="p-relative">
-                                    <img
+                                    
+                                    {/* <img
                                         className="w-100 d-block"
                                         src="./images/home/banner/1.jpg"
                                         alt="Product"
                                         width="550"
                                         height="410"
-                                    />
-                                    <a className="btn-play btn-iframe" href="#" data="/uploads/video/video-1.mp4" onClick={showVideoModalHandler}>
+                                    /> 
+                                    {/* <a className="btn-play btn-iframe" href="#" data="/uploads/video/video-1.mp4" onClick={showVideoModalHandler}>
                                         <i className="d-icon-play-solid"></i>
-                                    </a>
+                                    </a> */}
+                                    <iframe width="550" height="410" src="https://www.youtube.com/embed/ivhNJxEkMTA" title="Portable Magic Mirror 3d Facial Skin Analyzer Machine for Sale" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
                                 </figure>
                             </div>
                         </Reveal>

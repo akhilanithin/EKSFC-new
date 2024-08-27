@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect,useState} from 'react';
 import { Helmet } from 'react-helmet';
 
 import { useQuery } from "@apollo/react-hooks";
@@ -18,13 +18,39 @@ import BannerSectionTwo from '~/components/partials/home/banner-section-two';
 import FeaturedCollection from '~/components/partials/home/featured-collection';
 import BlogSection from '~/components/partials/home/blog-section';
 import Instagram from '~/components/partials/home/instagram';
-
 function HomePage() {
-    const { data, loading, error } = useQuery(GET_HOME_DATA, { variables: { productsCount: 6 } });
-    const featured = data && data.specialProducts.featured;
-    const posts = data && data.posts.data;
-    const products = data && data.products.data;
 
+    
+    // const { data, loading, error } = useQuery(GET_HOME_DATA, { variables: { productsCount: 6 } }); 
+    // const featured = data && data.specialProducts.featured;
+    // const posts = data && data.posts.data;
+    // const products = data && data.products.data;
+
+
+    const [data, setData] = useState(null);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
+ 
+
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const res = await fetch('https://essentialkonjacskinfoods.com/api/v1/en/home');
+                if (!res.ok) throw new Error('Network response was not ok');
+                const result = await res.json();
+                const products=result.data.trending
+                setData(result);
+            } catch (error) {
+                setError(error);
+            } finally {
+                setLoading(false);
+            }
+        };
+
+        fetchData();
+    }, []);
+
+    
     return (
         <div className="main home">
             <Helmet>
@@ -35,21 +61,22 @@ function HomePage() {
             <h1 className="d-none">Essential Konjac Skin Food - Home</h1>
 
             <div className="page-content overflow-hidden">
+
                 <IntroSection />
 
-                <ProductCollection products={products} loading={loading} />
+                <ProductCollection data={data} loading={loading} />
 
                 <ServiceBox />
 
-                <BrandSection />
+                <BrandSection products={data} loading={loading}/>
 
                 <BannerSectionOne />
 
                 <BannerSectionTwo />
 
-                <FeaturedCollection products={featured} loading={loading} />
+                <FeaturedCollection products={data} loading={loading}/>
 
-                <BlogSection posts={posts} />
+                <BlogSection/>
 
                 <Instagram />
 
