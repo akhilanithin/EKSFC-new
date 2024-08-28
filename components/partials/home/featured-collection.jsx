@@ -9,7 +9,12 @@ import { productSlider2 } from '~/utils/data/carousel';
 import { fadeIn, fadeInUpShorter } from '~/utils/data/keyframes';
 
 function FeaturedCollection(props) {
+
+   
+    
+    
     const { products, loading } = props;
+
 
     return (
         <Reveal keyframes={fadeInUpShorter} delay={300} duration={1000} triggerOnce>
@@ -20,11 +25,17 @@ function FeaturedCollection(props) {
                         <span className="badge">Featured</span>
                     </div>
                 </Reveal>
+
+
                 {
                     loading ?
+                    
                         <OwlCarousel adClass="owl-theme owl-shadow-carousel" options={productSlider2}>
                             {
                                 [1, 2, 3, 4, 5].map((item) =>
+                                
+                                 
+                                    
                                     <div className="product-loading-overlay" key={'featured-skel-' + item}></div>
                                 )
                             }
@@ -32,7 +43,7 @@ function FeaturedCollection(props) {
                         :
                         <OwlCarousel adClass="owl-theme" options={productSlider2}>
                             {
-                                products && products.map((item, index) =>
+                                products?.data.trending && products?.data.trending.map((item, index) =>
                                     <ProductTwo
                                         adClass="shadow-product text-center mb-4"
                                         product={item}
@@ -41,6 +52,9 @@ function FeaturedCollection(props) {
                             }
                         </OwlCarousel>
                 }
+
+
+
             </section>
         </Reveal>
     )

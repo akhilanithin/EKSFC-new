@@ -1,5 +1,6 @@
 import Reveal from "react-awesome-reveal";
 import { connect } from 'react-redux';
+import { useState } from "react";
 
 // import Custom Components
 import ALink from '~/components/features/custom-link';
@@ -16,6 +17,12 @@ function BannerSectionOne(props) {
         let link = e.currentTarget.closest('.btn-play').getAttribute('data');
         openModal(link);
     }
+    const [isPlaying, setIsPlaying] = useState(false);
+
+    const handlePlayClick = (e) => {
+        e.preventDefault();
+        setIsPlaying(true);
+    };
 
     return (
         <section className="banner-section pt-md-6 pb-8">
@@ -25,13 +32,10 @@ function BannerSectionOne(props) {
                         <div className="banner h-100">
                             <div className="banner-content pr-lg-4 y-50">
                                 <Reveal keyframes={fadeInRightShorter} delay={300} duration={1000} triggerOnce>
-                                    <h4 className="banner-subtitle text-white font-weight-bold text-uppercase">How it
-                                            works?</h4>
-                                    <h2 className="banner-title text-white font-weight-bold mb-2">Get the Best Look
-                                    Video
-                                    Presentation
+                                    <h4 className="banner-subtitle text-white font-weight-bold text-uppercase">About Us</h4>
+                                    <h2 className="banner-title text-white font-weight-bold mb-2">Who we are
                                         </h2>
-                                    <p className="text-white mb-6">Your new manicure routine in <b>3 easy steps</b></p>
+                                    <p className="text-white mb-6"><b>Time to know your skin type and skin problem</b></p>
                                     <ALink href="/shop" className="btn btn-dark btn-icon-right mb-1">Shop Now <i
                                         className="d-icon-arrow-right"></i></ALink>
                                 </Reveal>
@@ -41,22 +45,70 @@ function BannerSectionOne(props) {
                     <div className="col-md-6">
                         <Reveal keyframes={fadeInLeftShorter} delay={500} duration={1000} triggerOnce>
 
+
+
                             <div className="card-description overlay-zoom">
                                 <figure className="p-relative">
-                                    
-                                    {/* <img
-                                        className="w-100 d-block"
-                                        src="./images/home/banner/1.jpg"
-                                        alt="Product"
-                                        width="550"
-                                        height="410"
-                                    /> 
-                                    {/* <a className="btn-play btn-iframe" href="#" data="/uploads/video/video-1.mp4" onClick={showVideoModalHandler}>
-                                        <i className="d-icon-play-solid"></i>
-                                    </a> */}
-                                    <iframe width="550" height="410" src="https://www.youtube.com/embed/ivhNJxEkMTA" title="Portable Magic Mirror 3d Facial Skin Analyzer Machine for Sale" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                                    {/* Container for video and placeholder image */}
+                                    <div className="video-container">
+                                        {/* Display the image and play button when not playing */}
+                                        {!isPlaying && (
+                                            <div className="video-placeholder">
+                                                <img
+                                                    className="w-100 d-block"
+                                                    src="https://eksfc.com/assets/img/SKINTEST.png"
+                                                    alt="Product"
+                                                    width="550"
+                                                    height="410"
+                                                />
+                                                <a
+                                                    className="btn-play"
+                                                    href="#"
+                                                    onClick={handlePlayClick}
+                                                >
+                                                    <i className="d-icon-play-solid"></i>
+                                                </a>
+
+
+
+
+
+                                                {/* <a className="btn-play btn-iframe" href="#" data="/uploads/video/video-1.mp4" onClick={showVideoModalHandler}>
+                                                    <i className="d-icon-play-solid"></i>
+                                                </a>  */}
+
+
+
+                                            </div>
+                                        )}
+                                        {/* Display the iframe when playing */}
+                                        {isPlaying && (
+                                            <iframe
+                                                width="550"
+                                                height="410"
+                                                src="https://www.youtube.com/embed/ivhNJxEkMTA?autoplay=1"
+                                                title="Portable Magic Mirror 3d Facial Skin Analyzer Machine for Sale"
+                                                frameBorder="0"
+                                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                                                referrerPolicy="strict-origin-when-cross-origin"
+                                                allowFullScreen
+                                            ></iframe>
+                                        )}
+                                            {/* overlay youtube video*/}
+
+                                        {/* <div className="info-blocks__item-img-overlay">
+                                            <span>AI Base Skin Analyzer</span>
+                                            <div className="info-blocks__item-img-play">
+                                                <img src="https://eksfc.com/assets/img/play-btn.png" className="js-img" alt="" />
+                                            </div>
+                                        </div> */}
+
+
+                                    </div>
                                 </figure>
                             </div>
+
+
                         </Reveal>
                     </div>
                 </div>
