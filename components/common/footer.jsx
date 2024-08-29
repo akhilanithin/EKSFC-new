@@ -40,16 +40,17 @@ export default function Footer() {
                                 <h4 className="widget-title">My Account</h4>
                                 <ul className="widget-body">
                                     <li>
-                                        <ALink href="#">About</ALink>
+                                        <ALink href="/pages/about-us/"
+                                    >About</ALink>
                                     </li>
                                     <li>
                                         <ALink href="/pages/faqs">FAQs</ALink>
                                     </li>
                                     <li>
-                                        <ALink href="#">Categories</ALink>
+                                        <ALink href="/shop/">Categories</ALink>
                                     </li>
                                     <li>
-                                        <ALink href="#">Shop</ALink>
+                                        <ALink href="/shop/">Shop</ALink>
                                     </li>
                                     <li>
                                         <ALink href="#">Cart</ALink>
@@ -58,10 +59,10 @@ export default function Footer() {
                                         <ALink href="#">Checkout</ALink>
                                     </li>
                                     <li>
-                                        <ALink href="#">Privacy Policy</ALink>
+                                        <ALink href="/pages/faqs">Privacy Policy</ALink>
                                     </li>
                                     <li>
-                                        <ALink href="#">Terms and Condition</ALink>
+                                        <ALink href="/pages/about-us/">Terms and Condition</ALink>
                                     </li>
                                     <li>
                                         <ALink href="/pages/contact-us">Contact Us</ALink>

@@ -5,8 +5,28 @@ import OwlCarousel from '~/components/features/owl-carousel';
 
 import { fadeIn } from '~/utils/data/keyframes';
 import { mainSlider5 } from '~/utils/data/carousel';
+// import axios from 'axios';
+
+const axios = require('axios');
+
+
+
+// import React,{useEffect,useState} from 'react';
+
+
+
 
 export default function Instagram() {
+
+
+    // const instagramURL = process.env.NEXT_PUBLIC_INSTAGRAM_URL;
+    // const facebookAccessToken = process.env.NEXT_PUBLIC_FACEBOOK_ACCESS_TOKEN;
+
+    // 'https://graph.instagram.com/me/media?fields=id,media_type,media_url,caption,&limit=20&access_token=IGQWRPRC01djdyYTVoWnhBVkozRXNZAWTZA0cmpNcXBGSUhkVTF1SE4zcThreFQ1NWN4WlJpb01MbmE3UXp0VUJCXzhjS1dhQnRCWTBvemR3UWtaOXhlcUdxNmdpdFJxbmEwQmJ4cDVEcmFKdlAyOG1EVTlydWtiXzgZD'
+
+
+
+
     return (
         <section className="instagram-section pt-lg-10 pb-8">
             <Reveal keyframes={fadeIn} delay={300} duration={1000} triggerOnce>

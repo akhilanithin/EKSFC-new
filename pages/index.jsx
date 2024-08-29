@@ -76,7 +76,7 @@ function HomePage() {
 
                 <FeaturedCollection products={data} loading={loading}/>
 
-                <BlogSection/>
+                {/* <BlogSection/> */}
 
                 <Instagram />
 
