@@ -441,9 +441,10 @@
 // Product Name
 .product-name {
     @include print_css( product, name );
-    white-space: nowrap;
+    white-space: normal;
     overflow: hidden;
     text-overflow: ellipsis;
+    height:35px;
     a {
         // transition: color .3s;
         &:hover {

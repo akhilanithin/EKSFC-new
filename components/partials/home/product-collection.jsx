@@ -61,7 +61,7 @@ const {data,loading}=props
                
                  
                     if (cat === 'all') return true;
-                    return itemElem.classList.contains(cat);
+                    return itemElem.classList.contains(cat.split(' ')[0]);
                 }
             });
         }
@@ -85,7 +85,7 @@ const {data,loading}=props
             <Reveal keyframes={fadeIn} delay={200} duration={300} triggerOnce>
                 <div className="title-wrapper mt-1">
                     <h2 className="text-left title with-link">
-                        Top Categories
+                    Trending products
                         <ALink href="/shop">View All Products<i className="d-icon-arrow-right"></i></ALink>
                     </h2>
 
@@ -114,10 +114,11 @@ const {data,loading}=props
                                 </div>
                             ))
                             :
-                            data?.data.trending && data?.data.trending.map((item, index) => (
-                                <div className={`grid-item col-md-4 col-6 ${getProductCategory(item)}`} key={`product-${index}`}>
+                            data?.data.trending && data?.data.trending.map((item, index) => (  
+                                
+                                item?.feature?  <div className={`grid-item col-md-4 col-6 ${getProductCategory(item)}`} key={`product-${index}`}>
                                     <ProductTwo adClass="shadow-product text-center mb-2" product={item} />
-                                </div>
+                                </div>:[]
                             ))
 
                         }
