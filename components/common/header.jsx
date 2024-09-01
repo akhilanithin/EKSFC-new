@@ -32,7 +32,7 @@ export default function Header(props) {
 
     return (
         <header className={`header ${transparent === 'false' ? 'p-relative' : ''} ${noborder ? 'no-border' : ''}`}>
-            <div className="header-top">
+            <div className="header-top" style={{color:'white',backgroundColor:'black'}}>
                 <div className="container">
                     <div className="header-left">
                         <div className="welcome-msg">

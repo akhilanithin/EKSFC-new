@@ -15,32 +15,32 @@ function ProductTwo(props) {
 
     const { product, adClass = 'text-center', toggleWishlist, wishlist, addToCart, openQuickview, isCategory = true } = props;
 
-// console.log(product?.variation.length);
+    // console.log(product?.variation.length);
 
 
 
-const getPrice = () => {
-    // Check if product has variations
-    if (product.variation && product.variation.length > 0) {
-      const variation = product.variation[0]; 
-  
-      
-      // Check if the variation has offers
-      if (variation.offers && variation.offers.length > 0) {
-        const offerPrice= variation.offers[0].price;
-        return offerPrice
+    const getPrice = () => {
+        // Check if product has variations
+        if (product.variation && product.variation.length > 0) {
+            const variation = product.variation[0];
 
 
-      }
+            // Check if the variation has offers
+            if (variation.offers && variation.offers.length > 0) {
+                const offerPrice = variation.offers[0].price;
+                return offerPrice
 
-      // Return the price from the variation if no offers are present
-      const originalPrice=variation.price
-      return originalPrice;
-    }
 
-    // Fallback if no variations are present
-    return 'Price not available';
-  };
+            }
+
+            // Return the price from the variation if no offers are present
+            const originalPrice = variation.price
+            return originalPrice;
+        }
+
+        // Fallback if no variations are present
+        return 'Price not available';
+    };
 
 
 
@@ -104,12 +104,12 @@ https://admin.essentialkonjacskinfoods.com/assets/img/products/1722234980697-lum
 
 
         <>
-                                        {/* full grid */}
+            {/* full grid */}
 
 
             <div className={`product text-left ${adClass}`} style={{ backgroundColor: 'rgba(252, 237, 234, 0.9)', borderRadius: '3rem', padding: '6%' }}>
 
-                                         {/* image Field */}
+                {/* image Field */}
 
 
                 <figure className="product-media" style={{ width: 'auto', height: '250px', overflow: 'hidden', objectFit: 'cover', display: 'flex' }}>
@@ -132,7 +132,7 @@ https://admin.essentialkonjacskinfoods.com/assets/img/products/1722234980697-lum
                     </ALink>
 
 
-                                         {/* Label New & Sales */}
+                    {/* Label New & Sales */}
 
 
                     <div className="product-label-group">
@@ -153,12 +153,12 @@ https://admin.essentialkonjacskinfoods.com/assets/img/products/1722234980697-lum
 
 
 
-                                    {/* Addto cart & Wishlisted */}
+                    {/* Addto cart & Wishlisted */}
 
 
                     <div className="product-action-vertical">
 
-                                      {/* Add to cart */}
+                        {/* Add to cart */}
 
 
                         {/* correct  logic */}
@@ -187,7 +187,7 @@ https://admin.essentialkonjacskinfoods.com/assets/img/products/1722234980697-lum
                         }
 
 
-                                             {/* wishlist */}
+                        {/* wishlist */}
 
 
                         <a href="#" className="btn-product-icon btn-wishlist" title={isWishlisted ? 'Remove from wishlist' : 'Add to wishlist'} onClick={wishlistHandler}>
@@ -196,20 +196,20 @@ https://admin.essentialkonjacskinfoods.com/assets/img/products/1722234980697-lum
                     </div>
 
 
-                                            {/* Quick View */}
+                    {/* Quick View */}
 
 
                     <div className="product-action">
-                        <ALink href="#" className="btn-product btn-quickview" title="Quick View" onClick={showQuickviewHandler}>Quick View</ALink>
+                        <ALink href={`/product/default/${product?.id}`} className="btn-product btn-quickview" title="Quick View" onClick={showQuickviewHandler}>Quick View</ALink>
                     </div>
                 </figure>
 
 
-                                             {/* Product Details */}
+                {/* Product Details */}
 
 
                 <div className="product-details">
-                                                 {/* Category */}
+                    {/* Category */}
 
                     {
                         isCategory ?
@@ -229,7 +229,7 @@ https://admin.essentialkonjacskinfoods.com/assets/img/products/1722234980697-lum
                             </div> : ""
                     }
 
-                                                 {/* Product Name */}
+                    {/* Product Name */}
 
 
                     <h3 className="product-name">
@@ -238,7 +238,7 @@ https://admin.essentialkonjacskinfoods.com/assets/img/products/1722234980697-lum
 
 
 
-                                                {/* Product Price  */}
+                    {/* Product Price  */}
 
 
                     <div className="product-price">
@@ -248,21 +248,21 @@ https://admin.essentialkonjacskinfoods.com/assets/img/products/1722234980697-lum
                         </div> */}
 
 
-                    {
-                       product.variation[0].price !== getPrice()  ?
-                           product?.variation.length === 0 || (product?.variation.length > 0 && !product.variation[0].price) ?
-                                <>
-                                    <ins className="new-price">AED {toDecimal(getPrice())}</ins>
-                                    <del className="old-price">AED {toDecimal(product.variation[0].price)}</del>
-                                </>
-                                :
-                             <>
-                                    < del className="old-price">AED{toDecimal(product.variation[0].price)} </del>
-                                    <ins className="new-price">AED {toDecimal(getPrice())}</ins>
-                                  
-                             </>
-                            : <ins className="new-price">AED{toDecimal(product.variation[0].price)}</ins>
-                    }
+                        {
+                            product.variation[0].price !== getPrice() ?
+                                product?.variation.length === 0 || (product?.variation.length > 0 && !product.variation[0].price) ?
+                                    <>
+                                        <ins className="new-price">AED {toDecimal(getPrice())}</ins>
+                                        <del className="old-price">AED {toDecimal(product.variation[0].price)}</del>
+                                    </>
+                                    :
+                                    <>
+                                        < del className="old-price">AED{toDecimal(product.variation[0].price)} </del>
+                                        <ins className="new-price">AED {toDecimal(getPrice())}</ins>
+
+                                    </>
+                                : <ins className="new-price">AED{toDecimal(product.variation[0].price)}</ins>
+                        }
 
                     </div>
 
