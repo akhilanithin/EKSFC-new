@@ -8,14 +8,41 @@ import { wishlistActions } from '~/store/wishlist';
 
 import { toDecimal } from '~/utils';
 
-function Wishlist( props ) {
+function Wishlist(props) {
     const { wishlist, addToCart, removeFromWishlist } = props;
 
-    const moveToCart = ( e, item ) => {
+    
+    
+
+
+    const PRODUCT_IMAGE_BASEURL = process.env.NEXT_PUBLIC_PRODUCT_IMAGE_BASEURL;
+
+
+    const moveToCart = (e, item) => {
         e.preventDefault();
-        addToCart( { ...item, qty: 1, price: item.price[ 0 ] } );
-        removeFromWishlist( item );
+        addToCart({ ...item, qty: 1, price: item.price[0] });
+        removeFromWishlist(item);
     }
+
+
+function getOfferPrice(productData) {
+    // Ensure the productData contains variations
+    if (productData && productData.variation) {
+        // Loop through each variation
+        return productData.variation.map(variation => {
+            // Check if offers exist and has at least one offer
+            if (variation.offers && variation.offers.length > 0) {
+                // Return the price of the first offer
+                return variation.offers[0].price;
+            }
+            // If no offers, return null or a default value
+            return null;
+        });
+    }
+    // If no variations, return an empty array
+    return [];
+}
+
 
     return (
         <main className="main">
@@ -52,48 +79,68 @@ function Wishlist( props ) {
                                     </thead>
                                     <tbody className="wishlist-items-wrapper">
                                         {
-                                            wishlist.map( ( item ) =>
-                                                <tr key={ 'wishlist-' + item.name }>
+                                            wishlist.map((item) =>
+
+
+
+                                                <tr key={'wishlist-' + item?.name}>
                                                     <td className="product-thumbnail">
-                                                        <ALink href={ '/product/default/' + item.slug }>
+                                                        <ALink href={'/product/default/' + item?.slug}>
                                                             <figure>
-                                                                <img src={ process.env.NEXT_PUBLIC_ASSET_URI + item.pictures[ 0 ].url } width="100" height="100"
+                                                                <img src={`${PRODUCT_IMAGE_BASEURL}/products/${item?.image}`} width="100" height="100"
                                                                     alt="product" />
                                                             </figure>
                                                         </ALink>
                                                     </td>
                                                     <td className="product-name">
-                                                        <ALink href={ '/product/default/' + item.slug }>{ item.name }</ALink>
+                                                        <ALink href={'/product/default/' + item.slug}>{item.name}</ALink>
                                                     </td>
+
+
                                                     <td className="product-price">
+                                                        {/* 
+                                                        <div>
+                                                            <h6>Price: AED{getOfferPrice(item)}</h6>
+                                                        </div>   */}
+
+
+
                                                         {
-                                                            item.price[ 0 ] !== item.price[ 1 ] ?
-                                                                < span className="amount">${ toDecimal( item.price[ 0 ] ) } – ${ toDecimal( item.price[ 1 ] ) }</span>
-                                                                : item.discount > 0 && item.variants.length > 0 ?
+
+                                                            item?.variation[0].price !== getOfferPrice(item) ?
+                                                                < span className="amount">AED{toDecimal(item?.variation[0].price)}</span>
+                                                                : item?.variation[0].offers[0].discount > 0 && item?.variation.length > 0 ?
                                                                     <>
-                                                                        <span className="amount">${ toDecimal( item.salePrice ) }</span>
-                                                                        <span className="amount">${ toDecimal( item.price ) }</span>
+                                                                        <span className="amount">AED{toDecimal(item.salePrice)}</span>
+                                                                        <span className="amount">AED{toDecimal(item.price)}</span>
                                                                     </>
-                                                                    : <span className="amount">${ toDecimal( item.price[ 0 ] ) }</span>
+                                                                    : <span className="amount">AED{toDecimal(item?.variation[0].price)}</span>
                                                         }
+
+
+
+
                                                     </td>
+
+
+
                                                     <td className="product-stock-status">
-                                                        <span className={ item.stock > 0 ? 'wishlist-in-stock' : 'wishlist-out-stock' }>{ item.stock > 0 ? 'In Stock' : 'Out of Stock' }</span>
+                                                        <span className={item.stock > 0 ? 'wishlist-in-stock' : 'wishlist-out-stock'}>{item.stock > 0 ? 'In Stock' : 'Out of Stock'}</span>
                                                     </td>
                                                     <td className="product-add-to-cart">
                                                         {
                                                             item.stock > 0 ?
                                                                 item.variants.length > 0 ?
-                                                                    <ALink href={ '/product/default/' + item.slug } className="btn-product btn-primary"><span>Select options</span></ALink>
+                                                                    <ALink href={'/product/default/' + item.slug} className="btn-product btn-primary"><span>Select options</span></ALink>
                                                                     :
-                                                                    <a href="#" className="btn-product btn-primary" onClick={ ( e ) => moveToCart( e, item ) }><span>Add to Cart</span></a>
+                                                                    <a href="#" className="btn-product btn-primary" onClick={(e) => moveToCart(e, item)}><span>Add to Cart</span></a>
                                                                 : ""
                                                         }
                                                     </td>
                                                     <td className="product-remove">
                                                         <div>
                                                             <ALink href="#" className="remove" title="Remove this product"><i
-                                                                className="fas fa-times" onClick={ () => removeFromWishlist( item ) }></i></ALink>
+                                                                className="fas fa-times" onClick={() => removeFromWishlist(item)}></i></ALink>
                                                         </div>
                                                     </td>
                                                 </tr>
@@ -122,7 +169,7 @@ function Wishlist( props ) {
                                 <p className="return-to-shop mb-0">
                                     <ALink className="button wc-backward btn btn-dark btn-md" href="/shop">
                                         Return to shop
-                            </ALink>
+                                    </ALink>
                                 </p>
                             </div>
                     }
@@ -132,10 +179,10 @@ function Wishlist( props ) {
     )
 }
 
-function mapStateToProps( state ) {
+function mapStateToProps(state) {
     return {
         wishlist: state.wishlist.data ? state.wishlist.data : []
     }
 }
 
-export default connect( mapStateToProps, { addToCart: cartActions.addToCart, removeFromWishlist: wishlistActions.removeFromWishlist } )( Wishlist );
+export default connect(mapStateToProps, { addToCart: cartActions.addToCart, removeFromWishlist: wishlistActions.removeFromWishlist })(Wishlist);

@@ -15,8 +15,10 @@ function ProductTwo(props) {
 
     const { product, adClass = 'text-center', toggleWishlist, wishlist, addToCart, openQuickview, isCategory = true } = props;
 
-    // console.log(product?.variation.length);
+  
+    
 
+    const PRODUCT_IMAGE_BASEURL = process.env.NEXT_PUBLIC_PRODUCT_IMAGE_BASEURL;
 
 
     const getPrice = () => {
@@ -51,7 +53,7 @@ https://admin.essentialkonjacskinfoods.com/assets/img/products/1722234980697-lum
 
 
 
-    const PRODUCT_IMAGE_BASEURL = process.env.NEXT_PUBLIC_PRODUCT_IMAGE_BASEURL;
+
 
 
 
@@ -82,6 +84,9 @@ https://admin.essentialkonjacskinfoods.com/assets/img/products/1722234980697-lum
     }
 
     const wishlistHandler = (e) => {
+      
+        
+
         if (toggleWishlist) {
             toggleWishlist(product);
         }
@@ -93,11 +98,16 @@ https://admin.essentialkonjacskinfoods.com/assets/img/products/1722234980697-lum
         setTimeout(() => {
             currentTarget.classList.remove('load-more-overlay', 'loading');
         }, 1000);
+
     }
+
+
+
 
     const addToCartHandler = (e) => {
         e.preventDefault();
-        addToCart({ ...product, qty: 1, price: product.price[0] });
+        console.log(e.preventDefault()); 
+        addToCart({ ...product, qty: 1, price: getPrice() });
     }
 
     return (
@@ -163,7 +173,7 @@ https://admin.essentialkonjacskinfoods.com/assets/img/products/1722234980697-lum
 
                         {/* correct  logic */}
 
-                        {/* {
+                        {
                             product.variation.length > 1 ?
 
                                 <ALink href={`/product/default/${product?.id}`} className="btn-product-icon btn-cart" title="Go to product">
@@ -172,19 +182,9 @@ https://admin.essentialkonjacskinfoods.com/assets/img/products/1722234980697-lum
                                 <a href="#" className="btn-product-icon btn-cart" title="Add to cart" onClick={addToCartHandler}>
                                     <i className="d-icon-bag"></i>
                                 </a>
-                        } */}
+                        } 
 
 
-                        {
-                            product.variation.length > 0 ?
-
-                                <ALink href={`/product/default/${product?.id}`} className="btn-product-icon btn-cart" title="Go to product">
-                                    <i className="d-icon-arrow-right"></i>
-                                </ALink> :
-                                <a href="#" className="btn-product-icon btn-cart" title="Add to cart" onClick={addToCartHandler}>
-                                    <i className="d-icon-bag"></i>
-                                </a>
-                        }
 
 
                         {/* wishlist */}
@@ -245,7 +245,7 @@ https://admin.essentialkonjacskinfoods.com/assets/img/products/1722234980697-lum
 
                         {/* <div>
                             <h6>Price: AED{getPrice()}</h6>
-                        </div> */}
+                        </div>  */}
 
 
                         {

@@ -12,6 +12,8 @@ function Cart(props) {
     const { cartList, removeFromCart, updateCart } = props;
     const [cartItems, setCartItems] = useState([]);
 
+    const PRODUCT_IMAGE_BASEURL = process.env.NEXT_PUBLIC_PRODUCT_IMAGE_BASEURL;
+
     useEffect(() => {
         setCartItems([...cartList]);
     }, [cartList])
@@ -67,8 +69,8 @@ function Cart(props) {
                                                         <tr key={'cart' + item.name}>
                                                             <td className="product-thumbnail">
                                                                 <figure>
-                                                                    <ALink href={'/product/default/' + item.slug}>
-                                                                        <img src={process.env.NEXT_PUBLIC_ASSET_URI + item.pictures[0].url} width="100" height="100"
+                                                                    <ALink href={'/product/default/' + item?.id}>
+                                                                        <img   src={`${PRODUCT_IMAGE_BASEURL}/products/${item?.image}`} width="100" height="100"
                                                                             alt="product" />
                                                                     </ALink>
                                                                 </figure>

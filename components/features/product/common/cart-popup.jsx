@@ -7,6 +7,14 @@ import { toDecimal } from '~/utils';
 export default function CartPopup ( props ) {
     const { product } = props;
 
+    console.log( product?.price);
+    
+
+
+
+    const PRODUCT_IMAGE_BASEURL = process.env.NEXT_PUBLIC_PRODUCT_IMAGE_BASEURL;
+    
+
     return (
         <div className="minipopup-area">
             <div className="minipopup-box show" style={ { top: "0" } }>
@@ -14,9 +22,9 @@ export default function CartPopup ( props ) {
 
                 <div className="product product-purchased  product-cart mb-0">
                     <figure className="product-media pure-media">
-                        <ALink href={ `/product/default/${ product.slug }` }>
+                        <ALink href={`/product/default/${product?.id}`}>
                             <img
-                                src={ process.env.NEXT_PUBLIC_ASSET_URI + product.pictures[ 0 ].url }
+                                src={`${PRODUCT_IMAGE_BASEURL}/products/${product?.image}`}
                                 alt="product"
                                 width="90"
                                 height="90"
@@ -24,10 +32,10 @@ export default function CartPopup ( props ) {
                         </ALink>
                     </figure>
                     <div className="product-detail">
-                        <ALink href={ `/product/default/${ product.slug }` } className="product-name">{ product.name }</ALink>
+                        <ALink href={`/product/default/${product?.id}`} className="product-name">{ product?.name }</ALink>
                         <span className="price-box">
-                            <span className="product-quantity">{ product.qty }</span>
-                            <span className="product-price">${ toDecimal( product.price ) }</span>
+                            <span className="product-quantity">{ product?.qty }</span>
+                            <span className="product-price">AED{ toDecimal( product?.price ) }</span>
                         </span>
                     </div>
                 </div>
