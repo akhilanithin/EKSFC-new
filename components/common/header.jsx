@@ -32,7 +32,7 @@ export default function Header(props) {
 
     return (
         <header className={`header ${transparent === 'false' ? 'p-relative' : ''} ${noborder ? 'no-border' : ''}`}>
-            <div className="header-top" style={{color:'white',backgroundColor:'black'}}>
+            <div className="header-top" >
                 <div className="container">
                     <div className="header-left">
                         <div className="welcome-msg">
@@ -62,13 +62,13 @@ export default function Header(props) {
                         </ALink>
 
                         <ALink href="/" className="logo d-none d-lg-block">
-                            <img src='./images/home/logo.png' alt="logo" width="154" height="43" />
+                            <img src='./images/home/logo.png' alt="logo"  height="70" />
                         </ALink>
                     </div>
 
                     <div className="header-center d-flex justify-content-center">
                         <ALink href="/" className="logo d-block d-lg-none">
-                            <img src="images/home/logo.png" alt="logo" width="154" height="43" />
+                            <img src="images/home/logo.png" alt="logo" height="70" />
                         </ALink>
                     </div>
 

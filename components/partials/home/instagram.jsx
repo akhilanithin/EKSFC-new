@@ -69,7 +69,7 @@ export default function Instagram() {
                                         style={{
                                             width: '100%',
                                             height: '250px',
-                                            objectFit: 'cover', // Use 'contain' if you want to avoid cropping
+                                            objectFit: 'cover', 
                                             alignItems: 'center'
                                         }}
                                     />

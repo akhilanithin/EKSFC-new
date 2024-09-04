@@ -10,7 +10,8 @@ import ProductTwo from '~/components/features/product/product-two';
 
 import { fadeIn } from '~/utils/data/keyframes';
 
-import FeaturedCollection from './featured-collection';
+
+
 
 
 

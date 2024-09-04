@@ -9,7 +9,7 @@ function MainMenu() {
 
     return (
         <nav className="main-nav mr-4">
-            <ul className="menu menu-active-underline">
+            <ul className="menu menu-active">
                 <li id="menu-home" className={pathname === '/' ? 'active' : ''}>
                     <ALink href='/'>Home</ALink>
                 </li>

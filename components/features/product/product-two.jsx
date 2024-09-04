@@ -117,12 +117,12 @@ https://admin.essentialkonjacskinfoods.com/assets/img/products/1722234980697-lum
             {/* full grid */}
 
 
-            <div className={`product text-left ${adClass}`} style={{ backgroundColor: 'rgba(252, 237, 234, 0.9)', borderRadius: '3rem', padding: '6%' }}>
+            <div className={`product text-left ${adClass}`} >
 
                 {/* image Field */}
 
 
-                <figure className="product-media" style={{ width: 'auto', height: '250px', overflow: 'hidden', objectFit: 'cover', display: 'flex' }}>
+                <figure className="product-media">
                     <ALink href={`/product/default/${product?.id}`}>
                         <div >
                             <LazyLoadImage
@@ -130,13 +130,7 @@ https://admin.essentialkonjacskinfoods.com/assets/img/products/1722234980697-lum
                                 src={`${PRODUCT_IMAGE_BASEURL}/products/${product?.image}`}
                                 threshold={500}
                                 effect="opacity"
-                                style={{
-                                    width: '100%',
-                                    height: '250px',
-                                    objectFit: 'cover', // Use 'contain' if you want to avoid cropping
-                                    alignItems: 'center'
-                                }}
-
+                             
                             />
                         </div>
                     </ALink>

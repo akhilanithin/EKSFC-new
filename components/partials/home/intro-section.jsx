@@ -10,14 +10,11 @@ import { introSlider } from '~/utils/data/carousel';
 import { fadeInUpShorter, fadeInRightShorter } from '~/utils/data/keyframes';
 
 function IntroSection() {
-
-
     return (
         <>
             <section className="intro-section p-relative">
                 <OwlCarousel adClass="owl-theme owl-nav-fade intro-slider" options={introSlider}>
                     <div className="banner banner-fixed intro-slide1" style={{ backgroundColor: "#f6f6f6" }}>
-
                         <video
                             loop
                             muted
@@ -40,26 +37,16 @@ function IntroSection() {
 
 
                                 <Reveal keyframes={fadeInRightShorter} delay={200} duration={1000}>
-                                    <h4 className="banner-subtitle"> Amazing Scientific Results</h4>
+                                    <h4 className="banner-subtitle">Professional</h4>
                                 </Reveal>
                                 <Reveal keyframes={fadeInUpShorter} delay={1000} duration={1200}>
                                     <h1 className="banner-title">Beauty &amp; Care</h1>
-                                </Reveal> *
+                                </Reveal>
 
 
                                 <Reveal keyframes={fadeInUpShorter} delay={1300} duration={1200}>
                                     <div className="banner-desc">
-                                        {/* <p><strong>01.</strong>Helps provide moisture for the skin.</p>
-                                        <p><strong>02.</strong>Helps remove injuery on the skin.</p>
-                                        <p><strong>03.</strong>Helps improve the skin by making it softer.</p> */}
-
-                                        <p style={{
-                                            maxWidth: '465px',
-                                            fontSize: '20px',
-                                            lineHeight: '150%',
-                                            fontFamily: 'Tenor Sans',
-                                            paddingLeft: '10px',
-                                        }}>
+                                        <p >
                                             Royal elegance to love yourself more. Through<br /> consistent innovation that is aimed at <br /> developing advanced skin
                                             care products based <br /> on active ingredients.
                                         </p>
@@ -72,52 +59,8 @@ function IntroSection() {
                             </div>
                         </div>
                     </div>
-                    <div>
 
-                        <div className="banner banner-fixed intro-slide2" style={{ backgroundColor: "#f6f6f6" }}>
-
-                            <video
-                                loop
-                                muted
-                                autoPlay
-                                playsInline
-                                className="video-tag"
-                                poster=""
-                                width="1260"
-                            >
-                                <source src="" type="video/mp4" />
-                                Your browser does not support the video tag.
-                            </video>
-
-
-                            <div className="container">
-                                <div className="banner-content">
-                                    <Reveal keyframes={fadeInRightShorter} delay={200} duration={1000}>
-                                        <h4 className="banner-subtitle">
-                                            Natural Process
-                                        </h4>
-                                    </Reveal>
-                                    <Reveal keyframes={fadeInUpShorter} delay={1000} duration={1200}>
-                                        <h2 className="banner-title mb-8">
-                                            Cosmetia Makeup<br />Professional</h2>
-                                    </Reveal>
-                                    <Reveal keyframes={fadeInUpShorter} delay={1300} duration={1200}>
-                                        <div className="banner-desc pl-0 font-weight-semi-bold text-dark text-uppercase">
-                                            <span className="ls-super">For-Women</span><br />
-                                            Product Identifier: DD1160
-                                        </div>
-                                    </Reveal>
-                                    <Reveal keyframes={fadeInUpShorter} delay={1800} duration={1200}>
-                                        <ALink href="/shop"
-                                            className="btn btn-primary btn-rounded btn-icon-right">Shop
-                                            Now<i className="d-icon-arrow-right"></i></ALink>
-                                    </Reveal>
-                                </div>
-                            </div>
-                        </div></div>
-
-
-
+                  
                 </OwlCarousel >
                 {/* <div className="shape-divider shape1">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 100" preserveAspectRatio="none">
