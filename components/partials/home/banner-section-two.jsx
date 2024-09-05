@@ -48,9 +48,36 @@ export default function BannerSectionTwo() {
       }, [])
 
 
-    return (
+      function formatDateInDubaiTimezone(isoDateString) {
+        // Create a Date object from the ISO string (which is in UTC)
+        const date = new Date(isoDateString);
+    
+        // Define formatting options for the Dubai timezone
+        const options = {
+            day: '2-digit',
+            month: '2-digit',
+            year: 'numeric',
+            hour: '2-digit',
+            minute: '2-digit',
+            second: '2-digit',
+            hour12: true, // 12-hour format with AM/PM
+            timeZone: 'Asia/Dubai'
+        };
+    
+        // Format the date for the Dubai timezone
+        const formatter = new Intl.DateTimeFormat('en-GB', options);
+        const formattedDate = formatter.format(date);
+    
+        // Construct the formatted string
+        return formattedDate.replace(',', '');
+    }
+    
 
-  
+
+
+
+
+    return (
  
         <section className="banner-section2 pb-4 pt-5 mt-10">
             <div className="container mt-10 pt-6 mt-md-0 pt-md-0">
@@ -77,13 +104,9 @@ export default function BannerSectionTwo() {
                     <div className="banner-image-wrapper overflow-hidden">
                         <Reveal keyframes={fadeInLeftShorter} delay={600} duration={1000} triggerOnce>
                             <OwlCarousel adClass="banner-carousel owl-theme owl-shadow-carousel" options={bannerSlider}>
-
-                     
-
-
                             {videos?.map((item, index) => (
 
-                                console.log(item?.snippet.publishedAt),
+                    
                                 
                                 <div>
                                     <ALink key={index} className="video-card" target="_blank" rel="noopener noreferrer"
@@ -99,26 +122,23 @@ export default function BannerSectionTwo() {
 
                                             <div className="MuiCardContent-root css-1qw96cp">
                                                 <div className="MuiTypography-root MuiTypography-h6 MuiTypography-gutterBottom css-4an0mh">
-                                                {item?.snippet.title}
+                                                {item?.snippet.title.slice(0, item?.snippet.title.length - 10) + '...'}
                                                 </div>
+                                                <br></br>
                                                 <div className="MuiTypography-root MuiTypography-p MuiTypography-gutterBottom css-urftx4">
-                                                {` published at  ${item?.snippet.publishedAt}`}
+                                                    {` published at : ${formatDateInDubaiTimezone(item?.snippet.publishedAt)}`}
                                                 </div>
                                             </div>
                                         </div>
                                     </ALink>
 
-
+                            
 
                             </div>
                                 
                             ))}
-
                              
-
-
-
-                              
+                
                             </OwlCarousel>
                         </Reveal>
                     </div>

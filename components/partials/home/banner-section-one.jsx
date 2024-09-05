@@ -28,35 +28,47 @@ function BannerSectionOne(props) {
         <section className="banner-section pt-md-6 pb-8">
             <div className="container">
                 <div className="row">
+
+                {/* About us-sucess story section */}
                     <div className="col-md-6">
                         <div className="banner h-100">
                             <div className="banner-content pr-lg-4 y-50">
                                 <Reveal keyframes={fadeInRightShorter} delay={300} duration={1000} triggerOnce>
-                                    <h4 className="banner-subtitle text-white font-weight-bold text-uppercase">About Us</h4>
-                                    <h2 className="banner-title text-white font-weight-bold mb-2">Who we are
-                                        </h2>
-                                    <p className="text-white mb-6"><b>Time to know your skin type and skin problem</b></p>
-                                    <ALink href="/shop" className="btn btn-dark btn-icon-right mb-1">Shop Now <i
-                                        className="d-icon-arrow-right"></i></ALink>
+                                    {/* <h2 className="banner-title text-white font-weight-bold mb-2">Who we are
+                                    </h2> */}
+                                    <span className="banner-subtitle text-black font-weight-bold text-uppercase 
+                                    " >Success story</span>
+
+                                    {/* <p className="text-white mb-6"><b>Time to know your skin type and skin problem</b></p> */}
+
+                                    <h2>Konjac SkinFood develops its own brands</h2>
+
+                                    <p>The Konjac SkinFoode network is being developed and improved, taking into account all consumer.</p>
+
+                                    <p>Forming the range of stores, we, above all, strive not only to meet the format
+                                        of "home shop", offering each customer the most basic household goods, but also to create a unique space
+                                        of beauty and care. Konjac SkinFoode stores offer their customers the widest and highest quality
+                                        selection of products from world-renowned manufacturers.</p>
                                 </Reveal>
+
+                                <ALink href="/shop" className="btn btn-dark btn-icon-right mb-1">Shop Now <i
+                                    className="d-icon-arrow-right"></i></ALink>
                             </div>
                         </div>
                     </div>
+
+                    {/* Skin Analyzer */}
+
                     <div className="col-md-6">
                         <Reveal keyframes={fadeInLeftShorter} delay={500} duration={1000} triggerOnce>
-
-
-
                             <div className="card-description overlay-zoom">
                                 <figure className="p-relative">
-                                    {/* Container for video and placeholder image */}
-                                    <div className="video-container">
-                                        {/* Display the image and play button when not playing */}
+                                    <div className="video-container ">
                                         {!isPlaying && (
                                             <div className="video-placeholder">
                                                 <img
                                                     className="w-100 d-block"
-                                                    src="https://eksfc.com/assets/img/SKINTEST.png"
+                                                    src="https://s.alicdn.com/@sc04/kf/H9cc5104808ed4876af83a68d8920448ej.jpg"
                                                     alt="Product"
                                                     width="550"
                                                     height="410"
@@ -69,32 +81,26 @@ function BannerSectionOne(props) {
                                                     <i className="d-icon-play-solid"></i>
                                                 </a>
 
-
-
-
+                                                {/* AI base analyzer */}
+                                                {/* <div className="info-blocks__item-img-overlay"><span>AI Base Skin Analyzer</span></div> */}
 
                                                 {/* <a className="btn-play btn-iframe" href="#" data="/uploads/video/video-1.mp4" onClick={showVideoModalHandler}>
                                                     <i className="d-icon-play-solid"></i>
                                                 </a>  */}
 
-
-
                                             </div>
                                         )}
+
+
                                         {/* Display the iframe when playing */}
+
+
                                         {isPlaying && (
-                                            <iframe
-                                                width="550"
-                                                height="410"
-                                                src="https://www.youtube.com/embed/ivhNJxEkMTA?autoplay=1"
-                                                title="Portable Magic Mirror 3d Facial Skin Analyzer Machine for Sale"
-                                                frameBorder="0"
-                                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                                                referrerPolicy="strict-origin-when-cross-origin"
-                                                allowFullScreen
-                                            ></iframe>
+                                            <iframe width="550" height="410" src="https://www.youtube.com/embed/1CjpntmL5H8" title="AI BITMOJI   Skin Analyzer - HERCA" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
                                         )}
-                                            {/* overlay youtube video*/}
+
+                                        
+                                        {/* overlay youtube video*/}
 
                                         {/* <div className="info-blocks__item-img-overlay">
                                             <span>AI Base Skin Analyzer</span>
@@ -102,6 +108,7 @@ function BannerSectionOne(props) {
                                                 <img src="https://eksfc.com/assets/img/play-btn.png" className="js-img" alt="" />
                                             </div>
                                         </div> */}
+                                     
 
 
                                     </div>
