@@ -7,6 +7,8 @@ import { brandSlider } from '~/utils/data/carousel';
 import { fadeIn } from '~/utils/data/keyframes';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 
+
+
 function BrandSection(props) {
  
     const{products,loading}=props
@@ -20,23 +22,26 @@ function BrandSection(props) {
             <section className="brand-section pb-10">
                 <h2 className="title d-none">Our Brand</h2>
 
-                <OwlCarousel adClass="owl-theme brand-carousel" options={brandSlider}>
-
-                        {products?.data.brands && products?.data.brands.map((item,index) => (
-                            
+               <div className='image-container'>
+                    <OwlCarousel adClass="owl-theme brand-carousel" options={brandSlider}>
+    
+    
+                        {products?.data.brands && products?.data.brands.map((item, index) => (
+    
                             <LazyLoadImage
-                            alt="brand"
-                            src={`https://admin.essentialkonjacskinfoods.com/assets/img/brands/${item?.img}`}
-                            threshold={500}
-                            effect="opacity"
-                            width="125"
-                            height="53"
-                            key={index}
-                        />
-
+                                alt="brand"
+                                src={`https://admin.essentialkonjacskinfoods.com/assets/img/brands/${item?.img}`}
+                                threshold={500}
+                                effect="opacity"
+                                key={index}
+                            />
+    
                         ))}
-
-                </OwlCarousel>
+    
+    
+                    </OwlCarousel>
+                    
+               </div>
             </section>
         </Reveal>
     )

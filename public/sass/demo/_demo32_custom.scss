@@ -833,3 +833,78 @@ rgba(252, 237, 234, 0.9);;
 //     -o-object-fit: cover;
 //     object-fit: cover;
 // }
+
+
+
+
+
+
+@import url("https://fonts.googleapis.com/css?family=Source+Sans+Pro&display=swap");
+
+.pricing {
+
+  justify-content:center;
+  padding: 15px;
+  display: flex;
+  width: 100%;
+
+  .plan {
+    
+    text-align: left;
+    width: auto;
+    height: 290px;
+    background-color: #fff;
+    overflow: hidden;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    flex: 1;
+ 
+
+
+
+    cursor: pointer;
+    border: 0.5px solid black;
+
+
+
+    &.popular {
+      border: 0.5px solid #6ab04c;
+      position: relative;
+      transform: scale(1.09);
+
+   
+   
+    }
+
+  }
+}
+
+
+.image-container {
+    display: flex;
+    align-items: center;
+    position: relative;
+    justify-content: flex-end;
+
+  
+}
+.image-container img {
+    height: 250px; /* Set the desired height */
+    width:100%;
+    position: absolute;
+    object-position: 25% 25%; 
+    float: left;
+    background-size: cover;
+    border: 0.5px solid black;
+    
+
+
+}
+
+.image-container div {
+
+    height: 230px; /* Cover the height of the container */
+    object-fit: cover; /* Crop and fit the image */
+    overflow: hidden;
+    margin-right: 10px;
+
+}

@@ -15,7 +15,7 @@ function MainMenu() {
                 </li>
 
                 <li className={`submenu lg-menu  ${pathname.includes('/shop') ? 'active' : ''}`}>
-                    <ALink href='/shop'>Categories</ALink>
+                    <ALink href='/shop'>Aestethic</ALink>
 
                     <div className="megamenu">
                         <div className="row">
@@ -116,6 +116,13 @@ function MainMenu() {
                     </div>
                 </li>
 
+
+
+
+
+
+
+
                 <li className={`submenu  ${pathname.includes('/pages') ? 'active' : ''}`}>
                     <ALink href="#">Pages</ALink>
 
@@ -148,6 +155,13 @@ function MainMenu() {
                         }
                     </ul>
                 </li>
+
+
+                
+                <li >
+                    <ALink href='/elements/blog-posts/'>Blogs</ALink>
+                </li>
+
 
                 <li>
                     <ALink href="/pages/about-us">About Us</ALink>
