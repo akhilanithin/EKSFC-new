@@ -62,13 +62,13 @@ export default function Header(props) {
                         </ALink>
 
                         <ALink href="/" className="logo d-none d-lg-block">
-                            <img src='./images/home/logo.png' alt="logo"  height="70" />
+                        <img src='./images/home/logo.png' alt="logo" width="160" height="50" />
                         </ALink>
                     </div>
 
                     <div className="header-center d-flex justify-content-center">
                         <ALink href="/" className="logo d-block d-lg-none">
-                            <img src="images/home/logo.png" alt="logo" height="70" />
+                        <img src='./images/home/logo.png' alt="logo" width="160" height="50" />
                         </ALink>
                     </div>
 

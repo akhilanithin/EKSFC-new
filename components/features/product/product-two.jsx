@@ -15,8 +15,8 @@ function ProductTwo(props) {
 
     const { product, adClass = 'text-center', toggleWishlist, wishlist, addToCart, openQuickview, isCategory = true } = props;
 
-  
-    
+
+
 
     const PRODUCT_IMAGE_BASEURL = process.env.NEXT_PUBLIC_PRODUCT_IMAGE_BASEURL;
 
@@ -84,8 +84,8 @@ https://admin.essentialkonjacskinfoods.com/assets/img/products/1722234980697-lum
     }
 
     const wishlistHandler = (e) => {
-      
-        
+
+
 
         if (toggleWishlist) {
             toggleWishlist(product);
@@ -106,7 +106,7 @@ https://admin.essentialkonjacskinfoods.com/assets/img/products/1722234980697-lum
 
     const addToCartHandler = (e) => {
         e.preventDefault();
-        console.log(e.preventDefault()); 
+        console.log(e.preventDefault());
         addToCart({ ...product, qty: 1, price: getPrice() });
     }
 
@@ -124,13 +124,14 @@ https://admin.essentialkonjacskinfoods.com/assets/img/products/1722234980697-lum
 
                 <figure className="product-media">
                     <ALink href={`/product/default/${product?.id}`}>
-                        <div >
+                        <div>
                             <LazyLoadImage
                                 alt="product"
                                 src={`${PRODUCT_IMAGE_BASEURL}/products/${product?.image}`}
                                 threshold={500}
                                 effect="opacity"
-                             
+                                width='300'
+                                height="338"
                             />
                         </div>
                     </ALink>
@@ -140,6 +141,7 @@ https://admin.essentialkonjacskinfoods.com/assets/img/products/1722234980697-lum
 
 
                     <div className="product-label-group">
+
                         {product.fresharrival === 0 ? <label className="product-label label-new">New</label> : ''}
 
                         {/* {product?.trending === 0 ? <label className="product-label label-top">Trending</label> : ''} */}
@@ -176,7 +178,7 @@ https://admin.essentialkonjacskinfoods.com/assets/img/products/1722234980697-lum
                                 <a href="#" className="btn-product-icon btn-cart" title="Add to cart" onClick={addToCartHandler}>
                                     <i className="d-icon-bag"></i>
                                 </a>
-                        } 
+                        }
 
 
 
@@ -196,6 +198,7 @@ https://admin.essentialkonjacskinfoods.com/assets/img/products/1722234980697-lum
                     <div className="product-action">
                         <ALink href={`/product/default/${product?.id}`} className="btn-product btn-quickview" title="Quick View" onClick={showQuickviewHandler}>Quick View</ALink>
                     </div>
+
                 </figure>
 
 

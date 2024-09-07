@@ -29,7 +29,7 @@ function BannerSectionOne(props) {
             <div className="container">
                 <div className="row">
 
-                {/* About us-sucess story section */}
+                    {/* About us-sucess story section */}
                     <div className="col-md-6">
                         <div className="banner h-100">
                             <div className="banner-content pr-lg-4 y-50">
@@ -37,11 +37,11 @@ function BannerSectionOne(props) {
                                     {/* <h2 className="banner-title text-white font-weight-bold mb-2">Who we are
                                     </h2> */}
                                     <span className="banner-subtitle text-black font-weight-bold text-uppercase 
-                                    " >Success story</span>
+                                    " >Success Story</span>
 
                                     {/* <p className="text-white mb-6"><b>Time to know your skin type and skin problem</b></p> */}
 
-                                    <h2>Konjac SkinFood develops its own brands</h2>
+                                    <h2>Konjac SkinFood Develops Its Own Brands</h2>
 
                                     <p>The Konjac SkinFoode network is being developed and improved, taking into account all consumer.</p>
 
@@ -99,7 +99,7 @@ function BannerSectionOne(props) {
                                             <iframe width="550" height="410" src="https://www.youtube.com/embed/1CjpntmL5H8" title="AI BITMOJI   Skin Analyzer - HERCA" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
                                         )}
 
-                                        
+
                                         {/* overlay youtube video*/}
 
                                         {/* <div className="info-blocks__item-img-overlay">
@@ -108,7 +108,7 @@ function BannerSectionOne(props) {
                                                 <img src="https://eksfc.com/assets/img/play-btn.png" className="js-img" alt="" />
                                             </div>
                                         </div> */}
-                                     
+
 
 
                                     </div>
