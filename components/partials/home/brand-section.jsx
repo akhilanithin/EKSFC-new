@@ -10,38 +10,34 @@ import { LazyLoadImage } from 'react-lazy-load-image-component';
 
 
 function BrandSection(props) {
- 
-    const{products,loading}=props
+
+    const { products, loading } = props
 
     console.log(products?.data.brands.img);
 
 
-    
+
     return (
         <Reveal keyframes={fadeIn} duration={1200} delay={300} triggerOnce>
             <section className="brand-section pb-10">
                 <h2 className="title d-none">Our Brand</h2>
 
-               <div className='image-container'>
+                <div className='image-container'>
                     <OwlCarousel adClass="owl-theme brand-carousel" options={brandSlider}>
-    
-    
+
+
                         {products?.data.brands && products?.data.brands.map((item, index) => (
-    
-                            <LazyLoadImage
-                                alt="brand"
-                                src={`https://admin.essentialkonjacskinfoods.com/assets/img/brands/${item?.img}`}
-                                threshold={500}
-                                effect="opacity"
-                                key={index}
-                            />
-    
+
+                            <figure className="brand">
+                            <img   src={`https://admin.essentialkonjacskinfoods.com/assets/img/brands/${item?.img}`} alt="Brand"  />
+                        </figure>
+
                         ))}
-    
-    
+
+
                     </OwlCarousel>
-                    
-               </div>
+
+                </div>
             </section>
         </Reveal>
     )

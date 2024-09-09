@@ -268,6 +268,19 @@
         height: 250px;
     }
 
+    video {
+        display: block;
+        width: 100%;
+        height: auto;
+        transition: all .5s;
+        object-fit: cover;
+        align-items: center;
+        height: 250px;
+    }
+
+
+
+
     span {
         position: absolute;
         left: 0;

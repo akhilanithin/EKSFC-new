@@ -21,7 +21,8 @@ export default function Instagram() {
     const [error, setError] = useState(null);
 
 
-    // https://graph.instagram.com/me/media?fields=id,media_type,media_url,caption,thumbnail_url,permalink,timestamp,username&limit=55&access_token=IGQWRNdUpTcEZALeFFNbmdrLUZAoR2FQYWVyMjF2eDlqSXVVTE5KYjVHLWZA4cTdwOEk0ZAmt2RTNDZAVdBQmZANX0tUOHFIUVZAuOHRaS20xZAXBNamtqUlVybkNpeW1XQW52QktaME5Jd3UzbGUzdVFVWGZApbVNtSnFEU0EZD
+    // https://graph.instagram.com/me/media?fields=id,media_type,media_url,caption,thumbnail_url,permalink,timestamp,username&limit=55&access_token=IGQWRQOEhaXzF3VEdmbG1IWXd1VnlKZAk9JbndVYzRPM0gtVWpLd1BucEdCTlM1QWhNMVJ3VmZAaSHlYbkNScHZAQZAFZAuM2JyZAVJKS1NfNEFGU2FyQ2NwZAGV4Y05mTHVyQ0x3aGZABdzhBZAXE5SFE4aVZAqa1BBVlQ2X0EZD
+
 
 
 
@@ -66,12 +67,14 @@ export default function Instagram() {
                                         alt="Instagram Video"
                                         threshold={500}
                                         effect="opacity"
-                                        style={{
-                                            width: '100%',
-                                            height: '250px',
-                                            objectFit: 'cover', 
-                                            alignItems: 'center'
-                                        }}
+                                         width="280"
+                                        height="280"
+                                        // style={{
+                                        //     width: '100%',
+                                        //     height: '250px',
+                                        //     objectFit: 'cover', 
+                                        //     alignItems: 'center'
+                                        // }}
                                     />
                                 </a>
                             </figure>

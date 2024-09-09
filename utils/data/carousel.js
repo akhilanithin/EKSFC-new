@@ -430,8 +430,8 @@ export const productSlider = {
 }
 
 export const productSlider2 = {
-    // items: 4,
-    // nav: false,
+    items: 4,
+    nav: false,
     dots: false,
     margin: 20,
     loop: true,

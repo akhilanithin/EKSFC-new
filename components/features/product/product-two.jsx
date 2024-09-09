@@ -124,16 +124,53 @@ https://admin.essentialkonjacskinfoods.com/assets/img/products/1722234980697-lum
 
                 <figure className="product-media">
                     <ALink href={`/product/default/${product?.id}`}>
-                        <div>
-                            <LazyLoadImage
-                                alt="product"
-                                src={`${PRODUCT_IMAGE_BASEURL}/products/${product?.image}`}
-                                threshold={500}
-                                effect="opacity"
-                                width='300'
-                                height="338"
-                            />
-                        </div>
+
+                        <LazyLoadImage
+                            alt="product"
+                            src={`${PRODUCT_IMAGE_BASEURL}/products/${product?.image}`}
+                            threshold={500}
+                            effect="opacity"
+                            width='300'
+                            height="338"
+                        />
+
+{/*                         
+                        {
+                            product?.variation.length >= 2 ?
+
+                                <video
+                                    loop
+                                    muted
+                                    autoPlay
+                                    playsInline
+                                    className="video-tag"
+                                    poster=""
+                                    width='300'
+                                    height="338"
+
+                                >
+                                    <source src="https://sample-videos.com/video321/mp4/720/big_buck_bunny_720p_1mb.mp4" type="video/mp4" />
+                                    Your browser does not support the video tag.
+                                </video>
+                                : ""
+                        } */}
+
+
+                        <video
+                            loop
+                            muted
+                            autoPlay
+                            playsInline
+                            className="video-tag"
+                            poster=""
+                            width='300'
+                            height="338"
+
+                        >
+                            <source src="https://sample-videos.com/video321/mp4/720/big_buck_bunny_720p_1mb.mp4" type="video/mp4" />
+                            Your browser does not support the video tag.
+                        </video>
+
                     </ALink>
 
 
