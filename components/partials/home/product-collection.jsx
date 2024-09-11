@@ -58,9 +58,6 @@ const {data,loading}=props
         if (iso) {
             iso.arrange({
                 filter: function (index, itemElem) {
-
-               
-                 
                     if (cat === 'all') return true;
                     return itemElem.classList.contains(cat.split(' ')[0]);
                 }

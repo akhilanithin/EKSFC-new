@@ -38,7 +38,7 @@ export default function Instagram() {
                 setInstagram(resp.data.data.filter((post) => post.media_type === "VIDEO"))
       
               }).catch((err) => {
-                console.log(err);
+                // console.log(err);
                 setError(err)
               });
             }, [])

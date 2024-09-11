@@ -15,6 +15,8 @@ function ProductTwo(props) {
 
     const { product, adClass = 'text-center', toggleWishlist, wishlist, addToCart, openQuickview, isCategory = true } = props;
 
+// console.log(product?.variation.length);
+
 
 
 
@@ -53,23 +55,7 @@ https://admin.essentialkonjacskinfoods.com/assets/img/products/1722234980697-lum
 
 
 
-
-
-
-
-    // find the value of category
-    // Convert object entries to an array of objects with 'key' and 'value'
-    var formattedArray = Object.entries(product?.category).map(([key, value]) => ({ key, value }));
-    var createdOnEntry = formattedArray.find(item => item.key === "name");
-    var categoryValue = createdOnEntry ? createdOnEntry.value : "other";
-    // console.log(categoryValue);
-
-
-
-    // find the value of discount  
-    const discount = product?.variation[0].offers ? product?.variation[0].offers : []
-    var discountArray = Object.entries(discount).map(([key, value]) => ({ key, value }))
-
+    var categories = Array.isArray(product?.category) ? product?.category : [product?.category];
 
 
     // decide if the product is wishlisted
@@ -106,9 +92,28 @@ https://admin.essentialkonjacskinfoods.com/assets/img/products/1722234980697-lum
 
     const addToCartHandler = (e) => {
         e.preventDefault();
-        console.log(e.preventDefault());
+        // console.log(e.preventDefault());
         addToCart({ ...product, qty: 1, price: getPrice() });
     }
+
+
+
+  // Calculate the average star rating
+  const averageStarRating = () => {
+    
+    var ratings = Array.isArray(product?.review) ? product?.review : [product?.review];
+    var ratingContainer =ratings.map((index,item) => ({ index, item }))
+    const totalStars = ratingContainer.reduce((sum, review) => sum + review.index.star, 0);
+    const numberOfReviews = ratingContainer.length;
+    return (totalStars / numberOfReviews).toFixed(2); 
+  };
+
+
+//   console.log(product?.review.length);
+  
+
+
+
 
     return (
 
@@ -134,14 +139,14 @@ https://admin.essentialkonjacskinfoods.com/assets/img/products/1722234980697-lum
                             height="338"
                         />
 
-{/*                         
+
                         {
                             product?.variation.length >= 2 ?
 
                                 <video
                                     loop
-                                    muted
-                                    autoPlay
+                                    // muted
+                                    // autoPlay
                                     playsInline
                                     className="video-tag"
                                     poster=""
@@ -153,8 +158,8 @@ https://admin.essentialkonjacskinfoods.com/assets/img/products/1722234980697-lum
                                     Your browser does not support the video tag.
                                 </video>
                                 : ""
-                        } */}
-
+                        }
+{/* 
 
                         <video
                             loop
@@ -169,7 +174,7 @@ https://admin.essentialkonjacskinfoods.com/assets/img/products/1722234980697-lum
                         >
                             <source src="https://sample-videos.com/video321/mp4/720/big_buck_bunny_720p_1mb.mp4" type="video/mp4" />
                             Your browser does not support the video tag.
-                        </video>
+                        </video>  */}
 
                     </ALink>
 
@@ -181,15 +186,37 @@ https://admin.essentialkonjacskinfoods.com/assets/img/products/1722234980697-lum
 
                         {product.fresharrival === 0 ? <label className="product-label label-new">New</label> : ''}
 
-                        {/* {product?.trending === 0 ? <label className="product-label label-top">Trending</label> : ''} */}
+                    
+                            {
+                               product?.variation ?
+                                    <div>
+                                        {product?.variation.map((item, index) => (
+                                          
 
-                        {
-                            discountArray.length > 0 && discountArray[0].value ?
-                                product.variation.length === 0 ?
-                                    <label className="product-label label-sale">{discountArray[0].value.discount} % OFF</label>
-                                    : <label className="product-label label-sale">Sale</label>
-                                : ''
-                        }
+                                            item?.offers.length > 0 && item?.offers ?
+                                                product.variation.length === 0 ?
+
+                                                    <label className="product-label label-sale">{item?.offers[0]?.discount} % OFF</label>
+                                                    : <label className="product-label label-sale">Sale</label>
+                                                : ''
+
+
+                                     
+
+                                        ))}
+                                    </div>
+
+
+                                    : ""
+                            }
+
+                        
+
+
+
+
+
+                        
 
                     </div>
 
@@ -247,20 +274,31 @@ https://admin.essentialkonjacskinfoods.com/assets/img/products/1722234980697-lum
 
                     {
                         isCategory ?
+
+
                             <div className="product-cat">
                                 {
                                     product.category ?
+                                        <div>
+                                            {categories?.map((item, index) => (
 
-                                        <React.Fragment key={categoryValue}>
-                                            <ALink href={{ pathname: '/shop', query: { category: categoryValue } }}>
-                                                {categoryValue}
-                                                {/* {index < product.category.length - 1 ? ', ' : ""} */}
-                                            </ALink>
-                                        </React.Fragment>
+                                                <React.Fragment key={index}>
+                                                    <ALink href={{ pathname: '/shop', query: { category: item?.name } }}>
+                                                        {item?.name}
+                                                        {/* {index < product.category.length - 1 ? ', ' : ""} */}
+                                                    </ALink>
+                                                </React.Fragment>
+
+                                            ))}
+                                        </div>
+
 
                                         : ""
                                 }
+
                             </div> : ""
+
+
                     }
 
                     {/* Product Name */}
@@ -303,16 +341,32 @@ https://admin.essentialkonjacskinfoods.com/assets/img/products/1722234980697-lum
 
 
 
-
+                    {/* ratings */}
 
                     <div className="ratings-container">
-                        {/* <div className="ratings-full">
-                <span className="ratings" style={{ width: 20 * product.ratings + '%' }}></span>
-                <span className="tooltiptext tooltip-top">{product.ratings}</span>
-            </div> */}
+                        {
+                            product?.review ?
+                                <div>
 
-                        {/* <ALink href={`/product/default/${product.name}`} className="rating-reviews">( {product.reviews} reviews )</ALink> */}
+                                    <div className="ratings-full">
+                                        {averageStarRating() > 0 ?
+
+                                            <span className="ratings" style={{ width: 20 * averageStarRating() + '%' }}></span> : []
+                                        }
+                                        <span className="tooltiptext tooltip-top"> averageStarRating()</span>
+                                    </div>
+
+
+                                </div>
+
+                                : ""
+                        }
+
+                        {product?.review.length ? <ALink href={`/product/default/${product?.id}`} className="rating-reviews">( {product?.review.length} reviews )</ALink> : ''}
+                      
+
                     </div>
+
                 </div>
 
 

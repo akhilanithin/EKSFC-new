@@ -42,12 +42,12 @@ export default function BannerSectionTwo() {
             setVideos(resp.data.items.filter((item) => item.snippet.thumbnails !== undefined && item.snippet.title !== "Private video"))
 
         }).catch((err) => {
-            console.log(err);
+            // console.log(err);
             setError(err)
         });
     }, [])
 
-    console.log(videos);
+    // console.log(videos);
 
 
     function formatDateInDubaiTimezone(isoDateString) {

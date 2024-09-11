@@ -352,9 +352,9 @@ rgba(252, 237, 234, 0.9);;
 
 
         img {
-            width: auto;
-            // width: 8rem;
-            // height: 8rem;
+            // width: auto;
+            width: 8rem;
+            height: 8rem;
         }
     }
 }
@@ -841,44 +841,44 @@ rgba(252, 237, 234, 0.9);;
 
 
 
-@import url("https://fonts.googleapis.com/css?family=Source+Sans+Pro&display=swap");
+// @import url("https://fonts.googleapis.com/css?family=Source+Sans+Pro&display=swap");
 
-.pricing {
+// .pricing {
 
-  justify-content:center;
-  padding: 15px;
-  display: flex;
-  width: 100%;
+//   justify-content:center;
+//   padding: 15px;
+//   display: flex;
+//   width: 100%;
 
-  .plan {
+//   .plan {
     
-    text-align: left;
-    width: auto;
-    height: 290px;
-    background-color: #fff;
-    overflow: hidden;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    flex: 1;
+//     text-align: left;
+//     width: auto;
+//     height: 290px;
+//     background-color: #fff;
+//     overflow: hidden;
+//     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+//     flex: 1;
  
 
 
 
-    cursor: pointer;
-    border: 0.5px solid black;
+//     cursor: pointer;
+//     border: 0.5px solid black;
 
 
 
-    &.popular {
-      border: 0.5px solid #6ab04c;
-      position: relative;
-      transform: scale(1.09);
+//     &.popular {
+//       border: 0.5px solid #6ab04c;
+//       position: relative;
+//       transform: scale(1.09);
 
    
    
-    }
+//     }
 
-  }
-}
+//   }
+// }
 
 
 // brand section styling
