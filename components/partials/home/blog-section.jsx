@@ -12,42 +12,46 @@ const axios = require('axios');
 
 function BlogSection() {
 
-    const [data, setData] = useState(null); // State to hold the fetched data
+    const [posts, setPosts] = useState(null); // State to hold the fetched data
     const [error, setError] = useState(null); // State to hold any error
+    const [loading, setLoading] = useState(true); 
 
-    const BLOG_URL = process.env.NEXT_PUBLIC_BLOG_URL;
-    const BLOG_TOKEN = process.env.NEXT_PUBLIC_BLOG_TOKEN;
+    const url = process.env.NEXT_PUBLIC_BLOG_URL;
+    const token = process.env.NEXT_PUBLIC_BLOG_TOKEN;
 
     useEffect(() => {
-        // Define the function to fetch data
+        // Fetch data from API
         const fetchData = async () => {
             try {
-                const response = await axios.get(BLOG_URL, {
+                const response = await axios.get(url, {
                     headers: {
-                        'Authorization': `Bearer ${BLOG_TOKEN}`,
-                        'Content-Type': 'application/json',// or other content types if needed
-                        'konjac-version': '1.0.1'
+                        'Authorization': `Bearer ${token}`, // Authorization header
+                        'Content-Type': 'application/json', // Optional: Set to the expected content type
+                        'konjac-version':'1.0.1'
+                    
                     }
                 });
-                setData(response.data); // Update state with fetched data
+                setPosts(response.data); // Set the data state with the API response data
+                setLoading(false); // Set loading to false after data is fetched
             } catch (err) {
-                setError(err); // Update state with error
+                setError(err); // Set error state if there's an issue
+                setLoading(false); // Set loading to false even if there's an error
             }
         };
 
-        fetchData(); // Call the function to fetch data
-    }, [BLOG_URL, BLOG_TOKEN]); // Dependencies array: fetch when url or token changes
+        fetchData(); // Call the async function
+    }, [url, token]); // Dependencies array: the effect will run if url or token changes
 
-    if (error) {
-        return <div>Error: {error.message}</div>; // Display error message if there's an error
-    }
+    // Render loading, error, or data based on the component state
+    if (loading) return <p>Loading...</p>;
+    if (error) return <p>Error: {error.message}</p>;
+    
 
-    if (!data) {
-        return <div>Loading...</div>; // Display loading state if data is not yet loaded
-    }
-
-
-    console.log(data);
+  
+    
+    var blogs = Array.isArray(posts?.data) ? posts?.data : [posts?.data];
+  
+    
     
 
 
@@ -55,27 +59,31 @@ function BlogSection() {
 
 
 
-        <section className="blog-section mt-8 mb-10 bg-white" style={{ backgroundImage: 'url(images/home/banner/5.jpg)' }}>
+        <section className="blog-section mt-8 mb-10">
             <Reveal keyframes={fadeInLeftShorter} delay={300} duration={1000} triggerOnce>
                 <div className="container">
                     <Reveal keyframes={fadeIn} delay={300} duration={1000} triggerOnce>
                         <div className="title-wrapper mt-1 mb-5">
-                            <h2 className="text-left title with-link text-white">Our Latest Blog</h2>
-                            <span className="badge text-white">Who we are</span>
+                            <h2 className="text-left title with-link text-black">Our Latest Blog</h2>
+                            {/* <span className="badge text-white">Who we are</span> */}
                         </div>
                     </Reveal>
 
                     <OwlCarousel adClass="owl-theme owl-shadow-carousel" options={mainSlider6}>
-                        {/* {
-                            posts && posts.length ?
-                                posts.slice(15, 18).map((post, index) => (
+
+                        {
+                            posts && posts?.count ?
+
+                            
+                                blogs?.map((post, index) => (
                                     <React.Fragment key={"post-eight" + index}>
                                         <div className="blog-post mb-4">
                                             <PostEight post={post} adClass="overlay-zoom" />
                                         </div>
                                     </React.Fragment>
                                 )) : ''
-                        } */}
+                        }  
+
                     </OwlCarousel>
                 </div>
             </Reveal>

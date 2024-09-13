@@ -18,19 +18,23 @@ function PostEight ( props ) {
                     <figure className="post-media">
                         {
                             isLazy ?
-                                <ALink href={ `/blog/single/${ post.slug }` }>
+                                <ALink href={`/blog/single/${post?.slug}`}>
                                     {
-                                        isOriginal ? <LazyLoadImage
-                                            src={ process.env.NEXT_PUBLIC_ASSET_URI + post.large_picture[ 0 ].url }
-                                            alt="post image"
-                                            width={ 320 }
-                                            height={ 206 }
-                                            effect="opacity; transform"
-                                            style={ { backgroundColor: "#DEE6E8" } }
-                                        />
+                                        isOriginal ? 
+                                        post?.thumbnails.map( ( item, index ) =>
+                                            <LazyLoadImage
+                                                src={item}
+                                                alt="post gallery"
+                                                key={ item?.title + '-' + index }
+                                                width={ 320 }
+                                                height={ 206 }
+                                                effect="opacity; transform"
+                                                style={ { backgroundColor: "#DEE6E8" } }
+                                            />
+                                        )
                                             :
                                             <LazyLoadImage
-                                                src={ process.env.NEXT_PUBLIC_ASSET_URI + post.picture[ 0 ].url }
+                                                src={item }
                                                 alt="post image"
                                                 width={ 320 }
                                                 height={ 206 }
@@ -40,24 +44,32 @@ function PostEight ( props ) {
                                     }
                                 </ALink>
                                 :
-                                <ALink href={ `/blog/single/${ post.slug }` }>
+                                <ALink href={`/blog/single/${post?.slug}`}>
                                     {
-                                        isOriginal ? <img
-                                            src={ process.env.NEXT_PUBLIC_ASSET_URI + post.large_picture[ 0 ].url }
-                                            alt="post image"
-                                            width={ post.large_picture[ 0 ].width }
-                                            height={ post.large_picture[ 0 ].height }
-                                        /> :
-
+                                        isOriginal ? 
+                                        post?.thumbnails?.map((item, index) =>
+                                      
                                             <img
-                                                src={ process.env.NEXT_PUBLIC_ASSET_URI + post.picture[ 0 ].url }
-                                                alt="post image"
-                                                width={ post.picture[ 0 ].width }
-                                                height={ post.picture[ 0 ].height }
-                                            />
+                                            src={ item }
+                                            alt="post image"
+                                            width={ 320 }
+                                            height={ 206 }
+                                        /> 
+                                        )
+                                                                          
+                                        :
+                                        <img
+                                        src={ item }
+                                        alt="post image"
+                                        width={ 320 }
+                                        height={ 206 }
+                                    /> 
                                     }
                                 </ALink>
                         }
+
+
+
                         {
                             post.type === 'video' ?
                                 <>
@@ -68,9 +80,12 @@ function PostEight ( props ) {
                                 </>
                                 : ''
                         }
+
+
+
                         <div className="post-calendar">
-                            <span className="post-day">{ new Date( post.date ).getDay() + 1 }</span>
-                            <span className="post-month">{ months[ new Date( post.date ).getMonth() ] }</span>
+                            <span className="post-day">{ new Date( post?.createdAt ).getDay() + 1 }</span>
+                            <span className="post-month">{ months[ new Date( post?.createdAt ).getMonth() ] }</span>
                         </div>
                     </figure> :
                     <figure className="post-media">
@@ -78,44 +93,51 @@ function PostEight ( props ) {
                             isLazy ?
                                 <OwlCarousel adClass="owl-theme owl-dot-inner owl-dot-white gutter-no" options={ mainSlider20 }>
                                     {
-                                        post.picture.map( ( item, index ) =>
+                                         post?.images.map((item, index) =>
+                                      
                                             <LazyLoadImage
-                                                src={ process.env.NEXT_PUBLIC_ASSET_URI + item.url }
+                                                src={item}
                                                 alt="post gallery"
-                                                key={ item.title + '-' + index }
-                                                width={ 320 }
-                                                height={ 206 }
+                                                key={index}
+                                                width={320}
+                                                height={206}
                                                 effect="opacity; transform"
-                                                style={ { backgroundColor: "#DEE6E8" } }
+                                                style={{ backgroundColor: "#DEE6E8" }}
                                             />
-                                        ) }
+                                        )
+                                        
+                                        
+                                        }
                                 </OwlCarousel>
                                 :
                                 <OwlCarousel adClass="owl-theme owl-dot-inner owl-dot-white gutter-no" options={ mainSlider20 }>
                                     {
-                                        post.picture.map( ( item, index ) =>
-                                            <img
-                                                src={ process.env.NEXT_PUBLIC_ASSET_URI + item.url }
-                                                alt="post gallery"
-                                                key={ item.title + '-' + index }
-                                                width={ 320 }
-                                                height={ 206 }
-                                            />
-                                        ) }
+                                       post?.images.map((item, index) =>
+                                      
+                                        <LazyLoadImage
+                                            src={item}
+                                            alt="post gallery"
+                                            key={index}
+                                            width={320}
+                                            height={206}
+                                            effect="opacity; transform"
+                                            style={{ backgroundColor: "#DEE6E8" }}
+                                        />
+                                    ) }
                                 </OwlCarousel>
                         }
                         <div className="post-calendar">
-                            <span className="post-day">{ new Date( post.date ).getDay() + 1 }</span>
-                            <span className="post-month">{ months[ new Date( post.date ).getMonth() ] }</span>
+                            <span className="post-day">{ new Date( post?.createdAt ).getDay() + 1 }</span>
+                            <span className="post-month">{ months[ new Date( post?.createdAt).getMonth() ] }</span>
                         </div>
                     </figure>
             }
 
             <div className="post-details">
                 <h4 className="post-title">
-                    <ALink href={ `/blog/single/${ post.slug }` }>{ post.title }</ALink>
+                    <ALink href={ `/blog/single/${ post?.slug }` }>{ post?.metaTitle}</ALink>
                 </h4>
-                <p className="post-content">{ post.content }</p>
+                <p className="post-content">{ post.metaDescription }</p>
                 <ALink href={ `/blog/single/${ post.slug }` } className={ `btn btn-primary btn-link btn-underline ${ btnAdClass }` }>{ btnText }<i className="d-icon-arrow-right"></i></ALink>
             </div>
         </div >

@@ -94,6 +94,7 @@
 
 // Default
 .post {
+    height: 'auto';
     @include print_css( post );
     .btn {
         i {
@@ -136,6 +137,9 @@
         width: 100%;
         height: auto;
         transition: transform .3s;
+        object-fit: cover;
+        align-items: center;
+        height: 206px;
     }
     .post-calendar {
         position: absolute;

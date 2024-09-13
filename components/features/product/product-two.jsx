@@ -110,10 +110,14 @@ https://admin.essentialkonjacskinfoods.com/assets/img/products/1722234980697-lum
 
 
 //   console.log(product?.review.length);
-  
-
-
-
+const variations = Array.isArray(product.variation) ? product.variation : [product.variation];
+const getDiscounts = () => variations.flatMap(variation => variation.offers || []);
+const discounts = getDiscounts();
+const discount = discounts.length > 0 ? discounts[0] : null;
+const discountValue = discount ? discount.discount : 0;
+const discountPrice = discount ? discount.price : null;
+const basePrice = variations[0]?.price || 0;
+const showDiscountedPrice = discountPrice && discountPrice < basePrice;
 
     return (
 
@@ -146,7 +150,7 @@ https://admin.essentialkonjacskinfoods.com/assets/img/products/1722234980697-lum
                                 <video
                                     loop
                                     // muted
-                                    // autoPlay
+                                    autoPlay
                                     playsInline
                                     className="video-tag"
                                     poster=""
@@ -315,26 +319,16 @@ https://admin.essentialkonjacskinfoods.com/assets/img/products/1722234980697-lum
 
                     <div className="product-price">
 
-                        {/* <div>
-                            <h6>Price: AED{getPrice()}</h6>
-                        </div>  */}
+                    {showDiscountedPrice ? (
+                        <>
+                            <del className="old-price"> AED {toDecimal(basePrice)}</del>
+                            <ins className="new-price"> AED {toDecimal(discountPrice)}</ins>
+                        </>
+                    ) : (
+                        <ins className="new-price">AED {toDecimal(basePrice)}</ins>
+                        
+                    )}
 
-
-                        {
-                            product.variation[0].price !== getPrice() ?
-                                product?.variation.length === 0 || (product?.variation.length > 0 && !product.variation[0].price) ?
-                                    <>
-                                        <ins className="new-price">AED {toDecimal(getPrice())}</ins>
-                                        <del className="old-price">AED {toDecimal(product.variation[0].price)}</del>
-                                    </>
-                                    :
-                                    <>
-                                        < del className="old-price">AED{toDecimal(product.variation[0].price)} </del>
-                                        <ins className="new-price">AED {toDecimal(getPrice())}</ins>
-
-                                    </>
-                                : <ins className="new-price">AED{toDecimal(product.variation[0].price)}</ins>
-                        }
 
                     </div>
 
