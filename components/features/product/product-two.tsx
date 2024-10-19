@@ -50,8 +50,10 @@ const ProductTwo: React.FC<Props & PropsFromRedux> = (props) => {
     const PRODUCT_IMAGE_BASEURL = process.env.NEXT_PUBLIC_PRODUCT_IMAGE_BASEURL;
 
     const getPrice = () => {
+        // Check if product has variations
         if (product.variation && product.variation.length > 0) {
             const variation = product.variation[0];
+            // Check if the variation has offers
             if (variation.offers && variation.offers.length > 0) {
                 return variation.offers[0].price;
             }
@@ -61,7 +63,7 @@ const ProductTwo: React.FC<Props & PropsFromRedux> = (props) => {
     };
 
     const categories = Array.isArray(product.category) ? product.category : [product.category];
-    
+
     const isWishlisted = wishlist.some(item => item.id === product.id);
 
     const showQuickviewHandler = () => {
@@ -85,6 +87,8 @@ const ProductTwo: React.FC<Props & PropsFromRedux> = (props) => {
         addToCart({ ...product, qty: 1, price: getPrice() });
     };
 
+
+    // Calculate the average star rating
     const averageStarRating = () => {
         const ratings = Array.isArray(product.review) ? product.review : [product.review];
         const totalStars = ratings.reduce((sum, review) => sum + (review.star || 0), 0);
@@ -100,7 +104,9 @@ const ProductTwo: React.FC<Props & PropsFromRedux> = (props) => {
     const showDiscountedPrice = discountPrice && discountPrice < basePrice;
 
     return (
+
         <div className={`product text-left ${adClass}`}>
+            {/* image Field */}
             <figure className="product-media">
                 <ALink href={`/product/default/${product.id}`}>
                     <LazyLoadImage
@@ -111,29 +117,105 @@ const ProductTwo: React.FC<Props & PropsFromRedux> = (props) => {
                         width='300'
                         height="338"
                     />
+
+
+  
+                    {/* <video
+                        loop
+                        muted
+                        autoPlay
+                        playsInline
+                        className="video-tag"
+                        poster=""
+                        width='300'
+                        height="338"
+
+                    >
+                        <source src="https://sample-videos.com/video321/mp4/720/big_buck_bunny_720p_1mb.mp4" type="video/mp4" />
+                        Your browser does not support the video tag.
+                    </video> */}
+
+
+
+
+
+
+
+
+
+
+
+
+                              
                     {product.variation.length >= 2 && (
                         <video
                             loop
+                            muted
                             autoPlay
                             playsInline
                             className="video-tag"
+                            poster=""
                             width='300'
                             height="338"
+
                         >
                             <source src="https://sample-videos.com/video321/mp4/720/big_buck_bunny_720p_1mb.mp4" type="video/mp4" />
                             Your browser does not support the video tag.
                         </video>
-                    )}
+                    )}  
+
+
+                  
+
+
                 </ALink>
+
+
+                {/* Label New & Sales */}
+{/* 
                 <div className="product-label-group">
-                    {product.fresharrival === 0 && <label className="product-label label-new">New</label>}
-                    {product.variation && product.variation.map((item, index) => (
-                        item.offers.length > 0 && (
-                            <label key={index} className="product-label label-sale">{item.offers[0].discount} % OFF</label>
-                        )
-                    ))}
+                    {product.fresharrival === 0 ? <label className="product-label label-new">New</label> : ''}
+                    {
+                        product?.variation ?
+                            <div>
+                                {product?.variation.map((item, index) => (
+
+
+                                    item?.offers?.length > 0 && item?.offers ?
+                                        product?.variation?.length === 0 ?
+
+                                            <label className="product-label label-sale">{item?.offers[0]?.discount} % OFF</label>
+                                            : <label className="product-label label-sale">Sale</label>
+                                        : ''
+                                ))}
+                            </div>
+
+                            : ""
+                    }                
                 </div>
+ */}
+
+
+
+                <div className="product-label-group">
+                    {product?.fresharrival === 0 && <label className="product-label label-new">New</label>}
+                    {discountValue > 0 && (
+                        variations.length === 0
+                            ? <label className="product-label label-sale">{discountValue}% OFF</label>
+                            : <label className="product-label label-sale">Sale</label>
+                    )}
+                </div>
+
+
+                {/* Addto cart & Wishlisted */}
+
                 <div className="product-action-vertical">
+
+                    {/* Add to cart */}
+
+
+                    {/* correct  logic */}
+
                     {product.variation.length > 1 ? (
                         <ALink href={`/product/default/${product.id}`} className="btn-product-icon btn-cart" title="Go to product">
                             <i className="d-icon-arrow-right"></i>
@@ -143,17 +225,32 @@ const ProductTwo: React.FC<Props & PropsFromRedux> = (props) => {
                             <i className="d-icon-bag"></i>
                         </a>
                     )}
+
+
+
+                    {/* wishlist */}
+
+
                     <a href="#" className="btn-product-icon btn-wishlist" title={isWishlisted ? 'Remove from wishlist' : 'Add to wishlist'} onClick={wishlistHandler}>
                         <i className={isWishlisted ? "d-icon-heart-full" : "d-icon-heart"}></i>
                     </a>
                 </div>
+
+                {/* Quick View */}
+
+
                 <div className="product-action">
                     <ALink href={`/product/default/${product.id}`} className="btn-product btn-quickview" title="Quick View" onClick={showQuickviewHandler}>
                         Quick View
                     </ALink>
                 </div>
             </figure>
+
+
+            {/* Product Details */}
+
             <div className="product-details">
+                {/* Category */}
                 {isCategory && (
                     <div className="product-cat">
                         {categories.map((item, index) => (
@@ -165,9 +262,18 @@ const ProductTwo: React.FC<Props & PropsFromRedux> = (props) => {
                         ))}
                     </div>
                 )}
+
+                {/* Product Name */}
+
+
                 <h3 className="product-name">
                     <ALink href={`/product/default/${product.id}`}>{product.name}</ALink>
                 </h3>
+
+
+
+                {/* Product Price  */}
+
                 <div className="product-price">
                     {showDiscountedPrice ? (
                         <>
@@ -178,6 +284,10 @@ const ProductTwo: React.FC<Props & PropsFromRedux> = (props) => {
                         <ins className="new-price">AED {toDecimal(basePrice)}</ins>
                     )}
                 </div>
+
+
+
+                {/* ratings */}
                 <div className="ratings-container">
                     {product.review && (
                         <div>
@@ -186,12 +296,14 @@ const ProductTwo: React.FC<Props & PropsFromRedux> = (props) => {
                                     <span className="ratings" style={{ width: `${20 * averageStarRating()}%` }}></span>
                                 )}
                             </div>
-                            {product.review.length > 0 && (
+                            {/* {product.review.length > 0 && (
                                 <ALink href={`/product/default/${product.id}`} className="rating-reviews">( {product.review.length} reviews )</ALink>
-                            )}
+                            )} */}
                         </div>
                     )}
                 </div>
+
+                
             </div>
         </div>
     );

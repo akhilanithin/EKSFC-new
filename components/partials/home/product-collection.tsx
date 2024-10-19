@@ -111,7 +111,7 @@ const ProductCollection: React.FC<Props> = ({ data, loading }) => {
                             ))
                         ) : (
                             data?.data.trending && data.data.trending.map((item, index) => (
-                                item.feature ? (
+                                item?.feature ? (
                                     <div className={`grid-item col-md-4 col-6 ${getProductCategory(item)}`} key={`product-${index}`}>
                                         <ProductTwo adClass="shadow-product text-center mb-2" product={item} />
                                     </div>

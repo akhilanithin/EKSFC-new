@@ -47,7 +47,7 @@ const PostEight: React.FC<PostEightProps> = ({
                                 <ALink href={`/blog/single/${post?.slug}`}>
                                     {
                                         isOriginal ?
-                                            post?.thumbnails?.map((item, index) => (
+                                            post?.images?.map((item, index) => (
                                                 <LazyLoadImage
                                                     src={item}
                                                     alt="post gallery"
@@ -60,7 +60,7 @@ const PostEight: React.FC<PostEightProps> = ({
                                             ))
                                             :
                                             <LazyLoadImage
-                                                src={post.thumbnails[0]} // Assuming first thumbnail for image type
+                                                src={post.images[0]} // Assuming first thumbnail for image type
                                                 alt="post image"
                                                 width={320}
                                                 height={206}
@@ -73,7 +73,7 @@ const PostEight: React.FC<PostEightProps> = ({
                                 <ALink href={`/blog/single/${post?.slug}`}>
                                     {
                                         isOriginal ?
-                                            post?.thumbnails?.map((item, index) => (
+                                            post?.images?.map((item, index) => (
                                                 <img
                                                     src={item}
                                                     alt="post image"
@@ -84,7 +84,7 @@ const PostEight: React.FC<PostEightProps> = ({
                                             ))
                                             :
                                             <img
-                                                src={post.thumbnails[0]} // Assuming first thumbnail for image type
+                                                src={post.images[0]} // Assuming first thumbnail for image type
                                                 alt="post image"
                                                 width={320}
                                                 height={206}
@@ -116,7 +116,7 @@ const PostEight: React.FC<PostEightProps> = ({
                             isLazy ? (
                                 <OwlCarousel adClass="owl-theme owl-dot-inner owl-dot-white gutter-no" options={mainSlider20}>
                                     {
-                                        post?.images?.map((item, index) => (
+                                        post?.thumbnails?.map((item, index) => (
                                             <LazyLoadImage
                                                 src={item}
                                                 alt="post gallery"
@@ -132,7 +132,7 @@ const PostEight: React.FC<PostEightProps> = ({
                             ) : (
                                 <OwlCarousel adClass="owl-theme owl-dot-inner owl-dot-white gutter-no" options={mainSlider20}>
                                     {
-                                        post?.images?.map((item, index) => (
+                                        post?.thumbnails?.map((item, index) => (
                                             <img
                                                 src={item}
                                                 alt="post gallery"
@@ -155,9 +155,9 @@ const PostEight: React.FC<PostEightProps> = ({
 
             <div className="post-details">
                 <h4 className="post-title">
-                    <ALink href={`/blog/single/${post?.slug}`}>{post?.metaTitle}</ALink>
+                    <ALink href={`/blog/single/${post?.slug}`}>{post?.title}</ALink>
                 </h4>
-                <p className="post-content">{post.metaDescription}</p>
+                <p className="post-content">{post.teaserText}</p>
                 <ALink href={`/blog/single/${post.slug}`} className={`btn btn-primary btn-link btn-underline ${btnAdClass}`}>
                     {btnText}<i className="d-icon-arrow-right"></i>
                 </ALink>
