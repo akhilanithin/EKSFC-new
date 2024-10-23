@@ -2,6 +2,8 @@ import Reveal from "react-awesome-reveal";
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import React, { useEffect, useState } from "react";
 import axios from 'axios';
+import SectionVideos from '~/components/partials/home/SectionVideos';
+
 
 // import Custom Components
 import OwlCarousel from '~/components/features/owl-carousel';
@@ -86,41 +88,10 @@ const BannerSectionTwo: React.FC = () => {
                         </div>
                     </div>
 
+                 
+
                     <div className="banner-image-wrapper overflow-hidden">
-                        <Reveal keyframes={fadeInLeftShorter} delay={600} duration={1000} triggerOnce>
-                            <OwlCarousel adClass="banner-carousel owl-theme owl-shadow-carousel" options={bannerSlider}>
-                                {videos?.map((item, index) => (
-                                    <div className="pricing" key={index}>
-                                        <div className={`plan ${middleIndices.includes(index) ? 'popular' : ''}`}>
-                                            <ALink
-                                                className="video-card"
-                                                target="_blank"
-                                                rel="noopener noreferrer"
-                                                href={`https://www.youtube.com/watch?v=${item?.snippet.resourceId.videoId}`}
-                                            >
-                                                <div className="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 MuiCard-root css-w88nxk">
-                                                    <LazyLoadImage
-                                                        className="MuiCardMedia-root MuiCardMedia-media MuiCardMedia-img w-100 css-rhsghg"
-                                                        src={`${item?.snippet.thumbnails.standard.url}`}
-                                                        alt={`${item?.snippet.title}`}
-                                                        effect="blur"
-                                                    />
-                                                    <div className="MuiCardContent-root css-1qw96cp">
-                                                        <div className="MuiTypography-root MuiTypography-h6 MuiTypography-gutterBottom css-4an0mh">
-                                                            {item?.snippet.title.slice(0, item?.snippet.title.length - 10) + '...'}
-                                                        </div>
-                                                        <br />
-                                                        <div className="MuiTypography-root MuiTypography-p MuiTypography-gutterBottom css-urftx4">
-                                                            {` published at : ${formatDateInDubaiTimezone(item?.snippet.publishedAt)}`}
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </ALink>
-                                        </div>
-                                    </div>
-                                ))}
-                            </OwlCarousel>
-                        </Reveal>
+                    <SectionVideos/>
                     </div>
                 </div>
             </div>

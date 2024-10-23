@@ -19,6 +19,7 @@ import FeaturedCollection from '~/components/partials/home/featured-collection';
 import BlogSection from '~/components/partials/home/blog-section';
 import Instagram from '~/components/partials/home/instagram';
 
+
 interface HomeData {
     data: {
         trending: any; // Replace 'any' with the specific type based on your API response
@@ -66,6 +67,7 @@ const HomePage: React.FC = () => {
                 <FeaturedCollection products={data} loading={loading} />
                 <BlogSection />
                 <Instagram />
+               
             </div>
 
             <NewsletterModal />
