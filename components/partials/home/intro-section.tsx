@@ -21,7 +21,7 @@ const IntroSection: React.FC = () => {
                             autoPlay
                             playsInline
                             className="video-tag"
-                            width="1260"
+                            width="100%"
                         >
                             <source src="https://eksfc.com/assets/img/homepage.mp4" type="video/mp4" />
                             Your browser does not support the video tag.

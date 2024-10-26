@@ -290,16 +290,19 @@ const ProductTwo: React.FC<Props & PropsFromRedux> = (props) => {
                 {/* ratings */}
                 <div className="ratings-container">
                     {product.review && (
-                        <div>
+                        <>
                             <div className="ratings-full">
                                 {averageStarRating() > 0 && (
-                                    <span className="ratings" style={{ width: `${20 * averageStarRating()}%` }}></span>
+                                <>
+                                        <span className="ratings" style={{ width: `${20 * averageStarRating()}%` }}></span>
+                                        <span className="tooltiptext tooltip-top">{ toDecimal(averageStarRating()) }</span>
+                                </>
                                 )}
                             </div>
                             {/* {product.review.length > 0 && (
                                 <ALink href={`/product/default/${product.id}`} className="rating-reviews">( {product.review.length} reviews )</ALink>
                             )} */}
-                        </div>
+                        </>
                     )}
                 </div>
 

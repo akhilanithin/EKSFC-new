@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import Helmet from 'react-helmet';
 import SlideToggle from 'react-slide-toggle';
-import Collapse from 'react-bootstrap/collapse';
+import Collapse from 'react-bootstrap/Collapse';
 
 import ALink from '~/components/features/custom-link';
 import Card from '~/components/features/accordion/card';
@@ -31,7 +31,7 @@ function Checkout(props) {
                     {
                         cartList.length > 0 ?
                             <>
-                                <div className="card accordion">
+                                {/* <div className="card accordion">
                                     <Card type="parse" title="<div class='alert alert-light alert-primary alert-icon mb-4 card-header'>
                             <i class='fas fa-exclamation-circle'></i> <span class='text-body'>Returning customer?</span> <a href='#' class='text-primary collapse'>Click here to login</a>
                         </div>">
@@ -84,7 +84,7 @@ function Checkout(props) {
                                             </form>
                                         </div>
                                     </Card>
-                                </div>
+                                </div> */}
                                 <form action="#" className="form">
                                     <div className="row">
                                         <div className="col-lg-7 mb-6 mb-lg-0 pr-lg-4">

@@ -61,19 +61,30 @@ const CartMenu: React.FC<CartMenuProps> = (props) => {
                                     {
                                         cartList.map((item, index) => (
                                             <div className="product product-cart" key={`cart-menu-product-${index}`}>
-                                                <figure className="product-media pure-media">
-                                                    <ALink href={`/product/default/${item.id}`}>
-                                                        <img src={`${PRODUCT_IMAGE_BASEURL}/products/${item.image}`} alt="product" width="80" height="88" />
+
+                                                <figure className="product-media pure-media"
+                                            >
+                                                    <ALink href={`/product/default/${item?.id}`}>
+                                                        <img
+                                                            src={`${PRODUCT_IMAGE_BASEURL}/products/${item?.image}`}
+                                                            alt="product"
+                                                            width="90"
+                                                            height="90"
+                                                            style={{height: 'auto' }}
+                                                        />
                                                     </ALink>
                                                     <button className="btn btn-link btn-close" onClick={() => removeCart(item)}>
                                                         <i className="fas fa-times"></i><span className="sr-only">Close</span>
                                                     </button>
                                                 </figure>
+
+
+
                                                 <div className="product-detail">
                                                     <ALink href={`/product/default/${item.slug}`} className="product-name">{item.name}</ALink>
                                                     <div className="price-box">
                                                         <span className="product-quantity">{item.qty}</span>
-                                                        <span className="product-price"></span>
+                                                        <span className="product-price">AED {toDecimal(item?.price)}</span>
                                                     </div>
                                                 </div>
                                             </div>
@@ -83,7 +94,7 @@ const CartMenu: React.FC<CartMenuProps> = (props) => {
 
                                 <div className="cart-total">
                                     <label>Subtotal:</label>
-                                    <span className="price"></span>
+                                    <span className="price">AED {toDecimal(getTotalPrice(cartList))}</span>
                                 </div>
 
                                 <div className="cart-action">

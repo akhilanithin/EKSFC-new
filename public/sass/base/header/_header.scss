@@ -1012,3 +1012,25 @@
         display: none;
     }
 }
+
+
+
+.wishlist {
+    position: relative;
+    display: inline-block;
+}
+
+.wishlist-count {
+    position: absolute;
+    top: -4px; // Adjusted value
+    right: 45px; // Adjusted value
+    background-color: red; // Adjusted color
+    color: white;
+    border-radius: 50%;
+    width: 18px; // Adjusted size
+    height: 18px; // Adjusted size
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 12px; // Font size
+}
