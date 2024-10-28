@@ -53,7 +53,8 @@
     "axios":"1.7.5",
     "@imgly/background-removal-node":"1.4.5",
     "react-slick":"0.30.2",
-    "slick-carousel":"1.8.1"
+    "slick-carousel":"1.8.1",
+    "@reduxjs/toolkit": "^1.9.7"
 
   },
   "devDependencies": {

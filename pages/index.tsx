@@ -49,6 +49,8 @@ const HomePage: React.FC = () => {
         fetchData();
     }, []);
 
+
+
     return (
         <div className="main home">
             <Helmet>

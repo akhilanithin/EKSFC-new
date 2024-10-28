@@ -47,6 +47,13 @@ type PropsFromRedux = ConnectedProps<typeof connector>;
 const ProductTwo: React.FC<Props & PropsFromRedux> = (props) => {
     const { product, adClass = 'text-center', toggleWishlist, wishlist, addToCart, openQuickview, isCategory = true } = props;
 
+    
+
+
+
+
+
+
     const PRODUCT_IMAGE_BASEURL = process.env.NEXT_PUBLIC_PRODUCT_IMAGE_BASEURL;
 
     const getPrice = () => {
@@ -70,6 +77,8 @@ const ProductTwo: React.FC<Props & PropsFromRedux> = (props) => {
         openQuickview(product.id);
     };
 
+
+
     const wishlistHandler = (e: React.MouseEvent<HTMLAnchorElement>) => {
         e.preventDefault();
         if (toggleWishlist) {
@@ -81,6 +90,9 @@ const ProductTwo: React.FC<Props & PropsFromRedux> = (props) => {
             currentTarget.classList.remove('load-more-overlay', 'loading');
         }, 1000);
     };
+
+
+
 
     const addToCartHandler = (e: React.MouseEvent<HTMLAnchorElement>) => {
         e.preventDefault();
@@ -147,7 +159,7 @@ const ProductTwo: React.FC<Props & PropsFromRedux> = (props) => {
 
 
                               
-                    {product.variation.length >= 2 && (
+                    {/* {product.variation.length >= 2 && (
                         <video
                             loop
                             muted
@@ -162,10 +174,10 @@ const ProductTwo: React.FC<Props & PropsFromRedux> = (props) => {
                             <source src="https://sample-videos.com/video321/mp4/720/big_buck_bunny_720p_1mb.mp4" type="video/mp4" />
                             Your browser does not support the video tag.
                         </video>
-                    )}  
+                    )}   */}
 
 
-                  
+                
 
 
                 </ALink>

@@ -43,7 +43,6 @@ function wishlistReducer( state = initialState, action ) {
     return state;
 }
 
-
 export const wishlistActions = {
     toggleWishlist: product => ( { type: actionTypes.TOGGLE_WISHLIST, payload: { product } } ),
     removeFromWishlist: product => ( { type: actionTypes.REMOVE_FROM_WISHLIST, payload: { product } } )

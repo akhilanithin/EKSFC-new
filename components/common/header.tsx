@@ -12,6 +12,9 @@ import { headerBorderRemoveList } from '~/utils/data/menu';
 
 
 
+
+
+
 interface HeaderProps {
     // Define any props that you might need
 }
@@ -50,7 +53,10 @@ const Header: React.FC<HeaderProps> = (props) => {
 
 
 
-const wishlist=10
+// const itemCount=10
+
+const itemCount = useSelector(state => state.wishlist?.data?.length);
+
 
 
     return (
@@ -79,15 +85,14 @@ const wishlist=10
 
                         <ALink href="/pages/wishlist" className="wishlist">
                             <i className="d-icon-heart"></i>
-                            {wishlist > 0 ? (
-                                <span className="wishlist-count">
-                                    {wishlist}
-                                </span>
+                            {itemCount > 0 ? (
+                                <span className="wishlist-count">{itemCount}</span>
                             ) : (
-                                <span className="wishlist-count" style={{ display: 'none' }}></span> 
+                                <span className="wishlist-count" style={{ display: 'none' }}></span>
                             )}
                             Wishlist
                         </ALink>
+
                         <LoginModal />
                         <CartMenu />
                     </div>
