@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useRouter } from 'next/router';
 import { useLazyQuery } from '@apollo/react-hooks';
-import { Col, Row, Card, Button, Spinner } from "react-bootstrap"; // Added Spinner for loading state
+import { Col, Row, Card, Button, Spinner } from "react-bootstrap";
 import { useDispatch } from "react-redux";
 import useFetch from "~/components/partials/shop/hooks/useFetch";
 import withApollo from '~/server/apollo';
@@ -9,7 +9,6 @@ import ProductTwo from '~/components/features/product/product-two';
 import ProductEight from '~/components/features/product/product-eight';
 import Pagination from '~/components/features/pagination';
 import { GET_PRODUCTS } from '~/server/queries';
-
 
 function ProductListOne(props) {
     const { itemsPerRow = 3, type = "left", isToolbox = true } = props;
@@ -23,20 +22,14 @@ function ProductListOne(props) {
         6: "cols-2 cols-sm-3 cols-md-4 cols-xl-6",
         7: "cols-2 cols-sm-3 cols-md-4 cols-lg-5 cols-xl-7",
         8: "cols-2 cols-sm-3 cols-md-4 cols-lg-5 cols-xl-8"
-    }
+    };
 
     const productURL = process.env.NEXT_PUBLIC_PRODUCT_URL || '';
     const productToken = process.env.NEXT_PUBLIC_PRODUCT_TOKEN || '';
     const [getProducts] = useLazyQuery(GET_PRODUCTS);
 
-    const { data, loading, error } = useFetch(
-        productURL,
-        productToken
-    );
-
-
-    const products = data && data?.data;
-
+    const { data, loading, error } = useFetch(productURL, productToken);
+    const products = data?.data;
 
     useEffect(() => {
         getProducts({
@@ -54,30 +47,21 @@ function ProductListOne(props) {
                 to: perPage * page
             }
         });
-    }, [query])
+    }, [query]);
 
+    function filterActiveProducts(products) {
+        return products?.filter(item => !item?.status) || [];
+    }
 
-
-
-    // original -me 
-
+    const filteredProducts = filterActiveProducts(products);
     const perPage = query.per_page ? parseInt(query.per_page) : 12;
-    const totalPage = data ? parseInt(products?.length / perPage) + (data?.products?.length % perPage ? 1 : 0) : 1;
-    const page = query.page ? query.page : 1;
+    const page = query.page ? parseInt(query.page) : 1;
 
+    // Calculate total pages
+    const totalPage = Math.ceil(filteredProducts.length / perPage);
 
-
-
-    // code 
-
-    // const perPage = query.per_page ? parseInt( query.per_page ) : 12;
-    // const totalPage = data ? parseInt( data?.data?.length / perPage ) + ( data.products.total % perPage ? 1 : 0 ) : 1;
-    // const page = query.page ? query.page : 1;
-  
-
-
-
-
+    // Slice filtered products for the current page
+    const displayedProducts = filteredProducts.slice((page - 1) * perPage, page * perPage);
 
     // Display loading indicator
     if (loading) {
@@ -86,15 +70,18 @@ function ProductListOne(props) {
 
     // Handle error state
     if (error) {
-        return <p className="text-danger fw-bolder fs-4">Error: {error}</p>;
+        return <p className="text-danger fw-bolder fs-4">Error: {error.message}</p>;
     }
-
 
     return (
         <>
-            {
-                isToolbox ? <ToolBox type={type} /> : ''
-            }
+
+        {/* Toolbox */}
+            {isToolbox ? <ToolBox type={type} /> : ''}
+
+
+
+
             {
                 loading ?
                     gridType === 'grid' ?
@@ -114,19 +101,23 @@ function ProductListOne(props) {
                         </div>
                     : ''
             }
+
+
+
+
+{/* view product as grid /list  */}
+
+
+
             {
                 gridType === 'grid' ?
-                    <div className={`row product-wrapper ${gridClasses[itemsPerRow]}`}>
-                        {products && products?.map(item =>
-                            !item?.status ? (
-                                <div className="product-wrap" key={'shop-' + item?.name}>
-                                    <ProductTwo product={item} adClass="" />
-                                </div>
-                            ) : null
-
-
-                        )}
+                <div className={`row product-wrapper ${gridClasses[itemsPerRow]}`}>
+                {displayedProducts.map(item => (
+                    <div className="product-wrap" key={'shop-' + item?.name}>
+                        <ProductTwo product={item} adClass="" />
                     </div>
+                ))}
+            </div>
                     :
                     <div className="product-lists product-wrapper">
                         {/* { products && products.map( item =>
@@ -135,48 +126,23 @@ function ProductListOne(props) {
                     </div>
             }
 
-            {
-                products && products?.length === 0 ?
-                    <p className="ml-1">No products were found matching your selection.</p> : ''
-            }
-
-
-{/* original me  */}
 
 
 
 
-            {
-                data && products?.length > 0 ?
-                    <div className="toolbox toolbox-pagination">
-                        {
-                            data && <p className="show-info">Showing <span>{perPage * (page - 1) + 1} - {Math.min(perPage * page, products?.length)} of {products?.length}</span>Products</p>
-                        }
-
-                        <Pagination totalPage={totalPage} />
-                    </div> : ''
-            } 
-
-
-{/* code */}
+            {filteredProducts.length === 0 && <p className="ml-1">No products were found matching your selection.</p>}
 
 
 
-{/* 
-{
-                data && data.products.total > 0 ?
-                    <div className="toolbox toolbox-pagination">
-                        {
-                            data && <p className="show-info">Showing <span>{ perPage * ( page - 1 ) + 1 } - { Math.min( perPage * page, data.products.total ) } of { data.products.total }</span>Products</p>
-                        }
+            {filteredProducts.length > 0 && (
+                <div className="toolbox toolbox-pagination">
+                    <p className="show-info">Showing <span>{perPage * (page - 1) + 1} - {Math.min(perPage * page, filteredProducts.length)} of {filteredProducts.length}</span> Products</p>
+                    <Pagination totalPage={totalPage} />
+                </div>
+            )}
 
-                        <Pagination totalPage={ totalPage } />
-                    </div> : ''
-            }  */}
 
         </>
-
-
     );
 }
 
