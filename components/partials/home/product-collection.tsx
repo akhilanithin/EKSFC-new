@@ -26,13 +26,7 @@ interface Props {
     loading: boolean;
 }
 
-
-
-
-
 const ProductCollection: React.FC<Props> = ({ data, loading }) => {
-
-    
     const ref = useRef<HTMLDivElement>(null);
     let iso: any;
 
@@ -77,10 +71,17 @@ const ProductCollection: React.FC<Props> = ({ data, loading }) => {
         }
     }
 
-    function getProductCategory(product: Product): string {
+    function getProductCategory(product: Product): string { 
         const formattedArray = Object.entries(product.category).map(([key, value]) => ({ key, value }));
         const createdOnEntry = formattedArray.find(item => item.key === "name");
         return createdOnEntry ? createdOnEntry.value : "other";
+    }
+
+    // Function to count products in each category
+    function getProductCount(categoryName: string): number {
+        return data?.data.trending.filter((product) => {
+            return getProductCategory(product) === categoryName;
+        }).length;
     }
 
     return (
@@ -94,19 +95,27 @@ const ProductCollection: React.FC<Props> = ({ data, loading }) => {
                     <span className="badge">Featured</span>
                 </div>
             </Reveal>
+
             <div className="row">
                 <div className="col-md-3 mb-6 mb-md-0">
                     <div className="nav-filters">
                         <ul className="nav-filters product-filters mr-0">
-                            <li><a href="#" className="nav-filter active" onClick={e => isoFilter(e, 'all')}>All</a></li>
+                            <li>
+                                <a href="#" className="nav-filter active" onClick={e => isoFilter(e, 'all')}>
+                                    All ({data?.data.trending.length})
+                                </a>
+                            </li>
                             {data?.data.trendingCategories.map((category, index) => (
                                 <li key={index}>
-                                    <a href="#" className="nav-filter" onClick={e => isoFilter(e, category.name)}>{category.name}</a>
+                                    <a href="#" className="nav-filter" onClick={e => isoFilter(e, category.name)}>
+                                        {category.name} ({getProductCount(category.name)})
+                                    </a>
                                 </li>
                             ))}
                         </ul>
                     </div>
                 </div>
+
                 <div className="col-md-9">
                     <div className="row grid" id="products-grid" ref={ref}>
                         {loading ? (

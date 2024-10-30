@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import ALink from '~/components/features/custom-link';
 import { cartActions } from '~/store/cart';
 import { getTotalPrice, getCartCount, toDecimal } from '~/utils';
+import { useSelector } from 'react-redux'
 
 // Define the types for the cart item and the props
 interface CartItem {
@@ -39,13 +40,26 @@ const CartMenu: React.FC<CartMenuProps> = (props) => {
         removeFromCart(item);
     };
 
+
+
+    const itemCount = useSelector(state => state.cart?.data?.length);
+
     return (
         <>
             <div className="dropdown cart-dropdown cart-offcanvas type3 ml-2">
+
                 <a href="#" className="cart-toggle" onClick={showCartMenu}>
-                    <i className="d-icon-bag"></i>
-                    My Cart
+                    <div className='carts'>
+                        <i className="d-icon-bag"></i>
+                        {itemCount > 0 ? (
+                                    <span className="cart-counts">{itemCount}</span>
+                                ) : (
+                                    <span className="cart-counts" style={{ display: 'none' }}></span>
+                                )}
+                        My Cart
+                    </div>
                 </a>
+                
                 <div className="cart-overlay" onClick={hideCartMenu}></div>
                 <div className="dropdown-box">
                     <div className="cart-header">

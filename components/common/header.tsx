@@ -59,8 +59,12 @@ const itemCount = useSelector(state => state.wishlist?.data?.length);
 
 
 
+
+
+
     return (
         <header className={`header ${!transparent ? 'p-relative' : ''} ${noborder ? 'no-border' : ''}`}>
+            <div className='header sticky-header fix-top sticky-content'>
             <div className="header-top">
                 <div className="container">
                     <div className="header-left">
@@ -99,7 +103,7 @@ const itemCount = useSelector(state => state.wishlist?.data?.length);
                 </div>
             </div>
 
-            <div className="header-middle sticky-header fix-top sticky-content">
+            <div className="header-middle ">
                 <div className="container">
                     <div className="header-left">
                         <ALink href="#" className="mobile-menu-toggle" onClick={showMobileMenu}>
@@ -124,6 +128,8 @@ const itemCount = useSelector(state => state.wishlist?.data?.length);
                     </div>
                 </div>
             </div>
+            </div>
+          
         </header>
     );
 };

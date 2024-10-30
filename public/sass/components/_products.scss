@@ -40,7 +40,9 @@
                 ),
                 sale: (
                     color: false,
-                    background: $secondary-color
+                    background: $primary-color
+                    // background: #a3d2a2
+                   
                 ),
                 top: (
                     color: false,
@@ -387,6 +389,7 @@
     &.btn-wishlist i {
         margin-top: .3rem;
         margin-left: .1rem;
+        color: red;
     }
 
     &:hover {
@@ -585,9 +588,12 @@
     .old-price {
         color: #aaa;
         margin-left: 1rem;
+        font-weight: 400;
     }
     .new-price {
         text-decoration: none;
+        font-weight: 700;
+
     }
 }
 

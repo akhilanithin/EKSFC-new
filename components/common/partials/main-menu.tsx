@@ -27,13 +27,26 @@ function MainMenu() {
 
     return (
         <nav className="main-nav mr-4">
+
+
             <ul className="menu menu-active">
+
+                {/* home */}
                 <li id="menu-home" className={pathname === '/' ? 'active' : ''}>
-                    <ALink href="/">Home</ALink>
+                    <ALink href="/">HOME</ALink>
                 </li>
 
+                {/* Aestethic */}
+
+
                 <li className={`submenu lg-menu ${pathname.includes('/shop') ? 'active' : ''}`}>
-                    <ALink href="/shop">Aestethic</ALink>
+                    <ALink href="#">AESTETHICS</ALink>
+                </li>
+
+                {/* Categories */}
+
+                {/* <li className={`submenu lg-menu ${pathname.includes('/shop') ? 'active' : ''}`}>
+                    <ALink href="/shop">Categories</ALink>
                     <div className="megamenu">
                         <div className="row">
                             <div className="col-6 col-sm-4 col-md-3 col-lg-4">
@@ -78,10 +91,14 @@ function MainMenu() {
                             </div>
                         </div>
                     </div>
-                </li>
+                </li> */}
+
+
+
+                {/* Products */}
 
                 <li className={`submenu lg-menu ${pathname.includes('/product') && !pathname.includes('/elements') ? 'active' : ''}`}>
-                    <ALink href="/product/default/bodycare-smooth-perfume">Products</ALink>
+                    <ALink href="/product/default/bodycare-smooth-perfume">PRODUCTS</ALink>
                     <div className="megamenu">
                         <div className="row">
                             <div className="col-6 col-sm-4 col-md-3 col-lg-4">
@@ -125,8 +142,11 @@ function MainMenu() {
                     </div>
                 </li>
 
+
+                {/* Pages */}
+
                 <li className={`submenu ${pathname.includes('/pages') ? 'active' : ''}`}>
-                    <ALink href="#">Pages</ALink>
+                    <ALink href="#">PAGES</ALink>
                     <ul>
                         {mainMenu.other.map((item) => (
                             <li key={`other-${item.title}`}>
@@ -139,8 +159,11 @@ function MainMenu() {
                     </ul>
                 </li>
 
+                {/* Elements */}
+
+
                 <li className={`${pathname.includes('/elements') ? 'active' : ''} d-xl-show submenu`}>
-                    <ALink href="/elements">Elements</ALink>
+                    <ALink href="/elements">ELEMENTS</ALink>
                     <ul>
                         {mainMenu.element.map((item) => (
                             <li key={`elements-${item.title}`}>
@@ -152,12 +175,22 @@ function MainMenu() {
                     </ul>
                 </li>
 
-                <li>
-                    <ALink href="/elements/blog-posts/">Blogs</ALink>
-                </li>
+
+                {/* Blogs */}
 
                 <li>
-                    <ALink href="/pages/about-us">About Us</ALink>
+                    <ALink href="/elements/blog-posts/">BLOGS</ALink>
+                </li>
+                {/* FAQ */}
+
+                <li>
+                    <ALink href="/pages/faqs">FAQ</ALink>
+                </li>
+
+                {/* About Us */}
+
+                <li>
+                    <ALink href="/pages/about-us">ABOUT US</ALink>
                 </li>
             </ul>
         </nav>

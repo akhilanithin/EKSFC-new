@@ -47,12 +47,6 @@ type PropsFromRedux = ConnectedProps<typeof connector>;
 const ProductTwo: React.FC<Props & PropsFromRedux> = (props) => {
     const { product, adClass = 'text-center', toggleWishlist, wishlist, addToCart, openQuickview, isCategory = true } = props;
 
-    
-
-
-
-
-
 
     const PRODUCT_IMAGE_BASEURL = process.env.NEXT_PUBLIC_PRODUCT_IMAGE_BASEURL;
 
@@ -244,7 +238,7 @@ const ProductTwo: React.FC<Props & PropsFromRedux> = (props) => {
 
 
                     <a href="#" className="btn-product-icon btn-wishlist" title={isWishlisted ? 'Remove from wishlist' : 'Add to wishlist'} onClick={wishlistHandler}>
-                        <i className={isWishlisted ? "d-icon-heart-full" : "d-icon-heart"}></i>
+                        <i className={isWishlisted ? "d-icon-heart-full " : "d-icon-heart"}></i>
                     </a>
                 </div>
 
