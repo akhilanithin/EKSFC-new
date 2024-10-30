@@ -261,8 +261,8 @@ const ProductTwo: React.FC<Props & PropsFromRedux> = (props) => {
                     <div className="product-cat">
                         {categories.map((item, index) => (
                             <React.Fragment key={index}>
-                                <ALink href={{ pathname: '/shop', query: { category: item.name } }}>
-                                    {item.name}
+                                <ALink href={{ pathname: '/shop', query: { category: item?.name } }}>
+                                    {item?.name}
                                 </ALink>
                             </React.Fragment>
                         ))}

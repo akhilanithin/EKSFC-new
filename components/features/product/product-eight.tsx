@@ -64,7 +64,7 @@ const ProductEight: React.FC<ProductEightProps> = (props) => {
     };
 
     return (
-        <div className={`product product-list ${adClass} ${product.variants.length > 0 ? 'product-variable' : ''}`}>
+        <div className={`product product-list ${adClass} ${product.variants?.length > 0 ? 'product-variable' : ''}`}>
             <figure className="product-media">
                 <ALink href={`/product/default/${product.slug}`}>
                     <LazyLoadImage
