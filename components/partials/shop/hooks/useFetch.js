@@ -21,7 +21,7 @@ const useFetch = (url, token) => {
                 }
 
                 const result = await response.json();
-                console.log("API Response:", result); // Log the full response
+                // console.log("API Response:", result); // Log the full response
 
                 // Assuming the response has a 'products' field
                 setData(result.products || result); // Adjust if the structure is different

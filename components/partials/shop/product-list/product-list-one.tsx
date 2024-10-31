@@ -26,10 +26,14 @@ function ProductListOne(props) {
 
     const productURL = process.env.NEXT_PUBLIC_PRODUCT_URL || '';
     const productToken = process.env.NEXT_PUBLIC_PRODUCT_TOKEN || '';
-    const [getProducts] = useLazyQuery(GET_PRODUCTS);
-
     const { data, loading, error } = useFetch(productURL, productToken);
     const products = data?.data;
+
+
+
+
+
+    const [getProducts] = useLazyQuery(GET_PRODUCTS);
 
     useEffect(() => {
         getProducts({

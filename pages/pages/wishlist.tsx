@@ -27,9 +27,20 @@ interface Props {
     wishlist: WishlistItem[];
     addToCart: (item: WishlistItem) => void;
     removeFromWishlist: (item: WishlistItem) => void;
+    
 }
 
+
+
+
+
+
 const Wishlist: React.FC<Props> = ({ wishlist, addToCart, removeFromWishlist }) => {
+
+
+
+
+    
     const PRODUCT_IMAGE_BASEURL = process.env.NEXT_PUBLIC_PRODUCT_IMAGE_BASEURL;
 
     const moveToCart = (e: React.MouseEvent<HTMLAnchorElement>, item: WishlistItem) => {
@@ -71,6 +82,8 @@ const Wishlist: React.FC<Props> = ({ wishlist, addToCart, removeFromWishlist }) 
                     {wishlist.length > 0 ? (
                         <>
                             <table className="shop-table wishlist-table mt-2 mb-4">
+
+                                {/* table Headings */}
                                 <thead>
                                     <tr>
                                         <th className="product-name"><span>Product</span></th>
@@ -81,62 +94,90 @@ const Wishlist: React.FC<Props> = ({ wishlist, addToCart, removeFromWishlist }) 
                                         <th className="product-remove"></th>
                                     </tr>
                                 </thead>
+
+                                {/* table body  */}
+
                                 <tbody className="wishlist-items-wrapper">
                                     {wishlist.map((item) => (
+
+                                        // console.log(item?.variation[0]?.stock),
+
+
                                         <tr key={'wishlist-' + item?.name}>
-                                            <td className="product-thumbnail">
-                                                <ALink href={'/product/default/' + item?.slug}>
-                                                    <figure>
-                                                        <img src={`${PRODUCT_IMAGE_BASEURL}/products/${item?.image}`} width="100" height="100" alt="product" />
-                                                    </figure>
-                                                </ALink>
-                                            </td>
-                                            <td className="product-name">
-                                                <ALink href={'/product/default/' + item.slug}>{item.name}</ALink>
-                                            </td>
-                                            <td className="product-price">
-                                                {item?.variation[0].price !== getOfferPrice(item)[0] ? (
-                                                    <span className="amount">AED{toDecimal(item?.variation[0].price)}</span>
-                                                ) : item?.variation[0].offers[0].discount > 0 && item?.variation.length > 0 ? (
-                                                    <>
-                                                        <span className="amount">AED{toDecimal(item.salePrice)}</span>
-                                                        <span className="amount">AED{toDecimal(item.price)}</span>
-                                                    </>
+
+                                        {/* Product Image */}
+                                        <td className="product-thumbnail">
+                                            <ALink href={'/product/default/' + item?.slug}>
+                                                <figure>
+                                                    <img src={`${PRODUCT_IMAGE_BASEURL}/products/${item?.image}`} width="100" height="100" alt="product" />
+                                                </figure>
+                                            </ALink>
+                                        </td>
+
+                                        {/* Product Name */}
+                                        <td className="product-name">
+                                            <ALink href={'/product/default/' + item.slug}>{item.name}</ALink>
+                                        </td>
+
+                                        {/* Product Price  */}
+                                        <td className="product-price">
+                                            {item?.variation[0].price !== getOfferPrice(item)[0] ? (
+                                                <span className="amount">AED {toDecimal(item?.variation[0].price)}</span>
+                                            ) : item?.variation[0].offers[0].discount > 0 && item?.variation.length > 0 ? (
+                                                <>
+                                                    <span className="amount">AED {toDecimal(item.salePrice)}</span>
+                                                    <span className="amount">AED {toDecimal(item.price)}</span>
+                                                </>
+                                            ) : (
+                                                <span className="amount">AED {toDecimal(item?.variation[0].price)}</span>
+                                            )}
+                                        </td>
+
+
+                                        {/* Product Stock status */}
+                                        <td className="product-stock-status">
+                                            <span className={item?.variation[0]?.stock > 0 ? 'wishlist-in-stock' : 'wishlist-out-stock'}>
+                                                {item?.variation[0]?.stock > 0 ? 'In Stock' : 'Out of Stock'}
+                                            </span>
+                                        </td>
+
+                                        {/* Select Opton */}
+                                        <td className="product-add-to-cart">
+                                            {item?.variation[0]?.stock > 0 ? (
+                                                item?.variation.length > 0 ? (
+                                                    <ALink href={'/product/default/' + item?.slug} className="btn-product btn-primary"><span>Select options</span></ALink>
                                                 ) : (
-                                                    <span className="amount">AED{toDecimal(item?.variation[0].price)}</span>
-                                                )}
-                                            </td>
-                                            <td className="product-stock-status">
-                                                <span className={item.stock > 0 ? 'wishlist-in-stock' : 'wishlist-out-stock'}>
-                                                    {item.stock > 0 ? 'In Stock' : 'Out of Stock'}
-                                                </span>
-                                            </td>
-                                            <td className="product-add-to-cart">
-                                                {item.stock > 0 ? (
-                                                    item.variants.length > 0 ? (
-                                                        <ALink href={'/product/default/' + item.slug} className="btn-product btn-primary"><span>Select options</span></ALink>
-                                                    ) : (
-                                                        <a href="#" className="btn-product btn-primary" onClick={(e) => moveToCart(e, item)}><span>Add to Cart</span></a>
-                                                    )
-                                                ) : ""}
-                                            </td>
-                                            <td className="product-remove">
-                                                <div>
-                                                    <ALink href="#" className="remove" title="Remove this product">
-                                                        <i className="fas fa-times" onClick={() => removeFromWishlist(item)}></i>
-                                                    </ALink>
-                                                </div>
-                                            </td>
-                                        </tr>
+                                                    <a href="#" className="btn-product btn-primary" onClick={(e) => moveToCart(e, item)}><span>Add to Cart</span></a>
+                                                )
+                                            ) : ""}
+                                        </td>
+
+                                        {/* Delete */}
+                                        <td className="product-remove">
+                                            <div>
+                                                <ALink href="#" className="remove" title="Remove this product">
+                                                    <i className="fas fa-times" onClick={() => removeFromWishlist(item)}></i>
+                                                </ALink>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                   
                                     ))}
                                 </tbody>
                             </table>
+
+                            {/* Social sites  */}
                             <div className="social-links share-on">
                                 <h5 className="text-uppercase font-weight-bold mb-0 mr-4 ls-s">Share on:</h5>
-                                <ALink href="#" className="social-link social-icon social-facebook" title="Facebook"><i className="fab fa-facebook-f"></i></ALink>
-                                <ALink href="#" className="social-link social-icon social-twitter" title="Twitter"><i className="fab fa-twitter"></i></ALink>
+
+                                <ALink href="https://www.facebook.com/konjacskinfood/" className="social-link social-icon social-facebook" title="Facebook"><i className="fab fa-facebook-f"></i></ALink>
+
+                                <ALink href="https://twitter.com/KonjacSkin" className="social-link social-icon social-twitter" title="Twitter"><i className="fab fa-twitter"></i></ALink>
+
                                 <ALink href="#" className="social-link social-icon social-pinterest" title="Pinterest"><i className="fab fa-pinterest-p"></i></ALink>
+
                                 <ALink href="#" className="social-link social-icon social-email" title="Email"><i className="far fa-envelope"></i></ALink>
+
                                 <ALink href="#" className="social-link social-icon social-whatsapp" title="Whatsapp"><i className="fab fa-whatsapp"></i></ALink>
                             </div>
                         </>
@@ -161,7 +202,7 @@ const mapStateToProps = (state: any) => ({
     wishlist: state.wishlist.data ? state.wishlist.data : []
 });
 
-export default connect(mapStateToProps, { 
-    addToCart: cartActions.addToCart, 
-    removeFromWishlist: wishlistActions.removeFromWishlist 
+export default connect(mapStateToProps, {
+    addToCart: cartActions.addToCart,
+    removeFromWishlist: wishlistActions.removeFromWishlist
 })(Wishlist);

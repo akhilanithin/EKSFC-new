@@ -109,12 +109,30 @@ const ProductTwo: React.FC<Props & PropsFromRedux> = (props) => {
     const basePrice = variations[0]?.price || 0;
     const showDiscountedPrice = discountPrice && discountPrice < basePrice;
 
+
+
+    const review = Array.isArray(product.review) ? product.review : [product.review];
+
+
+    const calculateAverageRating = () => {
+        const reviews = Array.isArray(product.review) ? product.review : [product.review];
+        const totalRating = reviews.reduce((sum, review) => sum + (review?.star || 0), 0);
+        return totalRating / reviews.length;
+    };
+
+    const averageRating = calculateAverageRating();
+
+
+
+    // console.log(product?.slug?.split('-').slice(0, -1).join('-'));
+    
+
     return (
 
         <div className={`product text-left ${adClass}`}>
             {/* image Field */}
             <figure className="product-media">
-                <ALink href={`/product/default/${product.id}`}>
+                <ALink href={`/product/default/${product?.slug}`}>
                     <LazyLoadImage
                         alt="product"
                         src={`${PRODUCT_IMAGE_BASEURL}/products/${product.image}`}
@@ -256,19 +274,22 @@ const ProductTwo: React.FC<Props & PropsFromRedux> = (props) => {
             {/* Product Details */}
 
             <div className="product-details">
+
+
                 {/* Category */}
+
+
                 {isCategory && (
                     <div className="product-cat">
-                        {categories.map((item, index) => (
+                        {categories?.map((item, index) => (
                             <React.Fragment key={index}>
-                                <ALink href={{ pathname: '/shop', query: { category: item?.name } }}>
+                                <ALink href={{ pathname: '/shop', query: { category: item?.name.toLowerCase().replace(/\s+/g, '-') } }}>
                                     {item?.name}
                                 </ALink>
                             </React.Fragment>
                         ))}
                     </div>
                 )}
-
                 {/* Product Name */}
 
 
@@ -294,6 +315,7 @@ const ProductTwo: React.FC<Props & PropsFromRedux> = (props) => {
 
 
                 {/* ratings */}
+{/*                 
                 <div className="ratings-container">
                     {product.review && (
                         <>
@@ -305,12 +327,34 @@ const ProductTwo: React.FC<Props & PropsFromRedux> = (props) => {
                                 </>
                                 )}
                             </div>
-                            {/* {product.review.length > 0 && (
+                            {product.review.length > 0 && (
                                 <ALink href={`/product/default/${product.id}`} className="rating-reviews">( {product.review.length} reviews )</ALink>
-                            )} */}
+                            )}
                         </>
                     )}
+                </div> */}
+
+
+
+
+
+                <div className="ratings-container">
+                    <div className="ratings-full">
+                        {review.length > 0 && (
+                            <span className="ratings" style={{ width: `${20 * averageRating}%` }}></span>
+                        )}
+                        <span className="tooltiptext tooltip-top">{averageRating.toFixed(1)}</span>
+                    </div>
+                    {/* {review.length > 0 && (
+                        <ALink href={`/product/${product.id}`} className="rating-reviews">
+                            ({review.length} {review.length > 1 ? 'reviews' : 'review'})
+                        </ALink>
+                    )} */}
+
                 </div>
+
+
+
 
                 
             </div>
