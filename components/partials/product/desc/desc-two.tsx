@@ -44,29 +44,29 @@ interface DescTwoProps {
 
 const DescTwo: React.FC<DescTwoProps> = ({ product, adClass = '' }) => {
 
-// console.log(product);
+console.log(product);
 
 
     const colors: Color[] = [];
     const sizes: Size[] = [];
 
-    if (product.variants.length > 0) {
-        if (product.variants[0].size) {
-            product.variants.forEach(item => {
-                if (sizes.findIndex(size => size.name === item.size!.name) === -1) {
-                    sizes.push({ name: item.size!.name, value: item.size.size });
-                }
-            });
-        }
+    // if (product?.variation?.length > 0) {
+    //     if (product.variants[0].size) {
+    //         product.variants.forEach(item => {
+    //             if (sizes.findIndex(size => size.name === item.size!.name) === -1) {
+    //                 sizes.push({ name: item.size!.name, value: item.size.size });
+    //             }
+    //         });
+    //     }
 
-        if (product.variants[0].color) {
-            product.variants.forEach(item => {
-                if (colors.findIndex(color => color.name === item.color!.name) === -1) {
-                    colors.push({ name: item.color!.name, value: item.color.color });
-                }
-            });
-        }
-    }
+    //     if (product.variants[0].color) {
+    //         product.variants.forEach(item => {
+    //             if (colors.findIndex(color => color.name === item.color!.name) === -1) {
+    //                 colors.push({ name: item.color!.name, value: item.color.color });
+    //             }
+    //         });
+    //     }
+    // }
 
     const setRating = (e: React.MouseEvent<HTMLAnchorElement>) => {
         e.preventDefault();
@@ -112,7 +112,7 @@ const DescTwo: React.FC<DescTwoProps> = ({ product, adClass = '' }) => {
 
                 <Card title="Additional information" adClass="card-additional">
                     <ul>
-                        {product.categories.length > 0 && (
+                        {/* {product.categories.length > 0 && (
                             <li>
                                 <label>Categories:</label>
                                 <p>
@@ -124,8 +124,14 @@ const DescTwo: React.FC<DescTwoProps> = ({ product, adClass = '' }) => {
                                     ))}
                                 </p>
                             </li>
-                        )}
-                        {product.brands.length > 0 && (
+                        )} */}
+
+
+
+
+
+
+                        {/* {product.brands.length > 0 && (
                             <li>
                                 <label>Brands:</label>
                                 <p>
@@ -137,7 +143,9 @@ const DescTwo: React.FC<DescTwoProps> = ({ product, adClass = '' }) => {
                                     ))}
                                 </p>
                             </li>
-                        )}
+                        )} */}
+
+
                         {colors.length > 0 && (
                             <li>
                                 <label>Color:</label>
@@ -215,7 +223,7 @@ const DescTwo: React.FC<DescTwoProps> = ({ product, adClass = '' }) => {
                                                 <div className="comment-rating ratings-container mb-0">
                                                     <div className="ratings-full">
                                                         <span className="ratings" style={{ width: product.ratings * 20 + '%' }}></span>
-                                                        <span className="tooltiptext tooltip-top">{toDecimal(product.ratings)}</span>
+                                                        {/* <span className="tooltiptext tooltip-top">{toDecimal(product.ratings)}</span> */}
                                                     </div>
                                                 </div>
                                                 <div className="comment-user">

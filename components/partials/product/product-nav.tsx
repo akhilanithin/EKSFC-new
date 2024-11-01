@@ -27,7 +27,7 @@ const ProductNav: React.FC<ProductNavProps> = ({ product }) => {
 
     return (
         <ul className="product-nav">
-            {product.prev && (
+            {/* {product.prev && (
                 <li className={`product-nav-${product.next ? 'prev' : 'next no-next'}`}>
                     <ALink href={{ pathname: router.pathname, query: { slug: product.prev.slug } }} scroll={false}>
                         <i className="d-icon-arrow-left"></i> Prev
@@ -59,7 +59,7 @@ const ProductNav: React.FC<ProductNavProps> = ({ product }) => {
                         </span>
                     </ALink>
                 </li>
-            )}
+            )} */}
         </ul>
     );
 };

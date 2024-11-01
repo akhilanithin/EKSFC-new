@@ -49,6 +49,9 @@ const DetailOne: React.FC<ProductProps> = (props) => {
 
 
 
+
+
+
     const router = useRouter();
     const { data, isSticky = false, isDesc = false, adClass = '' } = props;
     const { toggleWishlist, addToCart, wishlist } = props;
@@ -60,6 +63,9 @@ const DetailOne: React.FC<ProductProps> = (props) => {
     const [quantity, setQuantity] = useState<number>(1);
 
     const product = data?.product;
+
+    console.log(data);
+
 
     const isWishlisted = wishlist.some(item => item.slug === product?.data.slug);
 
@@ -203,7 +209,7 @@ const DetailOne: React.FC<ProductProps> = (props) => {
                 </span>
             </div>
 
-            <div className="product-price">
+            {/* <div className="product-price">
                 {product?.data.price[0] !== product.data.price[1] ? (
                     product.data.variants.length === 0 || (product.data.variants.length > 0 && !product.data.variants[0].price) ? (
                         <>
@@ -216,22 +222,22 @@ const DetailOne: React.FC<ProductProps> = (props) => {
                 ) : (
                     <ins className="new-price">${toDecimal(product.data.price[0])}</ins>
                 )}
-            </div>
+            </div> */}
+{/* 
+            {product?.data.price[0] !== product.data.price[1] && product.data.variants.length === 0 && <Countdown type={2} />} */}
 
-            {product?.data.price[0] !== product.data.price[1] && product.data.variants.length === 0 && <Countdown type={2} />}
-
-            <div className="ratings-container">
+            {/* <div className="ratings-container">
                 <div className="ratings-full">
                     <span className="ratings" style={{ width: `${20 * product.data.ratings}%` }}></span>
                     <span className="tooltiptext tooltip-top">{toDecimal(product.data.ratings)}</span>
                 </div>
 
                 <ALink href="#" className="rating-reviews">( {product.data.reviews} reviews )</ALink>
-            </div>
+            </div> */}
 
             <p className="product-short-desc">{product?.data.short_description}</p>
 
-            {product && product.data.variants.length > 0 && (
+            {/* {product && product.data.variants.length > 0 && (
                 <>
                     {product.data.variants[0].color && (
                         <div className='product-form product-color'>
@@ -305,11 +311,11 @@ const DetailOne: React.FC<ProductProps> = (props) => {
                         </Collapse>
                     </div>
                 </>
-            )}
+            )} */}
 
             <hr className="product-divider" />
 
-            <div className="product-form product-qty pb-0">
+            {/* <div className="product-form product-qty pb-0">
                 <label className="d-none">QTY:</label>
                 <div className="product-form-group">
                     <Quantity max={product?.data.stock} product={product} onChangeQty={changeQty} />
@@ -317,11 +323,11 @@ const DetailOne: React.FC<ProductProps> = (props) => {
                         <i className='d-icon-bag'></i>Add to Cart
                     </button>
                 </div>
-            </div>
+            </div> */}
 
             <hr className="product-divider mb-3" />
 
-            <div className="product-footer">
+            {/* <div className="product-footer">
                 <div className="social-links mr-4">
                     <ALink href="#" className="social-link social-facebook fab fa-facebook-f"></ALink>
                     <ALink href="#" className="social-link social-twitter fab fa-twitter"></ALink>
@@ -332,9 +338,9 @@ const DetailOne: React.FC<ProductProps> = (props) => {
                     <i className={isWishlisted ? "d-icon-heart-full" : "d-icon-heart"}></i>
                     {isWishlisted ? 'Browse wishlist' : 'Add to Wishlist'}
                 </a>
-            </div>
+            </div> */}
 
-            {isDesc && <DescTwo product={product?.data} adClass={adClass} />}
+            {isDesc && <DescTwo product={data} adClass={adClass} />}
         </div>
     );
 };

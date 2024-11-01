@@ -52,7 +52,7 @@ const ThumbTwo: React.FC<ThumbTwoProps> = (props) => {
 
     return (
         <div className="product-thumbs-wrap product-thumbs-two">
-            <OwlCarousel adClass="product-thumbs product-thumb-carousel" options={mainSlider15} onChangeRef={changeRefHandler}>
+            {/* <OwlCarousel adClass="product-thumbs product-thumb-carousel" options={mainSlider15} onChangeRef={changeRefHandler}>
                 {thumbs.map((thumb, index) => (
                     <div
                         className={`product-thumb ${index === 0 ? 'active' : ''}`}
@@ -67,7 +67,7 @@ const ThumbTwo: React.FC<ThumbTwoProps> = (props) => {
                         />
                     </div>
                 ))}
-            </OwlCarousel>
+            </OwlCarousel> */}
         </div>
     );
 };

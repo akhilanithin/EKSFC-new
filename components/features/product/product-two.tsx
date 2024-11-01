@@ -134,7 +134,7 @@ const ProductTwo: React.FC<Props & PropsFromRedux> = (props) => {
         <div className={`product text-left ${adClass}`}>
             {/* image Field */}
             <figure className="product-media">
-                <ALink href={`/product/default/${product?.slug?.replace(/-\d+$/, '').toLowerCase()}`}>
+                <ALink href={`/product/default/${product?.slug}`}>
                     <LazyLoadImage
                         alt="product"
                         src={`${PRODUCT_IMAGE_BASEURL}/products/${product.image}`}
