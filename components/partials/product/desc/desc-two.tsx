@@ -43,6 +43,10 @@ interface DescTwoProps {
 }
 
 const DescTwo: React.FC<DescTwoProps> = ({ product, adClass = '' }) => {
+
+// console.log(product);
+
+
     const colors: Color[] = [];
     const sizes: Size[] = [];
 

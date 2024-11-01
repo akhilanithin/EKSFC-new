@@ -47,6 +47,7 @@ type PropsFromRedux = ConnectedProps<typeof connector>;
 const ProductTwo: React.FC<Props & PropsFromRedux> = (props) => {
     const { product, adClass = 'text-center', toggleWishlist, wishlist, addToCart, openQuickview, isCategory = true } = props;
 
+// console.log(product);
 
     const PRODUCT_IMAGE_BASEURL = process.env.NEXT_PUBLIC_PRODUCT_IMAGE_BASEURL;
 
@@ -124,7 +125,8 @@ const ProductTwo: React.FC<Props & PropsFromRedux> = (props) => {
 
 
 
-    // console.log(product?.slug?.split('-').slice(0, -1).join('-'));
+    // console.log(product?.slug?.replace(/-\d+$/, '').toLowerCase());
+
     
 
     return (
@@ -132,7 +134,7 @@ const ProductTwo: React.FC<Props & PropsFromRedux> = (props) => {
         <div className={`product text-left ${adClass}`}>
             {/* image Field */}
             <figure className="product-media">
-                <ALink href={`/product/default/${product?.slug}`}>
+                <ALink href={`/product/default/${product?.slug?.replace(/-\d+$/, '').toLowerCase()}`}>
                     <LazyLoadImage
                         alt="product"
                         src={`${PRODUCT_IMAGE_BASEURL}/products/${product.image}`}

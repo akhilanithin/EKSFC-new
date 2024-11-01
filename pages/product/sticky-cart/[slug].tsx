@@ -34,6 +34,12 @@ const ProductDefault: React.FC = () => {
     const slug = query.slug as string; // Type assertion to string
 
     const { data, loading } = useQuery<QueryData>(GET_PRODUCT, { variables: { slug } });
+
+    console.log(data);
+    
+
+    console.log(data);
+    
     const [loaded, setLoadingState] = useState(false);
     const product = data?.product.data;
     const related = data?.product.related;

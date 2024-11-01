@@ -14,6 +14,7 @@ import { wishlistActions } from '~/store/wishlist';
 import { cartActions } from '~/store/cart';
 
 import { toDecimal } from '~/utils';
+import { log } from 'console';
 
 interface Variant {
     color?: { name: string; color: string };
@@ -45,6 +46,9 @@ interface ProductProps {
 }
 
 const DetailOne: React.FC<ProductProps> = (props) => {
+
+
+
     const router = useRouter();
     const { data, isSticky = false, isDesc = false, adClass = '' } = props;
     const { toggleWishlist, addToCart, wishlist } = props;

@@ -27,9 +27,13 @@ function ProductListOne(props) {
     const productURL = process.env.NEXT_PUBLIC_PRODUCT_URL || '';
     const productToken = process.env.NEXT_PUBLIC_PRODUCT_TOKEN || '';
     const { data, loading, error } = useFetch(productURL, productToken);
+    
     const products = data?.data;
+    function filterActiveProducts(products) {
+        return products?.filter(item => !item?.status) || [];
+    }
 
-
+    const filteredProducts = filterActiveProducts(products);
 
 
 
@@ -53,11 +57,6 @@ function ProductListOne(props) {
         });
     }, [query]);
 
-    function filterActiveProducts(products) {
-        return products?.filter(item => !item?.status) || [];
-    }
-
-    const filteredProducts = filterActiveProducts(products);
     const perPage = query.per_page ? parseInt(query.per_page) : 12;
     const page = query.page ? parseInt(query.page) : 1;
 
