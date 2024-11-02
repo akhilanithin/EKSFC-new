@@ -25,12 +25,25 @@ interface Props {
 }
 
 const MediaOne: React.FC<Props> = ({ product, adClass = '' }) => {
+
+
     const [index, setIndex] = useState<number>(0);
     const [mediaIndex, setMediaIndex] = useState<number>(0);
     const [isOpen, setOpenState] = useState<boolean>(false);
     const [mediaRef, setMediaRef] = useState<RefObject<any> | null>(null);
 
-    let lgImages: Image[] = product.large_pictures ? product.large_pictures : product.pictures || [];
+  
+
+console.log(product);
+
+
+const activeImages = product[0]?.variation[0]?.images.filter(image => image.status === 1);
+let lgImages: Image[] = activeImages ? activeImages : product?.image || [];
+
+
+// https://admin.essentialkonjacskinfoods.com/assets/img/products/1722945495569-Hydro Moist Treatment T 1.jpg
+
+
 
     useEffect(() => {
         setIndex(0);
@@ -90,11 +103,13 @@ const MediaOne: React.FC<Props> = ({ product, adClass = '' }) => {
                 events={events}
             >
                 {lgImages.map((image, index) => (
+               
+
                     <div key={`${image.url}-${index}`}>
                         <Magnifier
-                            imageSrc={process.env.NEXT_PUBLIC_ASSET_URI + image.url}
+                            imageSrc={process.env.NEXT_PUBLIC_ASSET + image.image}
                             imageAlt="magnifier"
-                            largeImageSrc={process.env.NEXT_PUBLIC_ASSET_URI + image.url}
+                            largeImageSrc={process.env.NEXT_PUBLIC_ASSET + image.image}
                             dragToMove={false}
                             mouseActivation="hover"
                             cursorStyleActive="crosshair"

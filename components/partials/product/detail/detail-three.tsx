@@ -64,7 +64,7 @@ const DetailOne: React.FC<ProductProps> = (props) => {
 
     const product = data?.product;
 
-    console.log(data);
+    // console.log(data);
 
 
     const isWishlisted = wishlist.some(item => item.slug === product?.data.slug);
