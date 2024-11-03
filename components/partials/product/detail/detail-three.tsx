@@ -62,17 +62,16 @@ const DetailOne: React.FC<ProductProps> = (props) => {
     const [cartActive, setCartActive] = useState<boolean>(false);
     const [quantity, setQuantity] = useState<number>(1);
 
-    const product = data?.product;
+    const product = data[0];
 
-    // console.log(data);
+    const isWishlisted = wishlist.some(item => item?.slug === product?.data?.slug);
 
-
-    const isWishlisted = wishlist.some(item => item.slug === product?.data.slug);
+    
 
     const colors: { name: string; value: string }[] = [];
     const sizes: { name: string; value: string }[] = [];
 
-    if (product?.data.variants) {
+    if (product?.data?.variants) {
         product.data.variants.forEach(item => {
             if (item.size && !sizes.some(size => size.name === item.size.name)) {
                 sizes.push({ name: item.size.name, value: item.size.size });
@@ -89,7 +88,7 @@ const DetailOne: React.FC<ProductProps> = (props) => {
     }, [product]);
 
     useEffect(() => {
-        if (product?.data.variants.length > 0) {
+        if (product?.data?.variants?.length > 0) {
             if (
                 (curSize !== 'null' && curColor !== 'null') ||
                 (curSize === 'null' && product.data.variants[0].size === null && curColor !== 'null') ||
@@ -181,74 +180,94 @@ const DetailOne: React.FC<ProductProps> = (props) => {
         setQuantity(qty);
     };
 
+
+console.log(product?.name);
+
+
+
+
     return (
         <div className={`product-details ${isSticky ? 'sticky' : ''} ${adClass}`}>
+
+            {/* Navigations */}
             <div className="product-navigation">
                 <ul className="breadcrumb breadcrumb-lg">
                     <li><ALink href="/"><i className="d-icon-home"></i></ALink></li>
                     <li><ALink href="#" className="active">Products</ALink></li>
                     <li>Detail</li>
                 </ul>
-
+            {/* Navigation next  */}
                 <ProductNav product={product} />
             </div>
+{/* Product Name  */}
 
-            <h2 className="product-name">{product?.data.name}</h2>
+            <h2 className="product-name">{product?.name}</h2>
 
             <div className='product-meta'>
-                SKU: <span className='product-sku'>{product?.data.sku}</span>
+
+
+                SKU: <span className='product-sku'>{product?.data?.sku}</span>
+
+
+
+{/* Categories */}
                 CATEGORIES: <span className='product-brand'>
-                    {product?.data.categories.map((item, index) => (
+                    {product?.data?.categories?.map((item, index) => (
                         <React.Fragment key={`${item.name}-${index}`}>
-                            <ALink href={{ pathname: '/shop', query: { category: item.slug } }}>
-                                {item.name}
+                            <ALink href={{ pathname: '/shop', query: { category: item?.slug } }}>
+                                {item?.name}
                             </ALink>
-                            {index < product.data.categories.length - 1 ? ', ' : ''}
+                            {index < product?.data?.categories?.length - 1 ? ', ' : ''}
                         </React.Fragment>
                     ))}
                 </span>
+
             </div>
 
-            {/* <div className="product-price">
-                {product?.data.price[0] !== product.data.price[1] ? (
-                    product.data.variants.length === 0 || (product.data.variants.length > 0 && !product.data.variants[0].price) ? (
+
+
+{/* Product price   */}
+
+            <div className="product-price">
+                {/* {product?.data?.price[0] !== product?.data?.price[1] ? (
+                    product?.data?.variants?.length === 0 || (product?.data?.variants?.length > 0 && !product?.data?.variants[0]?.price) ? (
                         <>
-                            <ins className="new-price">${toDecimal(product.data.price[0])}</ins>
-                            <del className="old-price">${toDecimal(product.data.price[1])}</del>
+                            <ins className="new-price">${toDecimal(product?.data?.price[0])}</ins>
+                            <del className="old-price">${toDecimal(product?.data?.price[1])}</del>
                         </>
                     ) : (
-                        <del className="new-price">${toDecimal(product.data.price[0])} – ${toDecimal(product.data.price[1])}</del>
+                        <del className="new-price">${toDecimal(product?.data?.price[0])} – ${toDecimal(product?.data?.price[1])}</del>
                     )
                 ) : (
-                    <ins className="new-price">${toDecimal(product.data.price[0])}</ins>
-                )}
-            </div> */}
-{/* 
-            {product?.data.price[0] !== product.data.price[1] && product.data.variants.length === 0 && <Countdown type={2} />} */}
+                    <ins className="new-price">${toDecimal(product?.data?.price[0])}</ins>
+                )} */}
+            </div>
 
-            {/* <div className="ratings-container">
+            {product?.data?.price[0] !== product?.data?.price[1] && product?.data.variants.length === 0 && <Countdown type={2} />} 
+
+            <div className="ratings-container">
                 <div className="ratings-full">
-                    <span className="ratings" style={{ width: `${20 * product.data.ratings}%` }}></span>
-                    <span className="tooltiptext tooltip-top">{toDecimal(product.data.ratings)}</span>
+                    <span className="ratings" style={{ width: `${20 * product?.data?.ratings}%` }}></span>
+                    {/* <span className="tooltiptext tooltip-top">{toDecimal(product?.data?.ratings)}</span> */}
                 </div>
 
-                <ALink href="#" className="rating-reviews">( {product.data.reviews} reviews )</ALink>
-            </div> */}
+                <ALink href="#" className="rating-reviews">( {product?.data?.reviews} reviews )</ALink>
+            </div>
 
-            <p className="product-short-desc">{product?.data.short_description}</p>
+            <p className="product-short-desc">{product?.data?.short_description}</p>
 
-            {/* {product && product.data.variants.length > 0 && (
+            {product && product?.data?.variants?.length > 0 && (
                 <>
-                    {product.data.variants[0].color && (
+                    {product?.data?.variants[0]?.color && (
                         <div className='product-form product-color'>
                             <label>Color:</label>
                             <div className="product-variations">
-                                {colors.map(item => (
+                                {colors?.map(item => (
                                     <ALink
                                         href="#"
-                                        className={`color ${curColor === item.name ? 'active' : ''} ${isDisabled(item.name, curSize) ? 'disabled' : ''}`}
-                                        key={`color-${item.name}`}
-                                        style={{ backgroundColor: item.value }}
+                                        className={`color ${curColor === item?.name ? 'active' : ''} ${isDisabled(item?.name, curSize) ? 'disabled' : ''}`}
+                                        key={`color-${item?.name}`}
+                                        style={{ backgroundColor: item?.value }}
                                         onClick={(e) => {
                                             e.preventDefault();
                                             toggleColorHandler(item);
@@ -259,7 +278,7 @@ const DetailOne: React.FC<ProductProps> = (props) => {
                         </div>
                     )}
 
-                    {product.data.variants[0].size && (
+                    {product?.data?.variants[0]?.size && (
                         <div className='product-form product-size mb-0 pb-2'>
                             <label>Size:</label>
                             <div className="product-form-group">
@@ -267,8 +286,8 @@ const DetailOne: React.FC<ProductProps> = (props) => {
                                     {sizes.map(item => (
                                         <ALink
                                             href="#"
-                                            className={`size ${curSize === item.name ? 'active' : ''} ${isDisabled(curColor, item.name) ? 'disabled' : ''}`}
-                                            key={`size-${item.name}`}
+                                            className={`size ${curSize === item?.name ? 'active' : ''} ${isDisabled(curColor, item?.name) ? 'disabled' : ''}`}
+                                            key={`size-${item?.name}`}
                                             onClick={(e) => {
                                                 e.preventDefault();
                                                 toggleSizeHandler(item);
@@ -293,41 +312,41 @@ const DetailOne: React.FC<ProductProps> = (props) => {
                             <div className="card-wrapper">
                                 {curIndex > -1 && (
                                     <div className="single-product-price">
-                                        {product.data.variants[curIndex]?.price ? (
+                                        {/* {product?.data?.variants[curIndex]?.price ? (
                                             product.data.variants[curIndex]?.sale_price ? (
                                                 <div className="product-price mb-0">
-                                                    <ins className="new-price">${toDecimal(product.data.variants[curIndex].sale_price)}</ins>
-                                                    <del className="old-price">${toDecimal(product.data.variants[curIndex].price)}</del>
+                                                    <ins className="new-price">${toDecimal(product?.data?.variants[curIndex]?.sale_price)}</ins>
+                                                    <del className="old-price">${toDecimal(product?.data?.variants[curIndex].price)}</del>
                                                 </div>
                                             ) : (
                                                 <div className="product-price mb-0">
-                                                    <ins className="new-price">${toDecimal(product.data.variants[curIndex].price)}</ins>
+                                                    <ins className="new-price">${toDecimal(product?.data?.variants[curIndex].price)}</ins>
                                                 </div>
                                             )
-                                        ) : null}
+                                        ) : null} */}
                                     </div>
                                 )}
                             </div>
                         </Collapse>
                     </div>
                 </>
-            )} */}
+            )} 
 
             <hr className="product-divider" />
 
-            {/* <div className="product-form product-qty pb-0">
+            <div className="product-form product-qty pb-0">
                 <label className="d-none">QTY:</label>
                 <div className="product-form-group">
-                    <Quantity max={product?.data.stock} product={product} onChangeQty={changeQty} />
+                    <Quantity max={product?.data?.stock} product={product} onChangeQty={changeQty} />
                     <button className={`btn-product btn-cart text-normal ls-normal font-weight-semi-bold ${cartActive ? '' : 'disabled'}`} onClick={addToCartHandler}>
                         <i className='d-icon-bag'></i>Add to Cart
                     </button>
                 </div>
-            </div> */}
+            </div>
 
             <hr className="product-divider mb-3" />
 
-            {/* <div className="product-footer">
+            <div className="product-footer">
                 <div className="social-links mr-4">
                     <ALink href="#" className="social-link social-facebook fab fa-facebook-f"></ALink>
                     <ALink href="#" className="social-link social-twitter fab fa-twitter"></ALink>
@@ -338,7 +357,7 @@ const DetailOne: React.FC<ProductProps> = (props) => {
                     <i className={isWishlisted ? "d-icon-heart-full" : "d-icon-heart"}></i>
                     {isWishlisted ? 'Browse wishlist' : 'Add to Wishlist'}
                 </a>
-            </div> */}
+            </div>
 
             {isDesc && <DescTwo product={data} adClass={adClass} />}
         </div>

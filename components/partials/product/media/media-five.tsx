@@ -34,7 +34,7 @@ const MediaOne: React.FC<Props> = ({ product, adClass = '' }) => {
 
   
 
-console.log(product);
+// console.log(product);
 
 
 const activeImages = product[0]?.variation[0]?.images.filter(image => image.status === 1);

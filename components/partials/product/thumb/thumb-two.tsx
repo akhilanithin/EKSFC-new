@@ -18,7 +18,7 @@ const ThumbTwo: React.FC<ThumbTwoProps> = (props) => {
     const { product, index = 0 } = props;
     const thumbs = product.pictures;
 
-console.log(thumbs);
+
 
 
     const [thumbRef, setThumbRef] = useState<React.RefObject<any>>(null); // Adjust the type as needed
