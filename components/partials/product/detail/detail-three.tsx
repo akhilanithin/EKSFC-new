@@ -62,7 +62,15 @@ const DetailOne: React.FC<ProductProps> = (props) => {
     const [cartActive, setCartActive] = useState<boolean>(false);
     const [quantity, setQuantity] = useState<number>(1);
 
-    const product = data[0];
+
+    console.log(cartActive);
+    
+ 
+
+    const product=data?.data?.product
+
+
+    
 
     const isWishlisted = wishlist.some(item => item?.slug === product?.data?.slug);
 
@@ -181,9 +189,32 @@ const DetailOne: React.FC<ProductProps> = (props) => {
     };
 
 
-console.log(product?.name);
 
 
+
+    const variations = Array.isArray(product.variation) ? product.variation : [product.variation];
+    const discounts = variations.flatMap(variation => variation.offers || []);
+    const discount = discounts.length > 0 ? discounts[0] : null;
+    const discountValue = discount ? discount.discount : 0;
+    const discountPrice = discount ? discount.price : null;
+    const basePrice = variations[0]?.price || 0;
+    const showDiscountedPrice = discountPrice && discountPrice < basePrice;
+
+
+    const review = Array.isArray(product.review) ? product.review : [product.review];
+    
+    const calculateAverageRating = () => {
+        const reviews = Array.isArray(product.review) ? product.review : [product.review];
+        const totalRating = reviews.reduce((sum, review) => sum + (review?.star || 0), 0);
+        return totalRating / reviews.length;
+    };
+
+    const averageRating = calculateAverageRating();
+
+
+
+    console.log(product?.variation[0]?.colors);
+    
 
 
     return (
@@ -199,27 +230,27 @@ console.log(product?.name);
             {/* Navigation next  */}
                 <ProductNav product={product} />
             </div>
-{/* Product Name  */}
+            {/* Product Name  */}
 
             <h2 className="product-name">{product?.name}</h2>
 
             <div className='product-meta'>
-
 
                 SKU: <span className='product-sku'>{product?.data?.sku}</span>
 
 
 
 {/* Categories */}
+
                 CATEGORIES: <span className='product-brand'>
-                    {product?.data?.categories?.map((item, index) => (
-                        <React.Fragment key={`${item.name}-${index}`}>
-                            <ALink href={{ pathname: '/shop', query: { category: item?.slug } }}>
-                                {item?.name}
+                   
+                        <React.Fragment key={`${product?.category?.name}`}>
+                            <ALink href={{ pathname: '/shop', query: { category: product?.category?.name } }}>
+                                {product?.category?.name}
                             </ALink>
-                            {index < product?.data?.categories?.length - 1 ? ', ' : ''}
+                            {product?.category?.id < product?.category?.length - 1 ? ', ' : ''}
                         </React.Fragment>
-                    ))}
+                
                 </span>
 
             </div>
@@ -229,36 +260,51 @@ console.log(product?.name);
 {/* Product price   */}
 
             <div className="product-price">
-                {/* {product?.data?.price[0] !== product?.data?.price[1] ? (
-                    product?.data?.variants?.length === 0 || (product?.data?.variants?.length > 0 && !product?.data?.variants[0]?.price) ? (
-                        <>
-                            <ins className="new-price">${toDecimal(product?.data?.price[0])}</ins>
-                            <del className="old-price">${toDecimal(product?.data?.price[1])}</del>
-                        </>
-                    ) : (
-                        <del className="new-price">${toDecimal(product?.data?.price[0])} – ${toDecimal(product?.data?.price[1])}</del>
-                    )
+                {showDiscountedPrice ? (
+                    <>
+                    
+                    <ins className="new-price"> AED {toDecimal(discountPrice)}</ins>
+                    <del className="old-price"> AED {toDecimal(basePrice)}</del>
+                    
+                        
+                    </>
                 ) : (
-                    <ins className="new-price">${toDecimal(product?.data?.price[0])}</ins>
-                )} */}
+                    <ins className="new-price">AED {toDecimal(basePrice)}</ins>
+                )}
             </div>
 
-            {product?.data?.price[0] !== product?.data?.price[1] && product?.data.variants.length === 0 && <Countdown type={2} />} 
+
+
+            
+
+            {basePrice!== discountPrice && product?.variation?.length === 0 && <Countdown type={2} />} 
+
+
+            {/* Rating container */}
 
             <div className="ratings-container">
-                <div className="ratings-full">
-                    <span className="ratings" style={{ width: `${20 * product?.data?.ratings}%` }}></span>
-                    {/* <span className="tooltiptext tooltip-top">{toDecimal(product?.data?.ratings)}</span> */}
+                    <div className="ratings-full">
+                        {review.length > 0 && (
+                            <span className="ratings" style={{ width: `${20 * averageRating}%` }}></span>
+                        )}
+                        <span className="tooltiptext tooltip-top">{averageRating.toFixed(1)}</span>
+                    </div>
+                    {review.length > 0 && (
+                        <ALink href={`/product/${product.id}`} className="rating-reviews">
+                            ({review.length} {review.length > 1 ? 'reviews' : 'review'})
+                        </ALink>
+                    )}
+
                 </div>
 
-                <ALink href="#" className="rating-reviews">( {product?.data?.reviews} reviews )</ALink>
-            </div>
+            <p className="product-short-desc">{product?.description}</p>
 
-            <p className="product-short-desc">{product?.data?.short_description}</p>
 
-            {product && product?.data?.variants?.length > 0 && (
+{/* Color */}
+
+            {product && product?.variation?.length > 0 && (
                 <>
-                    {product?.data?.variants[0]?.color && (
+                    {product?.variation[0]?.colors && (
                         <div className='product-form product-color'>
                             <label>Color:</label>
                             <div className="product-variations">
@@ -278,7 +324,12 @@ console.log(product?.name);
                         </div>
                     )}
 
-                    {product?.data?.variants[0]?.size && (
+
+
+                                {/* size */}
+
+                                
+                    {/* {product?.variants[0]?.size && (
                         <div className='product-form product-size mb-0 pb-2'>
                             <label>Size:</label>
                             <div className="product-form-group">
@@ -305,22 +356,26 @@ console.log(product?.name);
                                 </Collapse>
                             </div>
                         </div>
-                    )}
+                    )} */}
+
+
+
+
 
                     <div className='product-variation-price'>
                         <Collapse in={cartActive && curIndex > -1}>
                             <div className="card-wrapper">
                                 {curIndex > -1 && (
                                     <div className="single-product-price">
-                                        {/* {product?.data?.variants[curIndex]?.price ? (
-                                            product.data.variants[curIndex]?.sale_price ? (
+                                        {/* {product?.variants[curIndex]?.price ? (
+                                            product.variants[curIndex]?.sale_price ? (
                                                 <div className="product-price mb-0">
-                                                    <ins className="new-price">${toDecimal(product?.data?.variants[curIndex]?.sale_price)}</ins>
-                                                    <del className="old-price">${toDecimal(product?.data?.variants[curIndex].price)}</del>
+                                                    <ins className="new-price">${toDecimal(product?.variants[curIndex]?.sale_price)}</ins>
+                                                    <del className="old-price">${toDecimal(product?.variants[curIndex].price)}</del>
                                                 </div>
                                             ) : (
                                                 <div className="product-price mb-0">
-                                                    <ins className="new-price">${toDecimal(product?.data?.variants[curIndex].price)}</ins>
+                                                    <ins className="new-price">${toDecimal(product?.variants[curIndex].price)}</ins>
                                                 </div>
                                             )
                                         ) : null} */}
@@ -329,15 +384,25 @@ console.log(product?.name);
                             </div>
                         </Collapse>
                     </div>
+
+
+
+
+
+
                 </>
             )} 
+
+
+
+
 
             <hr className="product-divider" />
 
             <div className="product-form product-qty pb-0">
                 <label className="d-none">QTY:</label>
                 <div className="product-form-group">
-                    <Quantity max={product?.data?.stock} product={product} onChangeQty={changeQty} />
+                    <Quantity max={product?.stock} product={product} onChangeQty={changeQty} />
                     <button className={`btn-product btn-cart text-normal ls-normal font-weight-semi-bold ${cartActive ? '' : 'disabled'}`} onClick={addToCartHandler}>
                         <i className='d-icon-bag'></i>Add to Cart
                     </button>
@@ -353,10 +418,10 @@ console.log(product?.name);
                     <ALink href="#" className="social-link social-pinterest fab fa-pinterest-p"></ALink>
                 </div>
                 <span className="divider d-lg-show"></span>
-                <a href="#" className={`btn-product btn-wishlist`} title={isWishlisted ? 'Browse wishlist' : 'Add to wishlist'} onClick={wishlistHandler}>
+                {/* <a href="#" className={`btn-product btn-wishlist`} title={isWishlisted ? 'Browse wishlist' : 'Add to wishlist'} onClick={wishlistHandler}>
                     <i className={isWishlisted ? "d-icon-heart-full" : "d-icon-heart"}></i>
                     {isWishlisted ? 'Browse wishlist' : 'Add to Wishlist'}
-                </a>
+                </a> */}
             </div>
 
             {isDesc && <DescTwo product={data} adClass={adClass} />}

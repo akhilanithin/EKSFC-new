@@ -102,7 +102,7 @@ let lgImages: Image[] = activeImages ? activeImages : product?.image || [];
                 onChangeRef={changeRefHandler}
                 events={events}
             >
-                {lgImages.map((image, index) => (
+                {/* {lgImages.map((image, index) => (
                
 
                     <div key={`${image.url}-${index}`}>
@@ -116,7 +116,7 @@ let lgImages: Image[] = activeImages ? activeImages : product?.image || [];
                             className="product-image large-image"
                         />
                     </div>
-                ))}
+                ))} */}
             </OwlCarousel>
 
             <ALink href="#" className="product-image-full" onClick={openLightBox}>

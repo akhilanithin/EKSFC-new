@@ -66,10 +66,10 @@ const ProductTwo: React.FC<Props & PropsFromRedux> = (props) => {
 
     const categories = Array.isArray(product.category) ? product.category : [product.category];
 
-    const isWishlisted = wishlist.some(item => item.id === product.id);
+    // const isWishlisted = wishlist.some(item => item.id === product.id);
 
     const showQuickviewHandler = () => {
-        openQuickview(product.id);
+        openQuickview(product?.id);
     };
 
 
@@ -134,7 +134,7 @@ const ProductTwo: React.FC<Props & PropsFromRedux> = (props) => {
         <div className={`product text-left ${adClass}`}>
             {/* image Field */}
             <figure className="product-media">
-                <ALink href={`/product/default/${product?.slug}`}>
+                <ALink href={`/product/default/${product?.id}`}>
                     <LazyLoadImage
                         alt="product"
                         src={`${PRODUCT_IMAGE_BASEURL}/products/${product.image}`}
@@ -257,16 +257,16 @@ const ProductTwo: React.FC<Props & PropsFromRedux> = (props) => {
                     {/* wishlist */}
 
 
-                    <a href="#" className="btn-product-icon btn-wishlist" title={isWishlisted ? 'Remove from wishlist' : 'Add to wishlist'} onClick={wishlistHandler}>
+                    {/* <a href="#" className="btn-product-icon btn-wishlist" title={isWishlisted ? 'Remove from wishlist' : 'Add to wishlist'} onClick={wishlistHandler}>
                         <i className={isWishlisted ? "d-icon-heart-full " : "d-icon-heart"}></i>
-                    </a>
+                    </a> */}
                 </div>
 
                 {/* Quick View */}
 
 
                 <div className="product-action">
-                    <ALink href={`/product/default/${product.id}`} className="btn-product btn-quickview" title="Quick View" onClick={showQuickviewHandler}>
+                    <ALink href='#' className="btn-product btn-quickview" title="Quick View" onClick={showQuickviewHandler}>
                         Quick View
                     </ALink>
                 </div>

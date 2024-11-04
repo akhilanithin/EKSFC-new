@@ -35,6 +35,7 @@ function ProductListOne(props) {
 
     const filteredProducts = filterActiveProducts(products);
 
+console.log(filteredProducts);
 
 
     const [getProducts] = useLazyQuery(GET_PRODUCTS);
