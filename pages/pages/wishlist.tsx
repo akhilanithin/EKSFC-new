@@ -116,7 +116,7 @@ const Wishlist: React.FC<Props> = ({ wishlist, addToCart, removeFromWishlist }) 
 
                                         {/* Product Name */}
                                         <td className="product-name">
-                                            <ALink href={'/product/default/' + item.slug}>{item.name}</ALink>
+                                            <ALink href={'/product/default/' + item?.slug}>{item?.name}</ALink>
                                         </td>
 
                                         {/* Product Price  */}

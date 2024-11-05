@@ -55,6 +55,10 @@ function ProductMasonry() {
 
 const product=data?.data?.product
 
+console.log(data);
+
+
+
 
 
 

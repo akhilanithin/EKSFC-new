@@ -1,79 +1,92 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import OwlCarousel from '~/components/features/owl-carousel';
 import { mainSlider15 } from '~/utils/data/carousel';
 
-interface Picture {
-    url: string;
-}
-
 interface ThumbTwoProps {
     product: {
-        pictures: Picture[];
+        pictures: Array<{
+            url: string;
+        }>;
     };
     index?: number;
     onChangeIndex: (index: number) => void;
 }
 
-const ThumbTwo: React.FC<ThumbTwoProps> = (props) => {
+function ThumbTwo(props: ThumbTwoProps) {
     const { product, index = 0 } = props;
-    const thumbs = product.pictures;
+    const thumbs =product?.variation[0]?.images
 
+    
 
-
-
-    const [thumbRef, setThumbRef] = useState<React.RefObject<any>>(null); // Adjust the type as needed
+    const [thumbRef, setThumbRef] = useState<any>(null); // Replace `any` with the correct type if available
 
     useEffect(() => {
-        if (thumbRef && index >= 0) {
+        if (thumbRef !== null && index >= 0) {
             thumbRef.current.$car.to(index, 300, true);
 
-            const activeThumb = document.querySelector('.product-thumbs .owl-stage .product-thumb.active');
-            if (activeThumb) {
-                activeThumb.classList.remove('active');
-            }
+            const thumbsElement = document.querySelector('.product-thumbs');
+            if (thumbsElement) {
+                const activeThumb = thumbsElement.querySelector('.product-thumb.active');
+                if (activeThumb) activeThumb.classList.remove('active');
 
-            const newActiveThumb = document.querySelectorAll('.product-thumbs .owl-stage .owl-item')[index];
-            if (newActiveThumb) {
-                newActiveThumb.querySelector('.product-thumb')?.classList.add('active');
+                const owlItems = thumbsElement.querySelectorAll('.owl-item');
+                if (owlItems[index]) {
+                    owlItems[index].querySelector('.product-thumb')?.classList.add('active');
+                }
             }
         }
     }, [index, thumbRef]);
 
     const thumbActiveHandler = (e: React.MouseEvent<HTMLDivElement>, thumbIndex: number) => {
         props.onChangeIndex(thumbIndex);
-        const activeThumb = document.querySelector('.product-thumbs .owl-stage .product-thumb.active');
-        if (activeThumb) {
-            activeThumb.classList.remove('active');
+
+        const thumbsElement = document.querySelector('.product-thumbs');
+        if (thumbsElement) {
+            const activeThumb = thumbsElement.querySelector('.product-thumb.active');
+            if (activeThumb) activeThumb.classList.remove('active');
         }
+
         e.currentTarget.classList.add('active');
     };
 
     const changeRefHandler = (carRef: React.RefObject<any>) => {
-        if (carRef.current && thumbRef === null) {
+        if (carRef.current !== undefined && thumbRef === null) {
             setThumbRef(carRef);
         }
     };
 
+    const PRODUCT_IMAGE_BASEURL = process.env.NEXT_PUBLIC_PRODUCT_IMAGE_BASEURL;
+
+
+
+
     return (
+   
         <div className="product-thumbs-wrap product-thumbs-two">
-            {/* <OwlCarousel adClass="product-thumbs product-thumb-carousel" options={mainSlider15} onChangeRef={changeRefHandler}>
-                {thumbs.map((thumb, index) => (
+            <OwlCarousel
+                adClass="product-thumbs product-thumb-carousel"
+                options={mainSlider15}
+                onChangeRef={changeRefHandler}
+            >
+
+                {thumbs?.map((thumb, index) => (
+                             
                     <div
                         className={`product-thumb ${index === 0 ? 'active' : ''}`}
                         onClick={(e) => thumbActiveHandler(e, index)}
-                        key={`${thumb.url}-2-${index}`}
+                        key={`${thumb?.id}-2-${index}`}
                     >
                         <img
-                            src={`${process.env.NEXT_PUBLIC_ASSET_URI}${thumb.url}`}
+                           src={`${PRODUCT_IMAGE_BASEURL}/products/${thumb?.image}`}
                             alt="product thumbnail"
                             width="137"
                             height="137"
                         />
                     </div>
                 ))}
-            </OwlCarousel> */}
+            </OwlCarousel>
         </div>
     );
-};
+}
 
 export default React.memo(ThumbTwo);

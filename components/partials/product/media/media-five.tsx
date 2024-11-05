@@ -32,16 +32,14 @@ const MediaOne: React.FC<Props> = ({ product, adClass = '' }) => {
     const [isOpen, setOpenState] = useState<boolean>(false);
     const [mediaRef, setMediaRef] = useState<RefObject<any> | null>(null);
 
-  
-
-// console.log(product);
 
 
-const activeImages = product[0]?.variation[0]?.images.filter(image => image.status === 1);
-let lgImages: Image[] = activeImages ? activeImages : product?.image || [];
+    // console.log(product);
 
 
-// https://admin.essentialkonjacskinfoods.com/assets/img/products/1722945495569-Hydro Moist Treatment T 1.jpg
+    const lgImages = product?.variation[0]?.images ? product?.variation[0]?.images : product.pictures;
+
+    // https://admin.essentialkonjacskinfoods.com/assets/img/products/1722945495569-Hydro Moist Treatment T 1.jpg
 
 
 
@@ -86,13 +84,21 @@ let lgImages: Image[] = activeImages ? activeImages : product?.image || [];
         }
     };
 
+
+
+    const PRODUCT_IMAGE_BASEURL = process.env.NEXT_PUBLIC_PRODUCT_IMAGE_BASEURL;
+
     return (
         <div className={`product-gallery product-gallery-vertical product-gallery-sticky ${adClass}`}>
             <div className="product-label-group">
-                {product.stock === 0 && <label className="product-label label-out">out</label>}
-                {product.is_top && <label className="product-label label-top">top</label>}
-                {product.is_new && <label className="product-label label-new">new</label>}
-                {product.discount && <label className="product-label label-sale">sale</label>}
+                {/* out of stock */}
+                {product?.variation?.map((variation) => variation.stock === 0 ? <label key={variation.id} className="product-label label-out">out</label> : null)}
+                {/* new */}
+
+                {!product?.fresharrival && <label className="product-label label-new">new</label>}
+
+                {/* sale */}
+                {product?.variation[0]?.offers && <label className="product-label label-sale">sale</label>}
             </div>
 
             <OwlCarousel
@@ -102,21 +108,44 @@ let lgImages: Image[] = activeImages ? activeImages : product?.image || [];
                 onChangeRef={changeRefHandler}
                 events={events}
             >
-                {/* {lgImages.map((image, index) => (
+                {lgImages.map((image, index) => (
                
 
-                    <div key={`${image.url}-${index}`}>
-                        <Magnifier
-                            imageSrc={process.env.NEXT_PUBLIC_ASSET + image.image}
-                            imageAlt="magnifier"
-                            largeImageSrc={process.env.NEXT_PUBLIC_ASSET + image.image}
-                            dragToMove={false}
-                            mouseActivation="hover"
-                            cursorStyleActive="crosshair"
-                            className="product-image large-image"
-                        />
-                    </div>
-                ))} */}
+                    // <div key={`${image.url}-${index}`}>
+                    //     <Magnifier
+                    //         imageSrc={process.env.NEXT_PUBLIC_ASSET + image.image}
+                    //         imageAlt="magnifier"
+                    //         largeImageSrc={process.env.NEXT_PUBLIC_ASSET + image.image}
+                    //         dragToMove={false}
+                    //         mouseActivation="hover"
+                    //         cursorStyleActive="crosshair"
+                    //         className="product-image large-image"
+                    //     />
+                    // </div>
+
+
+
+                    <div key={ image + '-' + index }>
+                            <Magnifier
+                                imageSrc='https://admin.essentialkonjacskinfoods.com/assets/img/products/1722945495569-Hydro Moist Treatment T 1.jpg'
+                                imageAlt="magnifier"
+                                largeImageSrc='https://admin.essentialkonjacskinfoods.com/assets/img/products/1722945495569-Hydro Moist Treatment T 1.jpg'
+                                dragToMove={ false }
+                                mouseActivation="hover"
+                                cursorStyleActive="crosshair"
+                                className="product-image large-image"
+
+                            />
+                        </div>
+
+
+
+
+
+
+                ))}
+
+                
             </OwlCarousel>
 
             <ALink href="#" className="product-image-full" onClick={openLightBox}>

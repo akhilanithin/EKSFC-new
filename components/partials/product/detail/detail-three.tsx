@@ -40,9 +40,9 @@ interface ProductProps {
     isSticky?: boolean;
     isDesc?: boolean;
     adClass?: string;
-    toggleWishlist: (product: ProductData) => void;
-    addToCart: (product: ProductData & { qty: number; price: number; name: string }) => void;
-    wishlist: { slug: string }[];
+    // toggleWishlist: (product: ProductData) => void;
+    addToCart: (product: Product & { qty: number; price: number }) => void;
+    // wishlist: { slug: string }[];
 }
 
 const DetailOne: React.FC<ProductProps> = (props) => {
@@ -54,6 +54,7 @@ const DetailOne: React.FC<ProductProps> = (props) => {
 
     const router = useRouter();
     const { data, isSticky = false, isDesc = false, adClass = '' } = props;
+
     const { toggleWishlist, addToCart, wishlist } = props;
 
     const [curColor, setCurColor] = useState<string>('null');
@@ -62,17 +63,13 @@ const DetailOne: React.FC<ProductProps> = (props) => {
     const [cartActive, setCartActive] = useState<boolean>(false);
     const [quantity, setQuantity] = useState<number>(1);
 
-
-    console.log(cartActive);
-    
  
 
     const product=data?.data?.product
 
 
     
-
-    const isWishlisted = wishlist.some(item => item?.slug === product?.data?.slug);
+    // const isWishlisted = wishlist?.some(item => item?.id === product.id);
 
     
 
@@ -120,21 +117,38 @@ const DetailOne: React.FC<ProductProps> = (props) => {
         }
     }, [curColor, curSize, product]);
 
-    const wishlistHandler = (e: React.MouseEvent) => {
-        e.preventDefault();
+    // const wishlistHandler = (e: React.MouseEvent) => {
+    //     e.preventDefault();
 
-        if (toggleWishlist && !isWishlisted) {
-            const currentTarget = e.currentTarget as HTMLAnchorElement;
-            currentTarget.classList.add('load-more-overlay', 'loading');
-            toggleWishlist(product?.data);
+    //     if (toggleWishlist && !isWishlisted) {
+    //         const currentTarget = e.currentTarget as HTMLAnchorElement;
+    //         currentTarget.classList.add('load-more-overlay', 'loading');
+    //         toggleWishlist(product?.data);
 
-            setTimeout(() => {
-                currentTarget.classList.remove('load-more-overlay', 'loading');
-            }, 1000);
-        } else {
-            router.push('/pages/wishlist');
-        }
-    };
+    //         setTimeout(() => {
+    //             currentTarget.classList.remove('load-more-overlay', 'loading');
+    //         }, 1000);
+    //     } else {
+    //         router.push('/pages/wishlist');
+    //     }
+    // };
+
+
+    // const wishlistHandler = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    //     e.preventDefault();
+    //     if (toggleWishlist) {
+    //         toggleWishlist(product);
+    //     }
+    //     const currentTarget = e.currentTarget;
+    //     currentTarget.classList.add('load-more-overlay', 'loading');
+    //     setTimeout(() => {
+    //         currentTarget.classList.remove('load-more-overlay', 'loading');
+    //     }, 1000);
+    // };
+
+
+
+
 
     const toggleColorHandler = (color: { name: string }) => {
         if (!isDisabled(color.name, curSize)) {
@@ -148,21 +162,42 @@ const DetailOne: React.FC<ProductProps> = (props) => {
         }
     };
 
-    const addToCartHandler = () => {
-        if (product?.data.stock > 0 && cartActive) {
-            if (product.data.variants.length > 0) {
-                let tmpName = product.data.name;
-                tmpName += curColor !== 'null' ? `-${curColor}` : '';
-                tmpName += curSize !== 'null' ? `-${curSize}` : '';
+    // const addToCartHandler = () => {
+    //     if (product?.data.stock > 0 && cartActive) {
+    //         if (product.data.variants.length > 0) {
+    //             let tmpName = product.data.name;
+    //             tmpName += curColor !== 'null' ? `-${curColor}` : '';
+    //             tmpName += curSize !== 'null' ? `-${curSize}` : '';
 
-                const tmpPrice =
-                    product.data.variants[curIndex]?.sale_price ?? product.data.variants[curIndex]?.price ?? product.data.price[0];
+    //             const tmpPrice =
+    //                 product.data.variants[curIndex]?.sale_price ?? product.data.variants[curIndex]?.price ?? product.data.price[0];
 
-                addToCart({ ...product.data, name: tmpName, qty: quantity, price: tmpPrice });
-            } else {
-                addToCart({ ...product.data, qty: quantity, price: product.data.price[0] });
+    //             addToCart({ ...product.data, name: tmpName, qty: quantity, price: tmpPrice });
+    //         } else {
+    //             addToCart({ ...product.data, qty: quantity, price: product.data.price[0] });
+    //         }
+    //     }
+    // };
+
+
+
+    const getPrice = () => {
+        // Check if product has variations
+        if (product.variation && product.variation.length > 0) {
+            const variation = product.variation[0];
+            // Check if the variation has offers
+            if (variation.offers && variation.offers.length > 0) {
+                return variation.offers[0].price;
             }
+            return variation.price;
         }
+        return 0; // or another default value
+    };
+
+    
+    const addToCartHandler = (e: React.MouseEvent<HTMLAnchorElement>) => {
+        e.preventDefault();
+        addToCart({ ...product, qty: 1, price: getPrice() });
     };
 
     const resetValueHandler = () => {
@@ -213,7 +248,7 @@ const DetailOne: React.FC<ProductProps> = (props) => {
 
 
 
-    console.log(product?.variation[0]?.colors);
+    console.log(product?.variation[0]?.stock);
     
 
 
@@ -264,9 +299,7 @@ const DetailOne: React.FC<ProductProps> = (props) => {
                     <>
                     
                     <ins className="new-price"> AED {toDecimal(discountPrice)}</ins>
-                    <del className="old-price"> AED {toDecimal(basePrice)}</del>
-                    
-                        
+                    <del className="old-price"> AED {toDecimal(basePrice)}</del>     
                     </>
                 ) : (
                     <ins className="new-price">AED {toDecimal(basePrice)}</ins>
@@ -326,40 +359,8 @@ const DetailOne: React.FC<ProductProps> = (props) => {
 
 
 
-                                {/* size */}
 
-                                
-                    {/* {product?.variants[0]?.size && (
-                        <div className='product-form product-size mb-0 pb-2'>
-                            <label>Size:</label>
-                            <div className="product-form-group">
-                                <div className="product-variations">
-                                    {sizes.map(item => (
-                                        <ALink
-                                            href="#"
-                                            className={`size ${curSize === item?.name ? 'active' : ''} ${isDisabled(curColor, item?.name) ? 'disabled' : ''}`}
-                                            key={`size-${item?.name}`}
-                                            onClick={(e) => {
-                                                e.preventDefault();
-                                                toggleSizeHandler(item);
-                                            }}
-                                        >
-                                            {item.value}
-                                        </ALink>
-                                    ))}
-                                </div>
-
-                                <Collapse in={curColor !== 'null' || curSize !== 'null'}>
-                                    <div className="card-wrapper overflow-hidden reset-value-button w-100 mb-0">
-                                        <ALink href='#' className='product-variation-clean' onClick={resetValueHandler}>Clean All</ALink>
-                                    </div>
-                                </Collapse>
-                            </div>
-                        </div>
-                    )} */}
-
-
-
+                        {/* product variation price */}
 
 
                     <div className='product-variation-price'>
@@ -367,7 +368,7 @@ const DetailOne: React.FC<ProductProps> = (props) => {
                             <div className="card-wrapper">
                                 {curIndex > -1 && (
                                     <div className="single-product-price">
-                                        {/* {product?.variants[curIndex]?.price ? (
+                                        {/* {product?.variants[f]?.price ? (
                                             product.variants[curIndex]?.sale_price ? (
                                                 <div className="product-price mb-0">
                                                     <ins className="new-price">${toDecimal(product?.variants[curIndex]?.sale_price)}</ins>
@@ -386,42 +387,53 @@ const DetailOne: React.FC<ProductProps> = (props) => {
                     </div>
 
 
-
-
-
-
                 </>
             )} 
 
 
 
 
-
             <hr className="product-divider" />
+
+            {/* +/- symbol */}
 
             <div className="product-form product-qty pb-0">
                 <label className="d-none">QTY:</label>
                 <div className="product-form-group">
-                    <Quantity max={product?.stock} product={product} onChangeQty={changeQty} />
+                    <Quantity max={product?.variation[0]?.stock} product={product} onChangeQty={changeQty} />
+
+                    {/* Add to cart */}
                     <button className={`btn-product btn-cart text-normal ls-normal font-weight-semi-bold ${cartActive ? '' : 'disabled'}`} onClick={addToCartHandler}>
                         <i className='d-icon-bag'></i>Add to Cart
                     </button>
                 </div>
             </div>
 
+
+        
             <hr className="product-divider mb-3" />
+
+            {/* links */}
 
             <div className="product-footer">
                 <div className="social-links mr-4">
-                    <ALink href="#" className="social-link social-facebook fab fa-facebook-f"></ALink>
-                    <ALink href="#" className="social-link social-twitter fab fa-twitter"></ALink>
+                    <ALink href="https://www.facebook.com/konjacskinfood/" className="social-link social-facebook fab fa-facebook-f"></ALink>
+                    <ALink href="https://twitter.com/KonjacSkin" className="social-link social-twitter fab fa-twitter"></ALink>
                     <ALink href="#" className="social-link social-pinterest fab fa-pinterest-p"></ALink>
                 </div>
+
+                {/* wishlist  */}
+
+
                 <span className="divider d-lg-show"></span>
-                {/* <a href="#" className={`btn-product btn-wishlist`} title={isWishlisted ? 'Browse wishlist' : 'Add to wishlist'} onClick={wishlistHandler}>
-                    <i className={isWishlisted ? "d-icon-heart-full" : "d-icon-heart"}></i>
+
+             
+{/* 
+                <a href="#" className={`btn-product btn-wishlist`} title={isWishlisted ? 'Browse wishlist' : 'Add to wishlist'} onClick={wishlistHandler}>
+                    <i className={isWishlisted ? "d-icon-heart-full " : "d-icon-heart"}></i>
                     {isWishlisted ? 'Browse wishlist' : 'Add to Wishlist'}
                 </a> */}
+
             </div>
 
             {isDesc && <DescTwo product={data} adClass={adClass} />}
@@ -431,7 +443,7 @@ const DetailOne: React.FC<ProductProps> = (props) => {
 
 const mapStateToProps = (state: any) => {
     return {
-        wishlist: state.wishlist.data || []
+        // wishlist: state.wishlist.data || []
     };
 };
 

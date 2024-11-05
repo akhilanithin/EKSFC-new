@@ -66,7 +66,7 @@ const ProductTwo: React.FC<Props & PropsFromRedux> = (props) => {
 
     const categories = Array.isArray(product.category) ? product.category : [product.category];
 
-    // const isWishlisted = wishlist.some(item => item.id === product.id);
+    const isWishlisted = wishlist.some(item => item?.id === product.id);
 
     const showQuickviewHandler = () => {
         openQuickview(product?.id);
@@ -257,9 +257,9 @@ const ProductTwo: React.FC<Props & PropsFromRedux> = (props) => {
                     {/* wishlist */}
 
 
-                    {/* <a href="#" className="btn-product-icon btn-wishlist" title={isWishlisted ? 'Remove from wishlist' : 'Add to wishlist'} onClick={wishlistHandler}>
+                    <a href="#" className="btn-product-icon btn-wishlist" title={isWishlisted ? 'Remove from wishlist' : 'Add to wishlist'} onClick={wishlistHandler}>
                         <i className={isWishlisted ? "d-icon-heart-full " : "d-icon-heart"}></i>
-                    </a> */}
+                    </a>
                 </div>
 
                 {/* Quick View */}
@@ -292,6 +292,8 @@ const ProductTwo: React.FC<Props & PropsFromRedux> = (props) => {
                         ))}
                     </div>
                 )}
+
+                
                 {/* Product Name */}
 
 
