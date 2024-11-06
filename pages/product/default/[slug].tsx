@@ -48,12 +48,17 @@ function ProductMasonry() {
     }, []); // Empty dependency array means this runs once when the component mounts
 
    
+    const product=data?.data?.product
+
+
+
+
     if (error) {
         return <div>Error: {error}</div>;
     }
 
 
-const product=data?.data?.product
+
 
 // console.log(data);
 

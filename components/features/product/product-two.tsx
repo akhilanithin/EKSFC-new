@@ -47,7 +47,6 @@ type PropsFromRedux = ConnectedProps<typeof connector>;
 const ProductTwo: React.FC<Props & PropsFromRedux> = (props) => {
     const { product, adClass = 'text-center', toggleWishlist, wishlist, addToCart, openQuickview, isCategory = true } = props;
 
-console.log(openQuickview);
 
     const PRODUCT_IMAGE_BASEURL = process.env.NEXT_PUBLIC_PRODUCT_IMAGE_BASEURL;
 
@@ -69,9 +68,8 @@ console.log(openQuickview);
     const isWishlisted = wishlist.some(item => item?.id === product.id);
 
     const showQuickviewHandler = () => {
-        openQuickview(product?.id);
-    };
-
+        openQuickview( product?.id );
+    }
 
 
     const wishlistHandler = (e: React.MouseEvent<HTMLAnchorElement>) => {
@@ -102,10 +100,12 @@ console.log(openQuickview);
         return (totalStars / ratings.length).toFixed(2);
     };
 
-    const variations = Array.isArray(product.variation) ? product.variation : [product.variation];
-    const discounts = variations.flatMap(variation => variation.offers || []);
-    const discount = discounts.length > 0 ? discounts[0] : null;
-    const discountValue = discount ? discount.discount : 0;
+    
+    const variations = Array.isArray(product?.variation) ? product?.variation : [product?.variation];
+    const discounts = variations.flatMap(variation => variation?.offers || []);
+    const discount = discounts?.length > 0 ? discounts[0] : null;
+    const discountValue = discount ? discount?.discount : 0;
+
     const discountPrice = discount ? discount.price : null;
     const basePrice = variations[0]?.price || 0;
     const showDiscountedPrice = discountPrice && discountPrice < basePrice;
@@ -264,13 +264,9 @@ console.log(openQuickview);
 
                 {/* Quick View */}
 
-
                 <div className="product-action">
-                    <ALink href='#' className="btn-product btn-quickview" title="Quick View" onClick={showQuickviewHandler}>
-                        Quick View
-                    </ALink>
+                    <ALink href="#" className="btn-product btn-quickview" title="Quick View" onClick={ showQuickviewHandler }>Quick View</ALink>
                 </div>
-
 
                 
             </figure>

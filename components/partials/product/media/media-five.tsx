@@ -37,7 +37,7 @@ const MediaOne: React.FC<Props> = ({ product, adClass = '' }) => {
     
 
 
-    const lgImages = product?.variation[0]?.images ? product?.variation[0]?.images : product.pictures;
+    const lgImages = product?.variation[0]?.images ? product?.variation[0]?.images : product?.pictures;
 
     // console.log(lgImages);
     
@@ -114,11 +114,7 @@ const MediaOne: React.FC<Props> = ({ product, adClass = '' }) => {
                 events={events}
             >
                 {lgImages.map((image, index) => (
-               
-
-                
-
-
+            
                     <div key={ image + '-' + index }>
                             <Magnifier
                                 imageSrc={`${PRODUCT_IMAGE_BASEURL}/products/${image?.image}`}
@@ -131,12 +127,6 @@ const MediaOne: React.FC<Props> = ({ product, adClass = '' }) => {
 
                             />
                         </div>
-
-
-
-
-
-
                 ))}
 
                 

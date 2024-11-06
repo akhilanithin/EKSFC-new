@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useRouter } from 'next/router';
 import { useLazyQuery } from '@apollo/react-hooks';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
@@ -20,6 +20,8 @@ function SearchForm() {
     const [timer, setTimer] = useState('null');
 
     const [filteredResults, setFilteredResults] = useState([]);
+
+    const timerRef = useRef<NodeJS.Timeout | null>(null);
 
 
     // console.log(filteredResults);
@@ -56,20 +58,28 @@ function SearchForm() {
     }, [router.query.slug])
     
 
+ 
     useEffect(() => {
         if (search.length > 2) {
-            if (timer) clearTimeout(timer);
-            const timerId = setTimeout(() => {
-                const results = getFilteredResults(search);
-                setFilteredResults(results);
-                setTimer(null);
-            }, 500);
-            setTimer(timerId);
+          if (timerRef.current) {
+            clearTimeout(timerRef.current);
+          }
+          
+          timerRef.current = setTimeout(() => {
+            const results = getFilteredResults(search);
+            setFilteredResults(results);
+          }, 50);
         } else {
-            setFilteredResults([]); // Clear results if search term is too short
+          setFilteredResults([]); // Clear results if search term is too short
         }
-    }, [search, products]);
-
+    
+        // Clean up the timer when the component is unmounted or when search changes
+        return () => {
+          if (timerRef.current) {
+            clearTimeout(timerRef.current);
+          }
+        };
+      }, [search]); 
 
 
     useEffect(() => {

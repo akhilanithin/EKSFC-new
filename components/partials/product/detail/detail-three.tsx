@@ -227,19 +227,19 @@ const DetailOne: React.FC<ProductProps> = (props) => {
 
 
 
-    const variations = Array.isArray(product.variation) ? product.variation : [product.variation];
-    const discounts = variations.flatMap(variation => variation.offers || []);
-    const discount = discounts.length > 0 ? discounts[0] : null;
-    const discountValue = discount ? discount.discount : 0;
-    const discountPrice = discount ? discount.price : null;
+    const variations = Array.isArray(product?.variation) ? product?.variation : [product?.variation];
+    const discounts = variations.flatMap(variation => variation?.offers || []);
+    const discount = discounts?.length > 0 ? discounts[0] : null;
+    const discountValue = discount ? discount?.discount : 0;
+    const discountPrice = discount ? discount?.price : null;
     const basePrice = variations[0]?.price || 0;
     const showDiscountedPrice = discountPrice && discountPrice < basePrice;
 
 
-    const review = Array.isArray(product.review) ? product.review : [product.review];
+    const review = Array.isArray(product?.review) ? product.review : [product?.review];
     
     const calculateAverageRating = () => {
-        const reviews = Array.isArray(product.review) ? product.review : [product.review];
+        const reviews = Array.isArray(product?.review) ? product?.review : [product?.review];
         const totalRating = reviews.reduce((sum, review) => sum + (review?.star || 0), 0);
         return totalRating / reviews.length;
     };
@@ -322,9 +322,9 @@ const DetailOne: React.FC<ProductProps> = (props) => {
                         )}
                         <span className="tooltiptext tooltip-top">{averageRating.toFixed(1)}</span>
                     </div>
-                    {review.length > 0 && (
-                        <ALink href={`/product/${product.id}`} className="rating-reviews">
-                            ({review.length} {review.length > 1 ? 'reviews' : 'review'})
+                    {review?.length > 0 && (
+                        <ALink href={`/product/${product?.id}`} className="rating-reviews">
+                            ({review?.length} {review?.length > 1 ? 'reviews' : 'review'})
                         </ALink>
                     )}
 
