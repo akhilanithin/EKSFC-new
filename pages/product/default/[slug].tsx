@@ -55,7 +55,7 @@ function ProductMasonry() {
 
 const product=data?.data?.product
 
-console.log(data);
+// console.log(data);
 
 
 
@@ -77,7 +77,7 @@ console.log(data);
     }, [loading, data])
 
 
-    console.log(product);
+    // console.log(product);
     
 
     return (

@@ -176,7 +176,7 @@
     position: relative;
     @include print_css( product );
     transition: .3s;
-    // background-color: rgba(252, 237, 234, 0.9);
+    background-color: rgba(252, 237, 234, 0.9);
 
     &:hover {
         .product-action,

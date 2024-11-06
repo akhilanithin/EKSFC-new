@@ -248,7 +248,7 @@ const DetailOne: React.FC<ProductProps> = (props) => {
 
 
 
-    console.log(product?.variation[0]?.stock);
+    // console.log(product?.variation[0]?.stock);
     
 
 

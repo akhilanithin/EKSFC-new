@@ -34,12 +34,17 @@ const MediaOne: React.FC<Props> = ({ product, adClass = '' }) => {
 
 
 
-    // console.log(product);
+    
 
 
     const lgImages = product?.variation[0]?.images ? product?.variation[0]?.images : product.pictures;
 
+    // console.log(lgImages);
+    
+    
+
     // https://admin.essentialkonjacskinfoods.com/assets/img/products/1722945495569-Hydro Moist Treatment T 1.jpg
+
 
 
 
@@ -111,25 +116,14 @@ const MediaOne: React.FC<Props> = ({ product, adClass = '' }) => {
                 {lgImages.map((image, index) => (
                
 
-                    // <div key={`${image.url}-${index}`}>
-                    //     <Magnifier
-                    //         imageSrc={process.env.NEXT_PUBLIC_ASSET + image.image}
-                    //         imageAlt="magnifier"
-                    //         largeImageSrc={process.env.NEXT_PUBLIC_ASSET + image.image}
-                    //         dragToMove={false}
-                    //         mouseActivation="hover"
-                    //         cursorStyleActive="crosshair"
-                    //         className="product-image large-image"
-                    //     />
-                    // </div>
-
+                
 
 
                     <div key={ image + '-' + index }>
                             <Magnifier
-                                imageSrc='https://admin.essentialkonjacskinfoods.com/assets/img/products/1722945495569-Hydro Moist Treatment T 1.jpg'
+                                imageSrc={`${PRODUCT_IMAGE_BASEURL}/products/${image?.image}`}
                                 imageAlt="magnifier"
-                                largeImageSrc='https://admin.essentialkonjacskinfoods.com/assets/img/products/1722945495569-Hydro Moist Treatment T 1.jpg'
+                                largeImageSrc={`${PRODUCT_IMAGE_BASEURL}/products/${image?.image}`}
                                 dragToMove={ false }
                                 mouseActivation="hover"
                                 cursorStyleActive="crosshair"

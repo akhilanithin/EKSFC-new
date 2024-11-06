@@ -7,8 +7,10 @@ import imagesLoaded from 'imagesloaded';
 
 import { GET_PRODUCT } from '~/server/queries';
 import withApollo from '~/server/apollo';
+
 import OwlCarousel from '~/components/features/owl-carousel';
 import DetailOne from '~/components/partials/product/detail/detail-one';
+
 import { modalActions } from '~/store/modal';
 import { mainSlider3 } from '~/utils/data/carousel';
 
@@ -26,18 +28,26 @@ const customStyles = {
 
 Modal.setAppElement('#__next');
 
-interface Product {
-    id: string;
+// Define interfaces for expected data
+interface ProductImage {
+    url: string;
+}
+
+interface ProductVariant {
+    // Define properties according to your actual variant structure
+}
+
+interface ProductData {
     is_new: boolean;
     is_top: boolean;
     discount: number;
-    large_pictures: Array<{ url: string }>;
-    variants: Array<any>; // Adjust the type according to your variant structure
+    large_pictures: ProductImage[];
+    variants: ProductVariant[];
 }
 
-interface QueryData {
+interface ProductQueryData {
     product: {
-        data: Product;
+        data: ProductData;
     };
 }
 
@@ -48,10 +58,10 @@ interface QuickviewProps {
 }
 
 function Quickview({ slug, closeQuickview, isOpen }: QuickviewProps) {
-    if (!isOpen) return <div></div>;
+    const [loaded, setLoadingState] = useState<boolean>(false);
 
-    const [loaded, setLoadingState] = useState(false);
-    const { data, loading } = useQuery<QueryData>(GET_PRODUCT, { variables: { slug, onlyData: true } });
+    // Add type for `useQuery` to specify data structure
+    const { data, loading } = useQuery<ProductQueryData>(GET_PRODUCT, { variables: { slug, onlyData: true } });
     const product = data?.product;
 
     useEffect(() => {
@@ -65,10 +75,11 @@ function Quickview({ slug, closeQuickview, isOpen }: QuickviewProps) {
                 });
             }
         }, 200);
+
         return () => clearTimeout(timer);
     }, [data, isOpen, loading]);
 
-    if (!slug || !product || !product.data) return null;
+    if (!isOpen || !slug || !product?.data) return null;
 
     const closeQuick = () => {
         const overlay = document.querySelector(".ReactModal__Overlay");
@@ -100,8 +111,8 @@ function Quickview({ slug, closeQuickview, isOpen }: QuickviewProps) {
                                 {product.data.is_top && <label className="product-label label-top">Top</label>}
                                 {product.data.discount > 0 && (
                                     product.data.variants.length === 0 ?
-                                        <label className="product-label label-sale">{product.data.discount}% OFF</label>
-                                        : <label className="product-label label-sale">Sale</label>
+                                        <label className="product-label label-sale">{product.data.discount}% OFF</label> :
+                                        <label className="product-label label-sale">Sale</label>
                                 )}
                             </div>
 
@@ -127,7 +138,7 @@ function Quickview({ slug, closeQuickview, isOpen }: QuickviewProps) {
                     </div>
                 </div>
 
-                <button title="Close (Esc)" type="button" className="mfp-close p-0" onClick={closeQuick} ><span>×</span></button>
+                <button title="Close (Esc)" type="button" className="mfp-close p-0" onClick={closeQuick}><span>×</span></button>
             </>
             {!loaded && (
                 <div className="product row p-0 m-0 skeleton-body mfp-product" >

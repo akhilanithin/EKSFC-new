@@ -47,7 +47,7 @@ type PropsFromRedux = ConnectedProps<typeof connector>;
 const ProductTwo: React.FC<Props & PropsFromRedux> = (props) => {
     const { product, adClass = 'text-center', toggleWishlist, wishlist, addToCart, openQuickview, isCategory = true } = props;
 
-// console.log(product);
+console.log(openQuickview);
 
     const PRODUCT_IMAGE_BASEURL = process.env.NEXT_PUBLIC_PRODUCT_IMAGE_BASEURL;
 
@@ -270,6 +270,9 @@ const ProductTwo: React.FC<Props & PropsFromRedux> = (props) => {
                         Quick View
                     </ALink>
                 </div>
+
+
+                
             </figure>
 
 

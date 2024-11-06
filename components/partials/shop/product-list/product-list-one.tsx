@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import { useLazyQuery } from '@apollo/react-hooks';
 import { Col, Row, Card, Button, Spinner } from "react-bootstrap";
@@ -24,18 +24,57 @@ function ProductListOne(props) {
         8: "cols-2 cols-sm-3 cols-md-4 cols-lg-5 cols-xl-8"
     };
 
+
+
+
     const productURL = process.env.NEXT_PUBLIC_PRODUCT_URL || '';
     const productToken = process.env.NEXT_PUBLIC_PRODUCT_TOKEN || '';
     const { data, loading, error } = useFetch(productURL, productToken);
     
     const products = data?.data;
+
     function filterActiveProducts(products) {
         return products?.filter(item => !item?.status) || [];
     }
 
     const filteredProducts = filterActiveProducts(products);
 
-console.log(filteredProducts);
+
+
+
+
+
+    
+
+    const getFilteredResults = (searchTerm) => {
+        const activeProducts = filterActiveProducts(products);
+        return activeProducts.filter(product =>
+            product.name.toLowerCase().includes(searchTerm.toLowerCase())
+        );
+    };
+
+
+    const [timer, setTimer] = useState('null');
+    const [filteredResults, setFilteredResults] = useState([]);
+
+    console.log(filteredResults);
+    
+
+    useEffect(() => {
+        if (query?.search) {
+            const results = getFilteredResults(query?.search);
+            setFilteredResults(results);
+        } else {
+            setFilteredResults([]); // Clear results if there's no search term
+        }
+    }, [query?.search, products]);
+
+
+
+
+
+
+
 
 
     const [getProducts] = useLazyQuery(GET_PRODUCTS);
@@ -112,26 +151,43 @@ console.log(filteredProducts);
 {/* view product as grid /list  */}
 
 
-
-            {
-                gridType === 'grid' ?
-                <div className={`row product-wrapper ${gridClasses[itemsPerRow]}`}>
+{
+    (filteredResults && filteredResults.length > 0) ? (
+        gridType === 'grid' ? (
+            <div className={`row product-wrapper ${gridClasses[itemsPerRow]}`}>
+                {filteredResults.map(item => (
+                    <div className="product-wrap" key={'shop-' + item?.name}>
+                        <ProductTwo product={item} adClass="" />
+                    </div>
+                ))}
+            </div>
+        ) : (
+            <div className="product-lists product-wrapper">
+                {filteredResults.map(item => (
+                    <ProductEight product={item} key={'shop-list-' + item?.name} />
+                ))}
+            </div>
+        )
+    ) : (displayedProducts && displayedProducts.length > 0) ? (
+        gridType === 'grid' ? (
+            <div className={`row product-wrapper ${gridClasses[itemsPerRow]}`}>
                 {displayedProducts.map(item => (
                     <div className="product-wrap" key={'shop-' + item?.name}>
                         <ProductTwo product={item} adClass="" />
                     </div>
                 ))}
             </div>
-                    :
-                    <div className="product-lists product-wrapper">
-                        {/* { products && products.map( item =>
-                            <ProductEight product={ item } key={ 'shop-list-' + item?.name } />
-                        ) } */}
-                    </div>
-            }
-
-
-
+        ) : (
+            <div className="product-lists product-wrapper">
+                {displayedProducts.map(item => (
+                    <ProductEight product={item} key={'shop-list-' + item?.name} />
+                ))}
+            </div>
+        )
+    ) : (
+        <div>No products available</div>
+    )
+}
 
 
             {filteredProducts.length === 0 && <p className="ml-1">No products were found matching your selection.</p>}

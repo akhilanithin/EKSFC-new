@@ -101,7 +101,7 @@ const DescTwo: React.FC<DescTwoProps> = ({ product, adClass = '' }) => {
 
 
    
-   console.log( products?.review );
+//    console.log( products?.review );
    
 
 
