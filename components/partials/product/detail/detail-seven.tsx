@@ -361,9 +361,9 @@ function DetailSeven(props: Props) {
 
             <div className="product-footer">
                 <div className="social-links mr-4">
-                    <ALink href="#" className="social-link social-facebook fab fa-facebook-f"></ALink>
-                    <ALink href="#" className="social-link social-twitter fab fa-twitter"></ALink>
-                    <ALink href="#" className="social-link social-pinterest fab fa-pinterest-p"></ALink>
+                    <ALink href="https://www.facebook.com/konjacskinfood/" className="social-link social-facebook fab fa-facebook-f"></ALink>
+                    <ALink href="https://twitter.com/KonjacSkin" className="social-link social-twitter fab fa-twitter"></ALink>
+                    {/* <ALink href="#" className="social-link social-pinterest fab fa-pinterest-p"></ALink> */}
                 </div>
                 <span className="divider d-lg-show"></span>
                 <a href="#" className={`btn-product btn-wishlist`} title={isWishlisted ? 'Remove from wishlist' : 'Add to wishlist'} onClick={wishlistHandler}>

@@ -5,6 +5,8 @@ import axios from 'axios';
 import SectionVideos from '~/components/partials/home/SectionVideos';
 
 
+import Link from 'next/link';
+
 // import Custom Components
 import OwlCarousel from '~/components/features/owl-carousel';
 import { bannerSlider } from '~/utils/data/carousel';
@@ -82,7 +84,7 @@ const BannerSectionTwo: React.FC = () => {
                             <p className="banner-desc">
                                 Watch our latest videos collections on our YouTube channel. Hassle-free to watch, share, and like.
                             </p>
-                            <ALink className="btn btn-link btn-underline btn-dark" href="/shop">
+                            <ALink className="btn btn-link btn-underline btn-dark" href="/elements/youtube/">
                                 Learn more<i className="d-icon-arrow-right"></i>
                             </ALink>
                         </div>

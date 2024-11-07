@@ -116,9 +116,9 @@ const ContactUs: React.FC = () => {
                                                 <ALink className="mt-8" href={`mailto:mail@${city.toLowerCase()}riodestore.com`}>mail@{city.toLowerCase()}riodestore.com</ALink>
                                                 <ALink href="tel:#">Phone: (123) 456-7890</ALink>
                                                 <div className="social-links mt-1">
-                                                    <ALink href="#" className="social-link social-facebook fab fa-facebook-f"></ALink>
-                                                    <ALink href="#" className="social-link social-twitter fab fa-twitter"></ALink>
-                                                    <ALink href="#" className="social-link social-linkedin fab fa-linkedin-in"></ALink>
+                                                    <ALink href="https://www.facebook.com/konjacskinfood/" className="social-link social-facebook fab fa-facebook-f"></ALink>
+                                                    <ALink href="https://twitter.com/KonjacSkin" className="social-link social-twitter fab fa-twitter"></ALink>
+                                                    <ALink href="https://ae.linkedin.com/company/essential-konjac-skin-food" className="social-link social-linkedin fab fa-linkedin-in"></ALink>
                                                 </div>
                                             </div>
                                         </figure>

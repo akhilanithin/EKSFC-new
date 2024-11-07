@@ -67,11 +67,11 @@ const ComingSoon: React.FC = () => {
                                 <button className="btn btn-primary btn-link btn-icon-right" type="submit">subscribe</button>
                             </form>
                             <div className="social-links">
-                                <ALink href="#" className="social-link social-facebook fab fa-facebook-f" />
-                                <ALink href="#" className="social-link social-twitter fab fa-twitter" />
-                                <ALink href="#" className="social-link social-instagram fab fa-instagram" />
-                                <ALink href="#" className="social-link social-pinterest fab fa-pinterest-p" />
-                                <ALink href="#" className="social-link social-email far fa-envelope" />
+                                <ALink href="https://www.facebook.com/konjacskinfood/" className="social-link social-facebook fab fa-facebook-f" />
+                                <ALink href="https://twitter.com/KonjacSkin" className="social-link social-twitter fab fa-twitter" />
+                                <ALink href="https://www.instagram.com/konjacskinfood/" className="social-link social-instagram fab fa-instagram" />
+                                {/* <ALink href="#" className="social-link social-pinterest fab fa-pinterest-p" /> */}
+                                {/* <ALink href="#" className="social-link social-email far fa-envelope" /> */}
                             </div>
                         </div>
                     </div>

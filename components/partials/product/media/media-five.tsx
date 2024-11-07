@@ -38,8 +38,9 @@ const MediaOne: React.FC<Props> = ({ product, adClass = '' }) => {
 
 
     const lgImages = product?.variation[0]?.images ? product?.variation[0]?.images : product?.pictures;
+    
 
-    // console.log(lgImages);
+  
     
     
 

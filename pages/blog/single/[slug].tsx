@@ -185,9 +185,9 @@ function PostSingle() {
                                                     <ALink href="#" className="tag">converse</ALink>
                                                 </div>
                                                 <div className="social-icons">
-                                                    <ALink href="#" className="social-icon social-facebook" title="Facebook"><i className="fab fa-facebook-f"></i></ALink>
-                                                    <ALink href="#" className="social-icon social-twitter" title="Twitter"><i className="fab fa-twitter"></i></ALink>
-                                                    <ALink href="#" className="social-icon social-pinterest" title="Pinterest"><i className="fab fa-pinterest-p"></i></ALink>
+                                                    <ALink href="https://www.facebook.com/konjacskinfood/" className="social-icon social-facebook" title="Facebook"><i className="fab fa-facebook-f"></i></ALink>
+                                                    <ALink href="https://twitter.com/KonjacSkin" className="social-icon social-twitter" title="Twitter"><i className="fab fa-twitter"></i></ALink>
+                                                    {/* <ALink href="#" className="social-icon social-pinterest" title="Pinterest"><i className="fab fa-pinterest-p"></i></ALink> */}
                                                 </div>
                                             </div>
                                         </div>

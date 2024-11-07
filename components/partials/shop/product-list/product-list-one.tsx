@@ -30,6 +30,9 @@ function ProductListOne(props) {
     const productURL = process.env.NEXT_PUBLIC_PRODUCT_URL || '';
     const productToken = process.env.NEXT_PUBLIC_PRODUCT_TOKEN || '';
     const { data, loading, error } = useFetch(productURL, productToken);
+
+    console.log(data);
+    
     
     const products = data?.data;
 

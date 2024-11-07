@@ -202,9 +202,9 @@ const AboutUs: React.FC = () => {
                                                     style={{ backgroundColor: "#EEE" }}
                                                 />
                                                 <div className="overlay social-links">
-                                                    <ALink href="#" className="social-link social-facebook fab fa-facebook-f"></ALink>
-                                                    <ALink href="#" className="social-link social-twitter fab fa-twitter"></ALink>
-                                                    <ALink href="#" className="social-link social-linkedin fab fa-linkedin-in"></ALink>
+                                                    <ALink href="https://www.facebook.com/konjacskinfood/" className="social-link social-facebook fab fa-facebook-f"></ALink>
+                                                    <ALink href="https://twitter.com/KonjacSkin" className="social-link social-twitter fab fa-twitter"></ALink>
+                                                    <ALink href="https://ae.linkedin.com/company/essential-konjac-skin-food" className="social-link social-linkedin fab fa-linkedin-in"></ALink>
                                                 </div>
                                             </figure>
                                             <h4 className="member-name">{name}</h4>

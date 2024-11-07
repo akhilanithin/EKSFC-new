@@ -83,9 +83,9 @@ const LoginModal: React.FC = () => {
                                         <div className="form-choice text-center">
                                             <label className="ls-m">or Login With</label>
                                             <div className="social-links">
-                                                <ALink href="#" className="social-link social-google fab fa-google border-no"></ALink>
-                                                <ALink href="#" className="social-link social-facebook fab fa-facebook-f border-no"></ALink>
-                                                <ALink href="#" className="social-link social-twitter fab fa-twitter border-no"></ALink>
+                                                {/* <ALink href="#" className="social-link social-google fab fa-google border-no"></ALink> */}
+                                                <ALink href="https://www.facebook.com/konjacskinfood/" className="social-link social-facebook fab fa-facebook-f border-no"></ALink>
+                                                <ALink href="https://twitter.com/KonjacSkin" className="social-link social-twitter fab fa-twitter border-no"></ALink>
                                             </div>
                                         </div>
                                     </TabPanel>

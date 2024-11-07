@@ -36,12 +36,16 @@ function MainMenu() {
                     <ALink href="/">HOME</ALink>
                 </li>
 
-                {/* Aestethic */}
+                {/* Aesthetics */}
 
-
-                <li className={`submenu lg-menu ${pathname.includes('/shop') ? 'active' : ''}`}>
-                    <ALink href="#">AESTETHICS</ALink>
+                <li>
+                    <ALink href="aesthetics/aesthetics">AESTHETICS</ALink>
                 </li>
+              
+
+                {/* <li className={`submenu lg-menu ${pathname.includes('/shop') ? 'active' : ''}`}>
+                    <ALink href="#">AESTHETICS</ALink>
+                </li> */}
 
                 {/* Categories */}
 
@@ -97,7 +101,7 @@ function MainMenu() {
 
                 {/* Products */}
 
-                <li className={`submenu lg-menu ${pathname.includes('/product') && !pathname.includes('/elements') ? 'active' : ''}`}>
+                {/* <li className={`submenu lg-menu ${pathname.includes('/product') && !pathname.includes('/elements') ? 'active' : ''}`}>
                     <ALink href="/product/default/bodycare-smooth-perfume">PRODUCTS</ALink>
                     <div className="megamenu">
                         <div className="row">
@@ -140,7 +144,15 @@ function MainMenu() {
                             </div>
                         </div>
                     </div>
+                </li> */}
+
+
+
+
+                <li>
+                    <ALink href="/shop">PRODUCTS</ALink>
                 </li>
+
 
 
                 {/* Pages */}

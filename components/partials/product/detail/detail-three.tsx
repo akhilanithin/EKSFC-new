@@ -68,6 +68,8 @@ const DetailOne: React.FC<ProductProps> = (props) => {
     const product=data?.data?.product
 
 
+    console.log(data);
+
     
     // const isWishlisted = wishlist?.some(item => item?.id === product.id);
 
@@ -92,30 +94,36 @@ const DetailOne: React.FC<ProductProps> = (props) => {
         resetValueHandler();
     }, [product]);
 
-    useEffect(() => {
-        if (product?.data?.variants?.length > 0) {
-            if (
-                (curSize !== 'null' && curColor !== 'null') ||
-                (curSize === 'null' && product.data.variants[0].size === null && curColor !== 'null') ||
-                (curColor === 'null' && product.data.variants[0].color === null && curSize !== 'null')
-            ) {
-                setCartActive(true);
-                setCurIndex(product.data.variants.findIndex(item => (
-                    (item.size !== null && item.color !== null && item.color.name === curColor && item.size.name === curSize) ||
-                    (item.size === null && item.color.name === curColor) ||
-                    (item.color === null && item.size.name === curSize)
-                )));
-            } else {
-                setCartActive(false);
-            }
-        } else {
-            setCartActive(true);
-        }
 
-        if (product?.stock === 0) {
-            setCartActive(false);
-        }
-    }, [curColor, curSize, product]);
+
+    // useEffect(() => {
+    //     if (product?.data?.variants?.length > 0) {
+    //         if (
+    //             (curSize !== 'null' && curColor !== 'null') ||
+    //             (curSize === 'null' && product.data.variants[0].size === null && curColor !== 'null') ||
+    //             (curColor === 'null' && product.data.variants[0].color === null && curSize !== 'null')
+    //         ) {
+    //             setCartActive(true);
+    //             setCurIndex(product.data.variants.findIndex(item => (
+    //                 (item.size !== null && item.color !== null && item.color.name === curColor && item.size.name === curSize) ||
+    //                 (item.size === null && item.color.name === curColor) ||
+    //                 (item.color === null && item.size.name === curSize)
+    //             )));
+    //         } else {
+    //             setCartActive(false);
+    //         }
+    //     } else {
+    //         setCartActive(true);
+    //     }
+
+    //     if (product?.stock === 0) {
+    //         setCartActive(false);
+    //     }
+    // }, [curColor, curSize, product]);
+
+
+
+
 
     // const wishlistHandler = (e: React.MouseEvent) => {
     //     e.preventDefault();
@@ -313,10 +321,13 @@ const DetailOne: React.FC<ProductProps> = (props) => {
             {basePrice!== discountPrice && product?.variation?.length === 0 && <Countdown type={2} />} 
 
 
+
+
             {/* Rating container */}
 
             <div className="ratings-container">
                     <div className="ratings-full">
+
                         {review.length > 0 && (
                             <span className="ratings" style={{ width: `${20 * averageRating}%` }}></span>
                         )}
@@ -328,7 +339,9 @@ const DetailOne: React.FC<ProductProps> = (props) => {
                         </ALink>
                     )}
 
+
                 </div>
+{/* description */}
 
             <p className="product-short-desc">{product?.description}</p>
 
@@ -341,7 +354,7 @@ const DetailOne: React.FC<ProductProps> = (props) => {
                         <div className='product-form product-color'>
                             <label>Color:</label>
                             <div className="product-variations">
-                                {colors?.map(item => (
+                                {product?.variation[0]?.colors?.map(item => (
                                     <ALink
                                         href="#"
                                         className={`color ${curColor === item?.name ? 'active' : ''} ${isDisabled(item?.name, curSize) ? 'disabled' : ''}`}
@@ -384,7 +397,10 @@ const DetailOne: React.FC<ProductProps> = (props) => {
                                 )}
                             </div>
                         </Collapse>
+
+                        
                     </div>
+
 
 
                 </>
@@ -419,7 +435,7 @@ const DetailOne: React.FC<ProductProps> = (props) => {
                 <div className="social-links mr-4">
                     <ALink href="https://www.facebook.com/konjacskinfood/" className="social-link social-facebook fab fa-facebook-f"></ALink>
                     <ALink href="https://twitter.com/KonjacSkin" className="social-link social-twitter fab fa-twitter"></ALink>
-                    <ALink href="#" className="social-link social-pinterest fab fa-pinterest-p"></ALink>
+                    {/* <ALink href="#" className="social-link social-pinterest fab fa-pinterest-p"></ALink> */}
                 </div>
 
                 {/* wishlist  */}

@@ -43,6 +43,21 @@ function Quickview(props) {
     
     const [loaded, setLoadingState] = useState(false);
 
+
+    // useEffect(() => {
+    //     setTimeout(() => {
+    //         if (!loading && data && isOpen && document.querySelector('.quickview-modal'))
+    //             imagesLoaded('.quickview-modal').on('done', function () {
+    //                 setLoadingState(true);
+    //                 window.jQuery('.quickview-modal .product-single-carousel').trigger('refresh.owl.carousel');
+    //             }).on('progress', function () {
+    //                 setLoadingState(false);
+    //             });
+    //     }, 200);
+    // }, [data, isOpen]);
+
+
+
     const closeQuick = () => {
         document.querySelector(".ReactModal__Overlay").classList.add('removed');
         document.querySelector('.quickview-modal').classList.add('removed');
@@ -53,7 +68,7 @@ function Quickview(props) {
     }
 
     const [data, setProduct] = useState(null);
-    
+    const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
 
     useEffect(() => {
@@ -68,6 +83,8 @@ function Quickview(props) {
             } catch (err) {
                 setError(err.message);
             } finally {
+
+                setLoading(false);
                 
             }
         };
@@ -88,19 +105,31 @@ function Quickview(props) {
 
 
     const lgImages = product?.variation[0]?.images ? product?.variation[0]?.images : product?.pictures;
+
     const PRODUCT_IMAGE_BASEURL = process.env.NEXT_PUBLIC_PRODUCT_IMAGE_BASEURL;
 
+    useEffect(() => {
+        setTimeout(() => {
+            if (!loading && data && isOpen && document.querySelector('.quickview-modal'))
+                imagesLoaded('.quickview-modal').on('done', function () {
+                    setLoadingState(true);
+                    window.jQuery('.quickview-modal .product-single-carousel').trigger('refresh.owl.carousel');
+                }).on('progress', function () {
+                    setLoadingState(false);
+                });
+        }, 200);
+    }, [product, isOpen]);
 
- console.log(discountValue);
 
- console.log(variations);
-   
+ 
 
+
+
+    {/* 
+                            https://admin.essentialkonjacskinfoods.com/assets/img/products/1709408674611-mahnnnn.jpg */}
 
     
-    
 
-    
 
 
 
@@ -143,9 +172,9 @@ function Quickview(props) {
                             <OwlCarousel adClass="product-single-carousel owl-theme owl-nav-inner" options={mainSlider3}>
 
 
-
                                 {
                                    lgImages?.map((item, index) =>
+                                    
                                         <Magnifier
                                             key={'quickview-image-' + index}
                                             imageSrc={`${PRODUCT_IMAGE_BASEURL}/products/${item?.image}`}
@@ -158,16 +187,15 @@ function Quickview(props) {
                                         />
                                     )
                                 }
-
                             </OwlCarousel>
 
 
                         </div>
                     </div>
 
-                    {/* <div className="col-md-6">
+                    <div className="col-md-6">
                         <DetailOne data={data} adClass="scrollable pr-3" isNav={false} />
-                    </div> */}
+                    </div>
 
 
                 </div>

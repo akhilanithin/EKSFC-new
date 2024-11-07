@@ -174,11 +174,16 @@ const Wishlist: React.FC<Props> = ({ wishlist, addToCart, removeFromWishlist }) 
 
                                 <ALink href="https://twitter.com/KonjacSkin" className="social-link social-icon social-twitter" title="Twitter"><i className="fab fa-twitter"></i></ALink>
 
-                                <ALink href="#" className="social-link social-icon social-pinterest" title="Pinterest"><i className="fab fa-pinterest-p"></i></ALink>
+                                <ALink href="https://www.instagram.com/konjacskinfood/" className="social-link social-icon social-instagram" title="Instagram"><i className="fab fa-instagram"></i></ALink>
 
-                                <ALink href="#" className="social-link social-icon social-email" title="Email"><i className="far fa-envelope"></i></ALink>
+                                <ALink href="https://ae.linkedin.com/company/essential-konjac-skin-food" className="social-link social-icon social-pinterest" title="Linkdin"><i className="fab fa-linkedin-in"></i></ALink>
 
-                                <ALink href="#" className="social-link social-icon social-whatsapp" title="Whatsapp"><i className="fab fa-whatsapp"></i></ALink>
+
+                                {/* <ALink href="#" className="social-link social-icon social-pinterest" title="Pinterest"><i className="fab fa-pinterest-p"></i></ALink> */}
+
+                                {/* <ALink href="#" className="social-link social-icon social-email" title="Email"><i className="far fa-envelope"></i></ALink> */}
+{/* 
+                                <ALink href="#" className="social-link social-icon social-whatsapp" title="Whatsapp"><i className="fab fa-whatsapp"></i></ALink> */}
                             </div>
                         </>
                     ) : (

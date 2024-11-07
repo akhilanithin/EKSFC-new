@@ -60,8 +60,8 @@ function Checkout(props) {
                                             <div className="link-group">
                                                 <ALink href="#" className="btn btn-dark btn-rounded mb-4">Login</ALink> <span className="d-inline-block text-body font-weight-semi-bold">or Login With</span> <div className="social-links mb-4">
                                                     <ALink href="#" className="social-link social-google fab fa-google"></ALink>
-                                                    <ALink href="#" className="social-link social-facebook fab fa-facebook-f"></ALink>
-                                                    <ALink href="#" className="social-link social-twitter fab fa-twitter"></ALink>
+                                                    <ALink href="https://www.facebook.com/konjacskinfood/" className="social-link social-facebook fab fa-facebook-f"></ALink>
+                                                    <ALink href="https://twitter.com/KonjacSkin" className="social-link social-twitter fab fa-twitter"></ALink>
                                                 </div>
                                             </div>
                                         </div>
